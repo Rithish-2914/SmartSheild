@@ -1,18 +1,62 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+// === Accident Risk Data (Historical/Seed Data) ===
+export const accidentZones = pgTable("accident_zones", {
+  id: serial("id").primaryKey(),
+  locationName: text("location_name").notNull(),
+  latitude: text("latitude").notNull(), // text to preserve precision or simple coordinate
+  longitude: text("longitude").notNull(),
+  riskLevel: text("risk_level").notNull(), // 'High', 'Medium', 'Low'
+  accidentCount: integer("accident_count").default(0),
+  description: text("description"),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+// === Driver Behavior Logs ===
+export const behaviorLogs = pgTable("behavior_logs", {
+  id: serial("id").primaryKey(),
+  eventType: text("event_type").notNull(), // 'braking', 'speeding', 'swerving'
+  scoreDeduction: integer("score_deduction").notNull(),
+  timestamp: timestamp("timestamp").defaultNow(),
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+// === Emergency Alerts ===
+export const emergencyAlerts = pgTable("emergency_alerts", {
+  id: serial("id").primaryKey(),
+  location: text("location").notNull(),
+  hospitalName: text("hospital_name").notNull(),
+  status: text("status").notNull(), // 'Active', 'Resolved'
+  triggeredAt: timestamp("triggered_at").defaultNow(),
+});
+
+// === Schemas ===
+export const insertAccidentZoneSchema = createInsertSchema(accidentZones).omit({ id: true });
+export const insertBehaviorLogSchema = createInsertSchema(behaviorLogs).omit({ id: true, timestamp: true });
+export const insertEmergencyAlertSchema = createInsertSchema(emergencyAlerts).omit({ id: true, triggeredAt: true });
+
+// === Types ===
+export type AccidentZone = typeof accidentZones.$inferSelect;
+export type BehaviorLog = typeof behaviorLogs.$inferSelect;
+export type EmergencyAlert = typeof emergencyAlerts.$inferSelect;
+
+// === API Types ===
+export type RiskPredictionRequest = {
+  latitude: number;
+  longitude: number;
+  timeOfDay: string;
+  weather: string;
+};
+
+export type RiskPredictionResponse = {
+  riskScore: number; // 0-100
+  riskLevel: 'High' | 'Medium' | 'Safe';
+  message: string;
+  nearbyZones: AccidentZone[];
+};
+
+export type DriverScoreResponse = {
+  currentScore: number; // Starts at 100
+  logs: BehaviorLog[];
+  badge: string; // 'Safe Driver', 'Caution', 'Risky'
+};

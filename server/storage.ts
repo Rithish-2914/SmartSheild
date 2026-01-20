@@ -1,38 +1,63 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  accidentZones,
+  behaviorLogs,
+  emergencyAlerts,
+  type AccidentZone,
+  type BehaviorLog,
+  type EmergencyAlert,
+  type InsertAccidentZone,
+  type InsertBehaviorLog,
+  type InsertEmergencyAlert
+} from "@shared/schema";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // Risk/Zones
+  getAccidentZones(): Promise<AccidentZone[]>;
+  createAccidentZone(zone: InsertAccidentZone): Promise<AccidentZone>;
+  
+  // Driver Behavior
+  getBehaviorLogs(): Promise<BehaviorLog[]>;
+  createBehaviorLog(log: InsertBehaviorLog): Promise<BehaviorLog>;
+  clearBehaviorLogs(): Promise<void>;
+  
+  // Emergency
+  createEmergencyAlert(alert: InsertEmergencyAlert): Promise<EmergencyAlert>;
+  getEmergencyAlerts(): Promise<EmergencyAlert[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getAccidentZones(): Promise<AccidentZone[]> {
+    return await db.select().from(accidentZones);
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async createAccidentZone(zone: InsertAccidentZone): Promise<AccidentZone> {
+    const [newZone] = await db.insert(accidentZones).values(zone).returning();
+    return newZone;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getBehaviorLogs(): Promise<BehaviorLog[]> {
+    return await db.select().from(behaviorLogs).orderBy(desc(behaviorLogs.timestamp));
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async createBehaviorLog(log: InsertBehaviorLog): Promise<BehaviorLog> {
+    const [newLog] = await db.insert(behaviorLogs).values(log).returning();
+    return newLog;
+  }
+
+  async clearBehaviorLogs(): Promise<void> {
+    await db.delete(behaviorLogs);
+  }
+
+  async createEmergencyAlert(alert: InsertEmergencyAlert): Promise<EmergencyAlert> {
+    const [newAlert] = await db.insert(emergencyAlerts).values(alert).returning();
+    return newAlert;
+  }
+
+  async getEmergencyAlerts(): Promise<EmergencyAlert[]> {
+    return await db.select().from(emergencyAlerts).orderBy(desc(emergencyAlerts.triggeredAt));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
