@@ -1,0 +1,122 @@
+for my hackathon
+SMART SHIELD – Predict • Prevent • Protect
+🚨 PROBLEM (WHAT YOU ARE SOLVING)
+ps: practical solutions focused on accident prevention, road safety awareness, and safer mobility practices.
+Road accidents happen due to:
+
+No real-time awareness of accident-prone zones
+
+Unsafe driving behavior not corrected immediately
+
+Delayed emergency response after accidents
+
+Existing solutions address these problems individually, not together.
+
+💡 SOLUTION (1-LINE)
+
+SMART SHIELD is a unified AI-powered road safety platform that:
+
+Predicts accident risk before accidents
+
+Improves driver behavior during driving
+
+Triggers fast emergency response after accidents
+
+🧠 CORE FEATURES (BUILD ONLY THIS)
+🔴 Feature 1: Accident Risk Prediction (MAIN FEATURE)
+
+Input:
+
+Historical accident data (CSV)
+
+Time of day
+
+Weather condition
+
+Logic:
+
+Simple rule-based or basic ML model
+
+Output: Risk Score (0–100)
+
+UI:
+
+Map with color zones:
+
+🔴 High risk
+
+🟡 Medium
+
+🟢 Safe
+
+Alert popup:
+
+“High accident-prone zone ahead. Reduce speed.”
+
+🟡 Feature 2: Driver Behavior Safety Score
+
+Simulated inputs:
+
+Sudden braking
+
+Over-speeding
+
+Scoring:
+
+Start at 100
+
+Unsafe action → score deduction
+
+UI:
+Safety score meter
+“Safe Driver” badge
+🔵 Feature 3: Emergency Response (Demo Mode)
+Accident trigger button
+On trigger:
+Show location on map
+Show nearest hospital (dummy data)
+Golden Hour countdown timer
+Create a working hackathon demo that shows:
+
+Accident risk prediction
+
+Driver behavior safety scoring
+
+Emergency response triggering
+
+Features
+
+Accident Risk Prediction
+
+Use sample CSV accident data
+
+Calculate a Risk Score (0–100)
+
+Display a map with red/yellow/green risk zones
+
+Show alert popup for high-risk zones
+
+Driver Safety Score
+
+Simulate rash driving actions
+
+Start score at 100 and reduce on unsafe actions
+
+Display score and badge
+
+Emergency Response
+
+Add a button to simulate an accident
+
+Show accident location, nearest hospital, and a golden hour timer
+
+Demo Mode
+
+One button that triggers all features sequentially
+Working frontend + backend
+
+Simple UI dashboard
+
+Clear demo flow
+
+README with run instructions
