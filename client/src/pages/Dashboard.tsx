@@ -53,7 +53,8 @@ export default function Dashboard() {
       
       // Step 2: High Speed Pursuit Simulation
       if (step === 2) {
-        setWeather("Rain");
+        // Keeping weather consistent with user preference or keeping it clear unless requested
+        // setWeather("Rain"); 
         setTimeOfDay("02:00");
       }
 

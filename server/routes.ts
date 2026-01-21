@@ -225,9 +225,9 @@ export async function registerRoutes(
       // Improved Overpass query: increase radius to 15km and prioritize hospitals/clinics
       const query = `[out:json][timeout:25];
         (
-          node["amenity"="hospital"](around:15000,${lat},${lng});
-          way["amenity"="hospital"](around:15000,${lat},${lng});
-          relation["amenity"="hospital"](around:15000,${lat},${lng});
+          node["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
+          way["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
+          relation["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
         );
         out center;`;
       const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
@@ -237,7 +237,14 @@ export async function registerRoutes(
         throw new Error(`Overpass API returned status: ${response.status}`);
       }
 
-      const data = await response.json();
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse Overpass response as JSON. Response starts with:", text.substring(0, 100));
+        throw new Error("Overpass API returned non-JSON response (possibly HTML error page)");
+      }
 
       if (data.elements && data.elements.length > 0) {
         // Find nearest by simple distance calculation
@@ -247,8 +254,11 @@ export async function registerRoutes(
           
           if (!hLat || !hLng) return null;
 
+          // Ensure it's not a school or something else if possible, though amenity=hospital should filter it
+          const name = h.tags.name || h.tags["name:en"] || "Medical Facility";
+          
           return {
-            name: h.tags.name || "Unnamed Medical Facility",
+            name: name,
             lat: hLat,
             lng: hLng,
             dist: Math.sqrt(Math.pow(hLat - lat, 2) + Math.pow(hLng - lng, 2))
