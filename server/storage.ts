@@ -3,12 +3,15 @@ import {
   accidentZones,
   behaviorLogs,
   emergencyAlerts,
+  hazardReports,
   type AccidentZone,
   type BehaviorLog,
   type EmergencyAlert,
+  type HazardReport,
   type InsertAccidentZone,
   type InsertBehaviorLog,
-  type InsertEmergencyAlert
+  type InsertEmergencyAlert,
+  type InsertHazardReport
 } from "../shared/schema.js";
 import { eq, desc } from "drizzle-orm";
 
