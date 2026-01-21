@@ -43,8 +43,11 @@ CREATE TABLE IF NOT EXISTS emergency_alerts (
 
 ## 3. Configure Environment Variables
 1. In Supabase, go to **Project Settings** > **Database**.
-2. Copy the **Connection string** (URI format, Transaction mode, Port 6543).
-3. In **Replit Secrets** and **Vercel Environment Variables**, set `DATABASE_URL` to this string.
+2. Scroll to **Connection Pooler** and ensure it is **enabled**.
+3. Set **Mode** to `Transaction`.
+4. Copy the **Connection string** (it will use port `6543`).
+   * *Example: postgresql://postgres.[ID]:[PASS]@aws-0-[REGION].pooler.supabase.com:6543/postgres*
+5. In **Replit Secrets** and **Vercel Environment Variables**, set `DATABASE_URL` to this string.
    * *Remember to replace `[YOUR-PASSWORD]` with your actual database password.*
 
 ## 4. Final Step

@@ -18,6 +18,9 @@ export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: (process.env.DATABASE_URL?.includes('sslmode=disable') || process.env.DATABASE_URL?.includes('helium')) 
     ? false 
-    : { rejectUnauthorized: false }
+    : { rejectUnauthorized: false },
+  max: 1, // Optimize for serverless: only 1 connection per lambda
+  connectionTimeoutMillis: 5000,
+  idleTimeoutMillis: 30000
 });
 export const db = drizzle(pool, { schema });
