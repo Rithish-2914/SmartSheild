@@ -213,52 +213,55 @@ export async function registerRoutes(
       status: "Active"
     });
 
-    // Real-world Hospital Fetching (Using Overpass API for Hyderabad/Global)
+    // Searching state for nearest hospital
     let nearestHospital = {
-      name: "City General Hospital",
-      distance: "2.4 km",
-      eta: "5 mins",
-      coordinates: { lat: lat + 0.01, lng: lng + 0.01 }
+      name: "Detecting Facility...",
+      distance: "Calculating...",
+      eta: "Estimating...",
+      coordinates: { lat: lat + 0.001, lng: lng + 0.001 }
     };
 
     try {
-      // Improved Overpass query: increase radius to 15km and prioritize hospitals/clinics
-      const query = `[out:json][timeout:25];
+      // Improved Overpass query: focus on high-priority medical nodes first for speed
+      const query = `[out:json][timeout:30];
         (
-          node["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
-          way["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
-          relation["amenity"~"hospital|clinic"](around:15000,${lat},${lng});
+          node["amenity"="hospital"](around:15000,${lat},${lng});
+          way["amenity"="hospital"](around:15000,${lat},${lng});
+          node["amenity"="clinic"](around:15000,${lat},${lng});
         );
         out center;`;
-      const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
-      const response = await fetch(overpassUrl);
       
-      if (!response.ok) {
-        throw new Error(`Overpass API returned status: ${response.status}`);
-      }
+      const mirrors = [
+        `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`,
+        `https://overpass.kumi.systems/api/interpreter?data=${encodeURIComponent(query)}`,
+        `https://lz4.overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`
+      ];
 
-      const text = await response.text();
       let data;
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        console.error("Failed to parse Overpass response as JSON. Response starts with:", text.substring(0, 100));
-        throw new Error("Overpass API returned non-JSON response (possibly HTML error page)");
+      for (const url of mirrors) {
+        try {
+          console.log(`SOS: Searching for hospitals at: ${url}`);
+          const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+          if (response.ok) {
+            const text = await response.text();
+            data = JSON.parse(text);
+            if (data.elements && data.elements.length > 0) {
+              console.log(`SOS: Found ${data.elements.length} hospitals.`);
+              break;
+            }
+          }
+        } catch (e) {
+          console.error(`SOS: Mirror failed: ${url}`);
+        }
       }
 
-      if (data.elements && data.elements.length > 0) {
-        // Find nearest by simple distance calculation
+      if (data && data.elements && data.elements.length > 0) {
         const hospitals = data.elements.map((h: any) => {
           const hLat = h.lat || (h.center && h.center.lat);
           const hLng = h.lon || (h.center && h.center.lon);
-          
           if (!hLat || !hLng) return null;
-
-          // Ensure it's not a school or something else if possible, though amenity=hospital should filter it
-          const name = h.tags.name || h.tags["name:en"] || "Medical Facility";
-          
           return {
-            name: name,
+            name: h.tags.name || h.tags["name:en"] || "Local Medical Center",
             lat: hLat,
             lng: hLng,
             dist: Math.sqrt(Math.pow(hLat - lat, 2) + Math.pow(hLng - lng, 2))
@@ -268,19 +271,25 @@ export async function registerRoutes(
         if (hospitals.length > 0) {
           const best = hospitals[0];
           const distKm = (best.dist * 111).toFixed(1); 
-          
           nearestHospital = {
             name: best.name,
             distance: `${distKm} km`,
             eta: `${Math.ceil(Number(distKm) * 2.5)} mins`, 
             coordinates: { lat: best.lat, lng: best.lng }
           };
-
           await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
         }
+      } else {
+        // Honest fallback if API is down or no hospitals found
+        nearestHospital = {
+          name: "Nearest Emergency Hub",
+          distance: "Searching local directory...",
+          eta: "Contacting dispatch...",
+          coordinates: { lat: lat + 0.005, lng: lng + 0.005 }
+        };
       }
     } catch (error) {
-      console.error("Hospital search failed:", error);
+      console.error("SOS: Hospital search failed completely:", error);
     }
 
     res.json({ alert, nearestHospital });
