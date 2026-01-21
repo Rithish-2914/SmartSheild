@@ -7,7 +7,7 @@ import { DriverGauge } from "@/components/DriverGauge";
 import { EmergencyModal } from "@/components/EmergencyModal";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap } from "lucide-react";
+import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 
