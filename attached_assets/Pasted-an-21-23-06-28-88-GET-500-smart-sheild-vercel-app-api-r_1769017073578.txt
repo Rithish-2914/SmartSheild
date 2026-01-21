@@ -1,0 +1,24 @@
+an 21
+23:06:28
+.88
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/db' imported from /var/task/server/storage.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/db' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+23:06:28
+.88
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/db' imported from /var/task/server/storage.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/db' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+23:06:28
+.88
+GET
+500
+smart-sheild.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND
