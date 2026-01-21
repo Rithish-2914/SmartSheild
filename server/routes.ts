@@ -18,26 +18,26 @@ export async function registerRoutes(
     const weather = (req.query.weather as string) || "Clear";
 
     // Dynamic Risk Score Logic for India
-    let riskScore = 25; // Base risk in India
+    let riskScore = 15; // Base risk in India
     let message = "System monitoring active.";
 
     // Time based risk
     const hour = parseInt(time.split(':')[0]);
     if (hour >= 22 || hour <= 5) {
-      riskScore += 40; // High night risk
+      riskScore += 30; // High night risk
       message = "High risk: Night driving visibility and safety hazards.";
     } else if ((hour >= 8 && hour <= 10) || (hour >= 17 && hour <= 20)) {
-      riskScore += 30; // Peak traffic
+      riskScore += 20; // Peak traffic
       message = "Medium risk: Peak traffic congestion levels.";
     }
 
     // Weather based risk
     const weatherLower = weather.toLowerCase();
     if (weatherLower.includes("rain")) {
-      riskScore += 35;
+      riskScore += 25;
       message += " Slippery roads due to monsoon rains.";
     } else if (weatherLower.includes("fog")) {
-      riskScore += 25;
+      riskScore += 15;
       message += " Low visibility due to heavy fog/smog.";
     }
 
@@ -50,22 +50,28 @@ export async function registerRoutes(
       const zLat = parseFloat(zone.latitude);
       const zLng = parseFloat(zone.longitude);
       
-      // Simple distance squared check (threshold approx 0.05 units for "nearby")
-      const distSq = Math.pow(lat - zLat, 2) + Math.pow(lng - zLng, 2);
-      if (distSq < 0.0025) { // Roughly within 5km
-        if (zone.riskLevel === 'High') proximityPenalty = Math.max(proximityPenalty, 30);
-        else if (zone.riskLevel === 'Medium') proximityPenalty = Math.max(proximityPenalty, 15);
-        nearestZoneName = zone.locationName;
+      // Calculate distance in kilometers roughly (1 degree ~ 111km)
+      const dLat = (lat - zLat) * 111;
+      const dLng = (lng - zLng) * 111 * Math.cos(lat * Math.PI / 180);
+      const distance = Math.sqrt(dLat * dLat + dLng * dLng);
+
+      if (distance < 5) { // Within 5km
+        const penalty = zone.riskLevel === 'High' ? 40 : (zone.riskLevel === 'Medium' ? 20 : 10);
+        // Apply penalty inversely proportional to distance
+        const scaledPenalty = penalty * (1 - (distance / 5));
+        proximityPenalty = Math.max(proximityPenalty, scaledPenalty);
+        if (proximityPenalty === scaledPenalty) nearestZoneName = zone.locationName;
       }
     }
 
     riskScore += proximityPenalty;
-    if (proximityPenalty > 0) {
+    if (proximityPenalty > 10) {
       message = `CAUTION: Proximity to ${nearestZoneName}. Entering high-alert zone.`;
     }
 
     if (riskScore > 100) riskScore = 100;
     if (riskScore < 0) riskScore = 0;
+    riskScore = Math.round(riskScore);
 
     let riskLevel: 'High' | 'Medium' | 'Safe' = 'Safe';
     if (riskScore >= 75) riskLevel = 'High';
