@@ -222,36 +222,55 @@ export async function registerRoutes(
     };
 
     try {
-      // Overpass query for hospitals within 10km
-      const query = `[out:json];node["amenity"="hospital"](around:10000,${lat},${lng});out;`;
+      // Improved Overpass query: increase radius to 15km and prioritize hospitals/clinics
+      const query = `[out:json][timeout:25];
+        (
+          node["amenity"="hospital"](around:15000,${lat},${lng});
+          way["amenity"="hospital"](around:15000,${lat},${lng});
+          relation["amenity"="hospital"](around:15000,${lat},${lng});
+        );
+        out center;`;
       const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
       const response = await fetch(overpassUrl);
+      
+      if (!response.ok) {
+        throw new Error(`Overpass API returned status: ${response.status}`);
+      }
+
       const data = await response.json();
 
       if (data.elements && data.elements.length > 0) {
         // Find nearest by simple distance calculation
-        const hospitals = data.elements.map((h: any) => ({
-          name: h.tags.name || "Unnamed Hospital",
-          lat: h.lat,
-          lng: h.lon,
-          dist: Math.sqrt(Math.pow(h.lat - lat, 2) + Math.pow(h.lon - lng, 2))
-        })).sort((a: any, b: any) => a.dist - b.dist);
+        const hospitals = data.elements.map((h: any) => {
+          const hLat = h.lat || (h.center && h.center.lat);
+          const hLng = h.lon || (h.center && h.center.lon);
+          
+          if (!hLat || !hLng) return null;
 
-        const best = hospitals[0];
-        const distKm = (best.dist * 111).toFixed(1); // Rough approx for lat/lng to km
-        
-        nearestHospital = {
-          name: best.name,
-          distance: `${distKm} km`,
-          eta: `${Math.ceil(Number(distKm) * 2)} mins`, // Est 2 min per km
-          coordinates: { lat: best.lat, lng: best.lng }
-        };
+          return {
+            name: h.tags.name || "Unnamed Medical Facility",
+            lat: hLat,
+            lng: hLng,
+            dist: Math.sqrt(Math.pow(hLat - lat, 2) + Math.pow(hLng - lng, 2))
+          };
+        }).filter(Boolean).sort((a: any, b: any) => a.dist - b.dist);
 
-        // Update alert with real hospital name
-        await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
+        if (hospitals.length > 0) {
+          const best = hospitals[0];
+          const distKm = (best.dist * 111).toFixed(1); 
+          
+          nearestHospital = {
+            name: best.name,
+            distance: `${distKm} km`,
+            eta: `${Math.ceil(Number(distKm) * 2.5)} mins`, 
+            coordinates: { lat: best.lat, lng: best.lng }
+          };
+
+          await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
+        }
       }
     } catch (error) {
-      console.error("Failed to fetch real hospitals:", error);
+      console.error("Hospital search failed:", error);
     }
 
     res.json({ alert, nearestHospital });
