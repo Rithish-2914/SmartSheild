@@ -295,6 +295,32 @@ export async function registerRoutes(
     res.json({ alert, nearestHospital });
   });
 
+  // --- Hazard Reporting ---
+  app.get("/api/hazards", async (req, res) => {
+    const reports = await storage.getHazardReports();
+    res.json(reports);
+  });
+
+  app.post("/api/hazards", async (req, res) => {
+    const report = await storage.createHazardReport(req.body);
+    res.json(report);
+  });
+
+  app.post("/api/hazards/:id/upvote", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const reports = await storage.getHazardReports();
+    const report = reports.find(r => r.id === id);
+    if (report) {
+      const updated = await storage.createHazardReport({
+        ...report,
+        upvotes: (report.upvotes || 0) + 1
+      } as any); // Simple update logic for demo
+      res.json(updated);
+    } else {
+      res.status(404).json({ message: "Not found" });
+    }
+  });
+
   // --- Seed Data Helper ---
   seedDatabase();
 

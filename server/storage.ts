@@ -26,6 +26,9 @@ export interface IStorage {
   createEmergencyAlert(alert: InsertEmergencyAlert): Promise<EmergencyAlert>;
   getEmergencyAlerts(): Promise<EmergencyAlert[]>;
   updateEmergencyAlert(id: number, alert: Partial<InsertEmergencyAlert>): Promise<EmergencyAlert>;
+  // Hazard Reports
+  getHazardReports(): Promise<HazardReport[]>;
+  createHazardReport(report: InsertHazardReport): Promise<HazardReport>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -72,6 +75,15 @@ export class DatabaseStorage implements IStorage {
   async updateEmergencyAlert(id: number, alert: Partial<InsertEmergencyAlert>): Promise<EmergencyAlert> {
     const [updatedAlert] = await db.update(emergencyAlerts).set(alert).where(eq(emergencyAlerts.id, id)).returning();
     return updatedAlert;
+  }
+
+  async getHazardReports(): Promise<HazardReport[]> {
+    return await db.select().from(hazardReports).orderBy(desc(hazardReports.reportedAt));
+  }
+
+  async createHazardReport(report: InsertHazardReport): Promise<HazardReport> {
+    const [newReport] = await db.insert(hazardReports).values(report).returning();
+    return newReport;
   }
 }
 

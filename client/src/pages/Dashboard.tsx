@@ -23,9 +23,11 @@ export default function Dashboard() {
   const [weather, setWeather] = useState("Clear");
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
   const [demoActive, setDemoActive] = useState(false);
+  const [visionMode, setCyberVision] = useState(false);
 
   // Queries
   const { data: scoreData, isLoading: isScoreLoading } = useDriverScore();
+  const { data: hazards } = useQuery<HazardReport[]>({ queryKey: ["/api/hazards"] });
   const { data: riskData } = useRiskPrediction({ 
     lat: currentLocation.lat, 
     lng: currentLocation.lng,
@@ -100,6 +102,15 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            className={`border-primary/30 font-mono transition-all ${visionMode ? 'bg-primary/20 text-primary shadow-[0_0_15px_rgba(0,255,255,0.4)]' : 'text-muted-foreground'}`}
+            onClick={() => setCyberVision(!visionMode)}
+          >
+            <Zap className={`mr-2 h-4 w-4 ${visionMode ? 'animate-pulse' : ''}`} />
+            CYBER-VISION {visionMode ? "ON" : "OFF"}
+          </Button>
+
           <Button 
             variant="outline" 
             className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono relative group"
