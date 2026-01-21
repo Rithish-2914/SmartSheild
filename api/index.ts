@@ -5,6 +5,12 @@ import { api } from "../shared/routes";
 const app = express();
 app.use(express.json());
 
+// Add CORS and Headers for Vercel
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  next();
+});
+
 // --- Risk Prediction ---
 app.get(api.risk.predict.path, async (req, res) => {
   const lat = req.query.lat ? parseFloat(req.query.lat as string) : 0;
