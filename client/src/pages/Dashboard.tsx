@@ -51,18 +51,30 @@ export default function Dashboard() {
         setCurrentLocation({ lat: 12.9176, lng: 77.6233 }); // Silk Board
       }
       
-      // Step 2: Simulate bad driving
-      if (step === 3) {
-        logEvent({ eventType: "speeding", scoreDeduction: 15 });
+      // Step 2: High Speed Pursuit Simulation
+      if (step === 2) {
+        setWeather("Rain");
+        setTimeOfDay("02:00");
       }
 
-      // Step 3: Trigger Accident/Emergency
-      if (step === 5) {
+      // Step 3: Simulate multiple bad driving events
+      if (step === 3) {
+        logEvent({ eventType: "speeding", scoreDeduction: 15 });
+        logEvent({ eventType: "swerving", scoreDeduction: 10 });
+      }
+
+      // Step 4: AI Traffic Bypass Prediction
+      if (step === 4) {
+        // Just visual cue for simulation
+      }
+
+      // Step 5: Trigger Accident/Emergency
+      if (step === 6) {
         setIsEmergencyOpen(true);
         setDemoActive(false); // End demo
         clearInterval(interval);
       }
-    }, 2000);
+    }, 1500);
 
     return () => clearInterval(interval);
   }, [demoActive, logEvent]);

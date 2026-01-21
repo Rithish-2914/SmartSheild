@@ -48,13 +48,27 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
           {/* Left Column: Status */}
           <div className="space-y-6">
             <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg">
-              <h3 className="text-destructive font-bold mb-2 flex items-center gap-2">
-                <Clock className="w-5 h-5" /> GOLDEN HOUR TIMER
-              </h3>
-              <div className="text-5xl font-mono font-bold text-white tabular-nums tracking-widest text-shadow-red">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-destructive font-bold flex items-center gap-2 text-xs">
+                  <Clock className="w-4 h-4" /> GOLDEN HOUR
+                </h3>
+                <div className="bg-destructive text-[10px] px-1.5 py-0.5 rounded font-bold animate-pulse">
+                  CRITICAL
+                </div>
+              </div>
+              <div className="text-5xl font-mono font-bold text-white tabular-nums tracking-widest text-shadow-red leading-none mb-1">
                 {formatTime(timeLeft)}
               </div>
-              <p className="text-xs text-muted-foreground mt-2">Time remaining for critical intervention.</p>
+              <div className="flex gap-2 mt-3">
+                <div className="flex-1 p-2 bg-black/40 rounded border border-destructive/20">
+                  <div className="text-[10px] text-muted-foreground uppercase">Estimated Casuality</div>
+                  <div className="text-sm font-bold text-destructive">HIGH (AI PREDICTED)</div>
+                </div>
+                <div className="flex-1 p-2 bg-black/40 rounded border border-destructive/20">
+                  <div className="text-[10px] text-muted-foreground uppercase">Impact Force</div>
+                  <div className="text-sm font-bold text-orange-500">6.2 G-FORCE</div>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -62,6 +76,9 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
               <div className="bg-zinc-900/50 p-3 rounded border border-border h-32 overflow-y-auto font-mono text-xs space-y-2">
                 <div className="text-green-500">&gt; System triggered manually</div>
                 <div className="text-green-500">&gt; GPS coordinates acquired</div>
+                <div className="text-blue-400">&gt; AI Scan: Collision force detected (6.2G)</div>
+                <div className="text-blue-400">&gt; AI Scan: Casualty probability 84%</div>
+                <div className="text-blue-400">&gt; Smart Bypass: Rerouting ambulances via low-traffic corridor</div>
                 {isPending && <div className="text-yellow-500 animate-pulse">&gt; Contacting emergency services...</div>}
                 {data && (
                   <>
