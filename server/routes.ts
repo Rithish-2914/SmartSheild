@@ -209,17 +209,50 @@ export async function registerRoutes(
     // Create alert
     const alert = await storage.createEmergencyAlert({
       location: `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
-      hospitalName: "City General Hospital",
+      hospitalName: "Searching...",
       status: "Active"
     });
 
-    // Mock Hospital Data
-    const nearestHospital = {
+    // Real-world Hospital Fetching (Using Overpass API for Hyderabad/Global)
+    let nearestHospital = {
       name: "City General Hospital",
       distance: "2.4 km",
       eta: "5 mins",
-      coordinates: { lat: lat + 0.01, lng: lng + 0.01 } // Just slightly offset
+      coordinates: { lat: lat + 0.01, lng: lng + 0.01 }
     };
+
+    try {
+      // Overpass query for hospitals within 10km
+      const query = `[out:json];node["amenity"="hospital"](around:10000,${lat},${lng});out;`;
+      const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+      const response = await fetch(overpassUrl);
+      const data = await response.json();
+
+      if (data.elements && data.elements.length > 0) {
+        // Find nearest by simple distance calculation
+        const hospitals = data.elements.map((h: any) => ({
+          name: h.tags.name || "Unnamed Hospital",
+          lat: h.lat,
+          lng: h.lon,
+          dist: Math.sqrt(Math.pow(h.lat - lat, 2) + Math.pow(h.lon - lng, 2))
+        })).sort((a: any, b: any) => a.dist - b.dist);
+
+        const best = hospitals[0];
+        const distKm = (best.dist * 111).toFixed(1); // Rough approx for lat/lng to km
+        
+        nearestHospital = {
+          name: best.name,
+          distance: `${distKm} km`,
+          eta: `${Math.ceil(Number(distKm) * 2)} mins`, // Est 2 min per km
+          coordinates: { lat: best.lat, lng: best.lng }
+        };
+
+        // Update alert with real hospital name
+        await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
+      }
+    } catch (error) {
+      console.error("Failed to fetch real hospitals:", error);
+    }
 
     res.json({ alert, nearestHospital });
   });

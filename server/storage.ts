@@ -25,6 +25,7 @@ export interface IStorage {
   // Emergency
   createEmergencyAlert(alert: InsertEmergencyAlert): Promise<EmergencyAlert>;
   getEmergencyAlerts(): Promise<EmergencyAlert[]>;
+  updateEmergencyAlert(id: number, alert: Partial<InsertEmergencyAlert>): Promise<EmergencyAlert>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -51,6 +52,10 @@ export class DatabaseStorage implements IStorage {
     return newLog;
   }
 
+  async deleteBehaviorLog(id: number): Promise<void> {
+    await db.delete(behaviorLogs).where(eq(behaviorLogs.id, id));
+  }
+
   async clearBehaviorLogs(): Promise<void> {
     await db.delete(behaviorLogs);
   }
@@ -62,6 +67,11 @@ export class DatabaseStorage implements IStorage {
 
   async getEmergencyAlerts(): Promise<EmergencyAlert[]> {
     return await db.select().from(emergencyAlerts).orderBy(desc(emergencyAlerts.triggeredAt));
+  }
+
+  async updateEmergencyAlert(id: number, alert: Partial<InsertEmergencyAlert>): Promise<EmergencyAlert> {
+    const [updatedAlert] = await db.update(emergencyAlerts).set(alert).where(eq(emergencyAlerts.id, id)).returning();
+    return updatedAlert;
   }
 }
 

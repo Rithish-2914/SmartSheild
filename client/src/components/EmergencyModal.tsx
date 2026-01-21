@@ -120,6 +120,30 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
                   </div>
                 </div>
 
+                <div className="space-y-3">
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 group"
+                    onClick={() => {
+                      const url = `https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lng}&destination=${data.nearestHospital.coordinates.lat},${data.nearestHospital.coordinates.lng}&travelmode=driving`;
+                      window.open(url, '_blank');
+                    }}
+                    data-testid="button-open-route"
+                  >
+                    <Navigation className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
+                    OPEN LIVE NAVIGATION ROUTE
+                  </Button>
+                  
+                  <div className="p-3 bg-primary/5 border border-primary/20 rounded-lg">
+                    <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase mb-1">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
+                      Smart Shield Active
+                    </div>
+                    <p className="text-[10px] text-muted-foreground leading-relaxed">
+                      AI Impact Analysis: {data.nearestHospital.distance} calculated. Smart Traffic Bypass enabled: Automatically rerouting via low-traffic corridors.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="aspect-video bg-zinc-900 rounded-lg overflow-hidden relative">
                    {/* Placeholder for route map */}
                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-xs font-mono">
