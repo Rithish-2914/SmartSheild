@@ -86,13 +86,13 @@ export function RiskMap({ center, zones, currentLocation, onLocationSelect, zoom
           <CircleMarker
             key={zone.id}
             center={[parseFloat(zone.latitude), parseFloat(zone.longitude)]}
-            radius={15}
+            radius={8}
             pathOptions={{
               color: getZoneColor(zone.riskLevel),
               fillColor: getZoneColor(zone.riskLevel),
-              fillOpacity: 0.6,
-              weight: 3,
-              dashArray: zone.riskLevel === 'High' ? '5, 10' : undefined
+              fillOpacity: 0.8,
+              weight: 2,
+              dashArray: zone.riskLevel === 'High' ? '3, 6' : undefined
             }}
           >
             <Popup className="font-sans">
