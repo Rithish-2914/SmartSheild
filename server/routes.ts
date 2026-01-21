@@ -136,31 +136,38 @@ export async function registerRoutes(
 async function seedDatabase() {
   const existingZones = await storage.getAccidentZones();
   if (existingZones.length === 0) {
-    // Seed some risk zones (Coordinates for a generic city center, e.g., NYC or similar)
-    // Using mock coords approx around lat 40.7, lng -74.0 for demo
+    // Seed Indian cities data
     await storage.createAccidentZone({
-      locationName: "Downtown Intersection",
-      latitude: "40.7128",
-      longitude: "-74.0060",
+      locationName: "Silk Board Junction, Bengaluru",
+      latitude: "12.9176",
+      longitude: "77.6233",
       riskLevel: "High",
-      accidentCount: 15,
-      description: "Blind spot at high traffic intersection"
+      accidentCount: 45,
+      description: "Extremely high traffic density and complex merging lanes."
     });
     await storage.createAccidentZone({
-      locationName: "Highway Exit 42",
-      latitude: "40.7200",
-      longitude: "-74.0100",
+      locationName: "Western Express Highway, Mumbai",
+      latitude: "19.0760",
+      longitude: "72.8777",
+      riskLevel: "High",
+      accidentCount: 38,
+      description: "High speed corridor with frequent lane cutting incidents."
+    });
+    await storage.createAccidentZone({
+      locationName: "Connaught Place, Delhi",
+      latitude: "28.6315",
+      longitude: "77.2167",
       riskLevel: "Medium",
-      accidentCount: 8,
-      description: "Sharp turn on exit ramp"
+      accidentCount: 12,
+      description: "Heavy pedestrian movement and chaotic circular traffic."
     });
     await storage.createAccidentZone({
-      locationName: "School Zone A",
-      latitude: "40.7300",
-      longitude: "-74.0200",
-      riskLevel: "Low",
-      accidentCount: 2,
-      description: "Well marked school zone"
+      locationName: "Outer Ring Road, Hyderabad",
+      latitude: "17.3850",
+      longitude: "78.4867",
+      riskLevel: "Medium",
+      accidentCount: 15,
+      description: "Speeding violations common during night hours."
     });
   }
 }

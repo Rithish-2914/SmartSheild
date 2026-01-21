@@ -11,8 +11,8 @@ import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, 
 import { motion, AnimatePresence } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 
-// Mock starting location (New York City)
-const DEFAULT_CENTER: [number, number] = [40.7128, -74.0060];
+// Mock starting location (Bengaluru, India)
+const DEFAULT_CENTER: [number, number] = [12.9716, 77.5946];
 
 export default function Dashboard() {
   const [currentLocation, setCurrentLocation] = useState({ lat: DEFAULT_CENTER[0], lng: DEFAULT_CENTER[1] });
@@ -43,9 +43,9 @@ export default function Dashboard() {
     const interval = setInterval(() => {
       step++;
       
-      // Step 1: Simulate movement to a risky zone
+      // Step 1: Simulate movement to a risky zone (Silk Board)
       if (step === 1) {
-        setCurrentLocation({ lat: 40.7300, lng: -73.9950 }); // Near a zone
+        setCurrentLocation({ lat: 12.9176, lng: 77.6233 }); // Silk Board
       }
       
       // Step 2: Simulate bad driving
