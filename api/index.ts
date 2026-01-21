@@ -99,7 +99,55 @@ app.get(api.risk.predict.path, async (req, res) => {
 });
 
 app.get(api.risk.zones.path, async (req, res) => {
-  const zones = await storage.getAccidentZones();
+  let zones = await storage.getAccidentZones();
+  
+  // Auto-seed if empty (crucial for new deployments)
+  if (zones.length === 0) {
+    const defaultZones = [
+      { name: "Andhra Pradesh", lat: "15.9129", lng: "79.7400", risk: "High", city: "Amaravati", count: 42, desc: "High accident rate on state highways." },
+      { name: "Arunachal Pradesh", lat: "28.2180", lng: "94.7278", risk: "Low", city: "Itanagar", count: 8, desc: "Hilly terrain with weather-related risks." },
+      { name: "Assam", lat: "26.2006", lng: "92.9376", risk: "Medium", city: "Dispur", count: 25, desc: "Frequent flooding affecting road safety." },
+      { name: "Bihar", lat: "25.0961", lng: "85.3131", risk: "High", city: "Patna", count: 38, desc: "Heavy congestion and lack of traffic discipline." },
+      { name: "Chhattisgarh", lat: "21.2787", lng: "81.8661", risk: "Medium", city: "Raipur", count: 20, desc: "Industrial traffic on major arteries." },
+      { name: "Goa", lat: "15.2993", lng: "74.1240", risk: "Medium", city: "Panaji", count: 18, desc: "Tourist-heavy traffic on narrow roads." },
+      { name: "Gujarat", lat: "22.2587", lng: "71.1924", risk: "Medium", city: "Gandhinagar", count: 30, desc: "Industrial corridors with heavy vehicle movement." },
+      { name: "Haryana", lat: "29.0588", lng: "76.0856", risk: "High", city: "Chandigarh", count: 45, desc: "High speed on national highways near NCR." },
+      { name: "Himachal Pradesh", lat: "31.1048", lng: "77.1734", risk: "Medium", city: "Shimla", count: 15, desc: "Steep terrain and landslide-prone roads." },
+      { name: "Jharkhand", lat: "23.6102", lng: "85.2799", risk: "Medium", city: "Ranchi", count: 22, desc: "Mining trucks contributing to road risks." },
+      { name: "Karnataka", lat: "15.3173", lng: "75.7139", risk: "High", city: "Bengaluru", count: 50, desc: "High urban traffic and technology hubs." },
+      { name: "Kerala", lat: "10.8505", lng: "76.2711", risk: "Medium", city: "Thiruvananthapuram", count: 28, desc: "Narrow roads with high pedestrian density." },
+      { name: "Madhya Pradesh", lat: "22.9734", lng: "78.6569", risk: "High", city: "Bhopal", count: 35, desc: "Central hub with heavy cross-country logistics." },
+      { name: "Maharashtra", lat: "19.7515", lng: "75.7139", risk: "High", city: "Mumbai", count: 60, desc: "High traffic density and multiple expressways." },
+      { name: "Manipur", lat: "24.6637", lng: "93.9063", risk: "Low", city: "Imphal", count: 6, desc: "Internal security and terrain challenges." },
+      { name: "Meghalaya", lat: "25.4670", lng: "91.3662", risk: "Low", city: "Shillong", count: 7, desc: "Foggy conditions and hilly roads." },
+      { name: "Mizoram", lat: "23.1645", lng: "92.9376", risk: "Low", city: "Aizawl", count: 4, desc: "Steep hills and low vehicle volume." },
+      { name: "Nagaland", lat: "26.1584", lng: "94.5624", risk: "Low", city: "Kohima", count: 5, desc: "Challenging terrain and limited road width." },
+      { name: "Odisha", lat: "20.9517", lng: "85.0985", risk: "Medium", city: "Bhubaneswar", count: 24, desc: "Mining and industrial traffic risks." },
+      { name: "Punjab", lat: "31.1471", lng: "75.3412", risk: "Medium", city: "Chandigarh", count: 32, desc: "High speed traffic on agricultural corridors." },
+      { name: "Rajasthan", lat: "27.0238", "74.2179", risk: "High", city: "Jaipur", count: 40, desc: "Vast distances and highway speeding." },
+      { name: "Sikkim", lat: "27.5330", "88.5122", risk: "Low", city: "Gangtok", count: 4, desc: "High altitude and steep road segments." },
+      { name: "Tamil Nadu", lat: "11.1271", "78.6569", risk: "High", city: "Chennai", count: 52, desc: "Extensive road network and high vehicle count." },
+      { name: "Telangana", lat: "18.1124", "79.0193", risk: "High", city: "Hyderabad", count: 36, desc: "Rapid urban expansion and high-speed ORR." },
+      { name: "Tripura", lat: "23.9408", "91.9882", risk: "Low", city: "Agartala", count: 6, desc: "Limited connectivity and hilly terrain." },
+      { name: "Uttar Pradesh", lat: "26.8467", "80.9462", risk: "High", city: "Lucknow", count: 65, desc: "Highest population and mixed traffic types." },
+      { name: "Uttarakhand", lat: "30.0668", "79.0193", risk: "Medium", city: "Dehradun", count: 14, desc: "Pilgrimage traffic on mountain roads." },
+      { name: "West Bengal", lat: "22.9868", "87.8550", risk: "High", city: "Kolkata", count: 34, desc: "Dense urban areas and heavy port traffic." }
+    ];
+
+    for (const z of defaultZones) {
+      await storage.createAccidentZone({
+        locationName: z.name,
+        latitude: z.lat,
+        longitude: z.lng,
+        riskLevel: z.risk,
+        city: z.city,
+        accidentCount: z.count,
+        description: z.desc
+      } as any);
+    }
+    zones = await storage.getAccidentZones();
+  }
+
   const time = (req.query.time as string) || "12:00";
   const weather = (req.query.weather as string) || "Clear";
   const hour = parseInt(time.split(':')[0]);
