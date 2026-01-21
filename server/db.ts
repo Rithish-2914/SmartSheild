@@ -10,8 +10,14 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+if (process.env.DATABASE_URL?.includes('helium')) {
+  console.warn("WARNING: You are using an internal Replit database URL ('helium'). This will NOT work on Vercel. Please use the External Connection String from the Database tool settings.");
+}
+
 export const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('sslmode=disable') ? false : { rejectUnauthorized: false }
+  ssl: (process.env.DATABASE_URL?.includes('sslmode=disable') || process.env.DATABASE_URL?.includes('helium')) 
+    ? false 
+    : { rejectUnauthorized: false }
 });
 export const db = drizzle(pool, { schema });
