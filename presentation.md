@@ -5,8 +5,7 @@ This guide details how to demonstrate the core features of the **Smart Shield** 
 ## 🚀 Presentation Flow
 
 ### 1. Introduction (The Problem)
-*   **Context**: India faces a high rate of road mishaps due to poor infrastructure awareness and delayed emergency response.
-*   **Solution**: Smart Shield - A unified AI-powered platform for **Safer India**.
+India faces a critical road safety crisis with over 150,000 fatalities annually due to poor infrastructure awareness and delayed emergency response. Our solution, Smart Shield, is an AI-powered unified platform that provides real-time risk prediction, driver behavior monitoring, and a "Golden Hour" emergency response system to drastically reduce road mishaps across all 28 Indian states.
 
 ---
 
