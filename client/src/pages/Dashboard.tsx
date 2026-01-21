@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDriverScore, useLogDriverEvent, useResetDriverScore } from "@/hooks/use-driver";
 import { useRiskPrediction, useAccidentZones } from "@/hooks/use-risk";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { HazardReport } from "@shared/schema";
 import { CyberCard } from "@/components/CyberCard";
 import { RiskMap } from "@/components/RiskMap";
@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useQueryClient } from "@tanstack/react-query";
 
 // Mock starting location (India Overview)
 const DEFAULT_CENTER: [number, number] = [20.5937, 78.9629]; // Center of India
@@ -156,6 +155,22 @@ export default function Dashboard() {
                   currentLocation={currentLocation}
                   visionMode={visionMode}
                   onLocationSelect={(lat, lng) => {
+                    // Create hazard report on click for community-driven feature
+                    const hazardTypes = ['Pothole', 'Blind Spot', 'Stray Animal', 'Black Ice'];
+                    const type = hazardTypes[Math.floor(Math.random() * hazardTypes.length)];
+                    
+                    fetch('/api/hazards', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        hazardType: type,
+                        latitude: lat.toString(),
+                        longitude: lng.toString()
+                      })
+                    }).then(() => {
+                      queryClient.invalidateQueries({ queryKey: ["/api/hazards"] });
+                    });
+
                     setCurrentLocation({ lat, lng });
                     setMapCenter([lat, lng]);
                     setZoom(13);
