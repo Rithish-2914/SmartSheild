@@ -1,4 +1,4 @@
-import { db } from "./db";
+import { db } from "./db.js";
 import {
   accidentZones,
   behaviorLogs,
@@ -9,7 +9,7 @@ import {
   type InsertAccidentZone,
   type InsertBehaviorLog,
   type InsertEmergencyAlert
-} from "@shared/schema";
+} from "../shared/schema.js";
 import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {

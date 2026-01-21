@@ -1,6 +1,6 @@
 import express from "express";
-import { storage } from "../server/storage";
-import { api } from "../shared/routes";
+import { storage } from "../server/storage.js";
+import { api } from "../shared/routes.js";
 
 const app = express();
 app.use(express.json());
