@@ -102,20 +102,28 @@ export default function Dashboard() {
         <div className="flex items-center gap-4">
           <Button 
             variant="outline" 
-            className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono"
+            className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono relative group"
             onClick={() => setDemoActive(!demoActive)}
             disabled={demoActive}
           >
             {demoActive ? <span className="animate-pulse">RUNNING DEMO...</span> : "START SIMULATION"}
+            <div className="absolute top-full mt-2 hidden group-hover:block z-50 w-64 p-3 bg-black/90 border border-primary/50 rounded-lg text-[10px] normal-case font-body text-muted-foreground shadow-2xl">
+              <p className="font-bold text-primary mb-1">AUTOMATED SCENARIO</p>
+              Runs a pre-programmed high-speed chase simulation under night conditions to demonstrate system response and driver scoring.
+            </div>
           </Button>
           
           <Button 
             variant="destructive"
-            className="font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse"
+            className="font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse relative group"
             onClick={() => setIsEmergencyOpen(true)}
           >
             <AlertTriangle className="mr-2 h-5 w-5" />
             SOS TRIGGER
+            <div className="absolute top-full mt-2 hidden group-hover:block z-50 w-64 p-3 bg-black/90 border border-destructive/50 rounded-lg text-[10px] normal-case font-body text-muted-foreground shadow-2xl">
+              <p className="font-bold text-destructive mb-1">MANUAL EMERGENCY</p>
+              Instantly triggers an emergency protocol at your current location, finds real nearby hospitals, and provides navigation routes.
+            </div>
           </Button>
         </div>
       </header>
