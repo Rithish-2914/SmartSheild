@@ -52,6 +52,9 @@ async function buildAll() {
     bundle: true,
     format: "cjs",
     outfile: "dist/index.cjs",
+    alias: {
+      "@shared": "./shared",
+    },
     define: {
       "process.env.NODE_ENV": '"production"',
     },
