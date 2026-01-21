@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDriverScore, useLogDriverEvent, useResetDriverScore } from "@/hooks/use-driver";
 import { useRiskPrediction, useAccidentZones } from "@/hooks/use-risk";
+import { useQuery } from "@tanstack/react-query";
+import { HazardReport } from "@shared/schema";
 import { CyberCard } from "@/components/CyberCard";
 import { RiskMap } from "@/components/RiskMap";
 import { DriverGauge } from "@/components/DriverGauge";
