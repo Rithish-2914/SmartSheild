@@ -11,13 +11,17 @@ This guide details how to demonstrate the core features of the **Smart Shield** 
 ---
 
 ### 2. Feature 1: Accident Risk Prediction (Safer Road Infrastructure)
-*   **Goal**: Show how authorities and drivers can identify accident-prone areas.
+*   **Goal**: Show how authorities and drivers can identify accident-prone areas across the country.
 *   **What to do**:
-    *   **Map Interaction**: Point to the **Red/Yellow/Green circles** on the map.
-    *   **Indian Context**: Highlight locations like **Silk Board Junction (Bengaluru)** or **Western Express Highway (Mumbai)**.
-    *   **Simulation**: Use the **Time** and **Weather** inputs in the "Live Risk Analysis" card.
-    *   **What to show**: Change weather to **"Rain"** or time to **"22:00"**. Observe the **Risk Score** increase and the **Risk Level** change to **HIGH**.
-    *   **Impact**: Demonstrates real-time awareness and infrastructure auditing.
+    *   **Pan-India Coverage**: Point to the **small, color-coded dots** distributed across **all 28 Indian states**.
+    *   **Dynamic Visualization**: 
+        *   Set time to **14:00 (2 PM)**: Observe many zones showing as **Green (Safe)** or **Yellow (Medium)**.
+        *   Change time to **22:00 (10 PM)**: Watch as the same dots **dynamically turn Red (High Risk)**, reflecting real-world night hazards.
+    *   **Geofencing & Remote Risk**: 
+        *   Enter coordinates outside India (e.g., `32.0, 40.0`): The system flags a **"WARNING: Vehicle outside standard safety monitoring zone"**.
+        *   Enter remote coordinates: Show how the score increases as you move away from major cities due to reduced emergency access.
+    *   **Refined Scoring**: Explain that the AI now uses a **weighted proximity algorithm** where High-Risk (Red) zones strictly outweigh base city/time factors, ensuring consistent safety alerts.
+    *   **Impact**: Demonstrates real-time awareness, dynamic infrastructure auditing, and nationwide scalability.
 
 ---
 

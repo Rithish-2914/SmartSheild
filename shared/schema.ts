@@ -41,6 +41,10 @@ export type AccidentZone = typeof accidentZones.$inferSelect;
 export type BehaviorLog = typeof behaviorLogs.$inferSelect;
 export type EmergencyAlert = typeof emergencyAlerts.$inferSelect;
 
+export type InsertAccidentZone = z.infer<typeof insertAccidentZoneSchema>;
+export type InsertBehaviorLog = z.infer<typeof insertBehaviorLogSchema>;
+export type InsertEmergencyAlert = z.infer<typeof insertEmergencyAlertSchema>;
+
 // === API Types ===
 export type RiskPredictionRequest = {
   latitude: number;

@@ -32,7 +32,7 @@ export default function Dashboard() {
     time: timeOfDay,
     weather 
   });
-  const { data: zones } = useAccidentZones();
+  const { data: zones } = useAccidentZones({ time: timeOfDay, weather });
 
   // Mutations
   const { mutate: logEvent } = useLogDriverEvent();

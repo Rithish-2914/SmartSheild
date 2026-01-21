@@ -25,11 +25,16 @@ export function useRiskPrediction(params: {
   });
 }
 
-export function useAccidentZones() {
+export function useAccidentZones(params: { time?: string; weather?: string } = {}) {
   return useQuery({
-    queryKey: [api.risk.zones.path],
+    queryKey: [api.risk.zones.path, params],
     queryFn: async () => {
-      const res = await fetch(api.risk.zones.path);
+      const queryParams: Record<string, string> = {};
+      if (params.time) queryParams.time = params.time;
+      if (params.weather) queryParams.weather = params.weather;
+      
+      const url = `${api.risk.zones.path}${Object.keys(queryParams).length ? '?' + new URLSearchParams(queryParams) : ''}`;
+      const res = await fetch(url);
       if (!res.ok) throw new Error("Failed to fetch zones");
       return api.risk.zones.responses[200].parse(await res.json());
     },
