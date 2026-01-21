@@ -30,7 +30,7 @@ export function RiskMap({ center, zones, currentLocation }: RiskMapProps) {
   };
 
   return (
-    <div className="h-full w-full rounded-xl overflow-hidden border border-border/50 relative z-0">
+    <div className="h-[400px] w-full rounded-xl overflow-hidden border border-border/50 relative z-0">
       <MapContainer 
         center={center} 
         zoom={13} 

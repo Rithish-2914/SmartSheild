@@ -108,56 +108,59 @@ export default function Dashboard() {
         
         {/* Left Column: Risk & Map (8 cols) */}
         <div className="lg:col-span-8 space-y-6">
-          <CyberCard title="Live Risk Analysis" className="h-[500px] flex flex-col" borderColor={riskData?.riskLevel === 'High' ? 'destructive' : 'primary'}>
-            <div className="absolute top-20 right-8 z-10 bg-black/80 backdrop-blur border border-border p-4 rounded-xl w-64">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-xs uppercase text-muted-foreground font-mono">Current Risk Score</span>
-                <span className={`text-2xl font-bold font-display ${riskData?.riskLevel === 'High' ? 'text-destructive' : 'text-primary'}`}>
-                  {riskData?.riskScore ?? 0}%
-                </span>
+          <CyberCard title="Live Risk Analysis" className="flex flex-col" borderColor={riskData?.riskLevel === 'High' ? 'destructive' : 'primary'}>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
+              <div className="md:col-span-3 h-[400px]">
+                <RiskMap 
+                  center={DEFAULT_CENTER} 
+                  zones={zones ?? []} 
+                  currentLocation={currentLocation}
+                />
               </div>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
-                    <Clock className="w-3 h-3" /> TIME: {timeOfDay}
-                  </label>
-                  <input 
-                    type="time" 
-                    value={timeOfDay} 
-                    onChange={(e) => setTimeOfDay(e.target.value)}
-                    className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-mono"
-                  />
+              <div className="bg-black/40 backdrop-blur border border-border p-4 rounded-xl flex flex-col gap-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs uppercase text-muted-foreground font-mono">Risk Score</span>
+                  <span className={`text-2xl font-bold font-display ${riskData?.riskLevel === 'High' ? 'text-destructive' : 'text-primary'}`}>
+                    {riskData?.riskScore ?? 0}%
+                  </span>
                 </div>
-                <div>
-                  <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
-                    <WeatherIcon className="w-3 h-3" /> WEATHER
-                  </label>
-                  <div className="flex gap-2">
-                    {['Clear', 'Rain', 'Fog'].map((w) => (
-                      <button
-                        key={w}
-                        onClick={() => setWeather(w)}
-                        className={`flex-1 py-1 text-xs rounded border transition-all ${weather === w ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-border text-muted-foreground'}`}
-                      >
-                        {w}
-                      </button>
-                    ))}
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
+                      <Clock className="w-3 h-3" /> TIME: {timeOfDay}
+                    </label>
+                    <input 
+                      type="time" 
+                      value={timeOfDay} 
+                      onChange={(e) => setTimeOfDay(e.target.value)}
+                      className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
+                      <WeatherIcon className="w-3 h-3" /> WEATHER
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {['Clear', 'Rain', 'Fog'].map((w) => (
+                        <button
+                          key={w}
+                          onClick={() => setWeather(w)}
+                          className={`flex-1 min-w-[60px] py-1 text-xs rounded border transition-all ${weather === w ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-border text-muted-foreground'}`}
+                        >
+                          {w}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                
+                {riskData?.message && (
+                  <div className="mt-auto p-2 bg-secondary/10 border-l-2 border-secondary text-xs text-secondary-foreground">
+                    {riskData.message}
+                  </div>
+                )}
               </div>
-              
-              {riskData?.message && (
-                <div className="mt-4 p-2 bg-secondary/10 border-l-2 border-secondary text-xs text-secondary-foreground">
-                  {riskData.message}
-                </div>
-              )}
             </div>
-
-            <RiskMap 
-              center={DEFAULT_CENTER} 
-              zones={zones ?? []} 
-              currentLocation={currentLocation}
-            />
           </CyberCard>
 
           {/* Recent Logs (Bottom left) */}
