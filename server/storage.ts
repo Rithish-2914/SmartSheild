@@ -1,18 +1,9 @@
 import { db } from "./db.js";
-import {
-  accidentZones,
-  behaviorLogs,
-  emergencyAlerts,
-  hazardReports,
-  type AccidentZone,
-  type BehaviorLog,
-  type EmergencyAlert,
-  type HazardReport,
-  type InsertAccidentZone,
-  type InsertBehaviorLog,
-  type InsertEmergencyAlert,
-  type InsertHazardReport
-} from "../shared/schema.js";
+import { 
+  accidentZones, behaviorLogs, emergencyAlerts, hazardReports,
+  type AccidentZone, type BehaviorLog, type EmergencyAlert, type HazardReport,
+  type InsertAccidentZone, type InsertBehaviorLog, type InsertEmergencyAlert, type InsertHazardReport 
+} from "@shared/schema";
 import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {

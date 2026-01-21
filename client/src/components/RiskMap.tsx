@@ -108,7 +108,7 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
         )}
 
         {/* Hazard Reports */}
-        {hazards.map((hazard) => (
+        {hazards?.map((hazard) => (
           <Marker 
             key={`hazard-${hazard.id}`} 
             position={[parseFloat(hazard.latitude), parseFloat(hazard.longitude)]}
