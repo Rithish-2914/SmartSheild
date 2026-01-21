@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS emergency_alerts (
 3. Set **Mode** to `Transaction`.
 4. Copy the **Connection string** (it will use port `6543`).
    * *Example: postgresql://postgres.[ID]:[PASS]@aws-0-[REGION].pooler.supabase.com:6543/postgres*
-5. In **Replit Secrets** and **Vercel Environment Variables**, set `DATABASE_URL` to this string.
-   * *Remember to replace `[YOUR-PASSWORD]` with your actual database password.*
+5. **IMPORTANT**: Ensure your password does not contain special characters like `@`, `:`, or `/`. If it does, you must URL-encode them (e.g., `@` becomes `%40`).
+6. In **Replit Secrets** and **Vercel Environment Variables**, set `DATABASE_URL` to this string.
 
 ## 4. Final Step
 Once the database is connected, the application will automatically populate the 28 Indian states on your first visit!

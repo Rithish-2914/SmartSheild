@@ -1,0 +1,1047 @@
+Jan 21
+17:31:39
+.46
+POST
+---
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:31:38
+.64
+POST
+---
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:31:34
+.71
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:31:34
+.71
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:31:34
+.70
+GET
+304
+smart-sheild.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3007, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'db.wvozrdkewmbgqwucsurt.supabase.co' }
+Jan 21
+17:31:25
+.97
+GET
+---
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:31:25
+.97
+GET
+200
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3007, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'db.wvozrdkewmbgqwucsurt.supabase.co' }
+Jan 21
+17:31:25
+.97
+GET
+500
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:31:25
+.92
+GET
+500
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:31:25
+.92
+GET
+500
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:31:25
+.92
+GET
+200
+smart-sheild-c0x028e12-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND db.wvozrdkewmbgqwucsurt.supabase.co at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3007, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'db.wvozrdkewmbgqwucsurt.supabase.co' }
+Jan 21
+17:17:17
+.02
+POST
+500
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:17:16
+.21
+POST
+500
+smart-sheild.vercel.app
+/api/driver/reset
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async DatabaseStorage.clearBehaviorLogs (/vercel/path0/server/storage.ts:55:5) at async <anonymous> (/vercel/path0/api/index.ts:203:3)
+Jan 21
+17:17:14
+.69
+POST
+500
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:17:13
+.89
+POST
+500
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:17:13
+.71
+POST
+500
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:17:13
+.18
+POST
+500
+smart-sheild.vercel.app
+/api/driver/log
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.createBehaviorLog (/vercel/path0/server/storage.ts:50:22) at async <anonymous> (/vercel/path0/api/index.ts:195:15)
+Jan 21
+17:17:09
+.37
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:17:09
+.37
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:17:09
+.34
+GET
+200
+smart-sheild.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3008, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'helium' }
+Jan 21
+17:17:05
+.62
+GET
+500
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:17:05
+.60
+GET
+200
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3008, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'helium' }
+Jan 21
+17:17:05
+.60
+GET
+500
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:17:05
+.56
+GET
+500
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:64:21)
+Jan 21
+17:17:05
+.56
+GET
+500
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getAccidentZones (/vercel/path0/server/storage.ts:32:12) at async <anonymous> (/vercel/path0/api/index.ts:108:15)
+Jan 21
+17:17:05
+.56
+GET
+200
+smart-sheild-4gaxkxi3x-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Failed to fetch logs: Error: getaddrinfo ENOTFOUND helium at /var/task/node_modules/pg-pool/index.js:45:11 at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async file:///var/task/node_modules/drizzle-orm/node-postgres/session.js:83:22 at async DatabaseStorage.getBehaviorLogs (/vercel/path0/server/storage.ts:42:14) at async <anonymous> (/vercel/path0/api/index.ts:181:16) { errno: -3008, code: 'ENOTFOUND', syscall: 'getaddrinfo', hostname: 'helium' }
+Jan 21
+17:13:52
+.67
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:35
+.25
+POST
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' }
+Jan 21
+17:13:33
+.91
+POST
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:33
+.02
+POST
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:27
+.55
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:27
+.55
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:27
+.55
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:22
+.63
+GET
+---
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Jan 21
+17:13:22
+.63
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:22
+.63
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:22
+.63
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:22
+.63
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:22
+.63
+GET
+500
+smart-sheild-1ut9qbg2i-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/shared/schema' imported from /var/task/shared/routes.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/shared/schema' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:13:02
+.77
+POST
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:12:57
+.35
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:12:57
+.35
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:12:57
+.35
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:10:07
+.25
+POST
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:10:06
+.56
+POST
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:10:03
+.22
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:10:03
+.21
+GET
+---
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:10:03
+.21
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.97
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.95
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.95
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.93
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.93
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:09:38
+.93
+GET
+500
+smart-sheild-5abp42ckt-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:55
+.02
+POST
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:51
+.89
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:50
+.30
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:46
+.06
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:46
+.06
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:46
+.05
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.62
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.62
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.62
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.19
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.17
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:40
+.17
+GET
+500
+smart-sheild-dbh1v4yzs-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:17
+.77
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:17
+.76
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:17
+.75
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:15
+.64
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:15
+.64
+GET
+---
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:15
+.62
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:14
+.54
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:14
+.54
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:14
+.53
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:13
+.31
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:13
+.31
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:13
+.31
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:11
+.83
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:11
+.83
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:07:11
+.81
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:56
+.82
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:56
+.82
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:55
+.82
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:55
+.82
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:54
+.86
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/reset
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:54
+.17
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:53
+.48
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:53
+.26
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:53
+.10
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:52
+.69
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:48
+.63
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/emergency/trigger
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:40
+.26
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/emergency/trigger
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:36
+.20
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:32
+.23
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:25
+.09
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/reset
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:24
+.38
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:23
+.89
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:23
+.01
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:06:19
+.25
+POST
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/log
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:58
+.54
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:58
+.53
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:57
+.41
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:57
+.41
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:56
+.46
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:56
+.45
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:49
+.89
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:49
+.89
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:49
+.89
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.99
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.99
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue. SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.99
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue. SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.98
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.98
+GET
+500
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue. SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:05:20
+.98
+GET
+---
+smart-sheild-1ickb242l-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue. SyntaxError: Unexpected token ',' at compileSourceTextModule (node:internal/modules/esm/utils:357:16) at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:109:18) at #translate (node:internal/modules/esm/loader:564:20) at afterLoad (node:internal/modules/esm/loader:614:29) at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:619:12) at #createModuleJob (node:internal/modules/esm/loader:643:36) at #getJobFromResolveResult (node:internal/modules/esm/loader:353:34) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:318:41) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:685:25) Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:43
+.50
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:43
+.50
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:42
+.07
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:42
+.07
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:40
+.06
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:32
+.06
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:30
+.63
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:20
+.31
+GET
+500
+smart-sheild.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:20
+.31
+GET
+500
+smart-sheild.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:20
+.31
+GET
+500
+smart-sheild.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.30
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.30
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.30
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.29
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/zones
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.29
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/risk/predict
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue. Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:280:11) at moduleResolve (node:internal/modules/esm/resolve:870:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:996:14) at defaultResolve (node:internal/modules/esm/resolve:1039:79) at #cachedDefaultResolve (node:internal/modules/esm/loader:757:20) at ModuleLoader.resolve (node:internal/modules/esm/loader:734:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:317:38) at #link (node:internal/modules/esm/module_job:208:49) at process.processTicksAndRejections (node:internal/process/task_queues:105:5) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/server/storage' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jan 21
+17:02:15
+.29
+GET
+500
+smart-sheild-mpkh787tq-bajjuririthish521-7577s-projects.vercel.app
+/api/driver/score
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/storage' imp
