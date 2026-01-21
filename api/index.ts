@@ -124,14 +124,14 @@ app.get(api.risk.zones.path, async (req, res) => {
       { name: "Nagaland", lat: "26.1584", lng: "94.5624", risk: "Low", city: "Kohima", count: 5, desc: "Challenging terrain and limited road width." },
       { name: "Odisha", lat: "20.9517", lng: "85.0985", risk: "Medium", city: "Bhubaneswar", count: 24, desc: "Mining and industrial traffic risks." },
       { name: "Punjab", lat: "31.1471", lng: "75.3412", risk: "Medium", city: "Chandigarh", count: 32, desc: "High speed traffic on agricultural corridors." },
-      { name: "Rajasthan", lat: "27.0238", "74.2179", risk: "High", city: "Jaipur", count: 40, desc: "Vast distances and highway speeding." },
-      { name: "Sikkim", lat: "27.5330", "88.5122", risk: "Low", city: "Gangtok", count: 4, desc: "High altitude and steep road segments." },
-      { name: "Tamil Nadu", lat: "11.1271", "78.6569", risk: "High", city: "Chennai", count: 52, desc: "Extensive road network and high vehicle count." },
-      { name: "Telangana", lat: "18.1124", "79.0193", risk: "High", city: "Hyderabad", count: 36, desc: "Rapid urban expansion and high-speed ORR." },
-      { name: "Tripura", lat: "23.9408", "91.9882", risk: "Low", city: "Agartala", count: 6, desc: "Limited connectivity and hilly terrain." },
-      { name: "Uttar Pradesh", lat: "26.8467", "80.9462", risk: "High", city: "Lucknow", count: 65, desc: "Highest population and mixed traffic types." },
-      { name: "Uttarakhand", lat: "30.0668", "79.0193", risk: "Medium", city: "Dehradun", count: 14, desc: "Pilgrimage traffic on mountain roads." },
-      { name: "West Bengal", lat: "22.9868", "87.8550", risk: "High", city: "Kolkata", count: 34, desc: "Dense urban areas and heavy port traffic." }
+      { name: "Rajasthan", lat: "27.0238", lng: "74.2179", risk: "High", city: "Jaipur", count: 40, desc: "Vast distances and highway speeding." },
+      { name: "Sikkim", lat: "27.5330", lng: "88.5122", risk: "Low", city: "Gangtok", count: 4, desc: "High altitude and steep road segments." },
+      { name: "Tamil Nadu", lat: "11.1271", lng: "78.6569", risk: "High", city: "Chennai", count: 52, desc: "Extensive road network and high vehicle count." },
+      { name: "Telangana", lat: "18.1124", lng: "79.0193", risk: "High", city: "Hyderabad", count: 36, desc: "Rapid urban expansion and high-speed ORR." },
+      { name: "Tripura", lat: "23.9408", lng: "91.9882", risk: "Low", city: "Agartala", count: 6, desc: "Limited connectivity and hilly terrain." },
+      { name: "Uttar Pradesh", lat: "26.8467", lng: "80.9462", risk: "High", city: "Lucknow", count: 65, desc: "Highest population and mixed traffic types." },
+      { name: "Uttarakhand", lat: "30.0668", lng: "79.0193", risk: "Medium", city: "Dehradun", count: 14, desc: "Pilgrimage traffic on mountain roads." },
+      { name: "West Bengal", lat: "22.9868", lng: "87.8550", risk: "High", city: "Kolkata", count: 34, desc: "Dense urban areas and heavy port traffic." }
     ];
 
     for (const z of defaultZones) {
