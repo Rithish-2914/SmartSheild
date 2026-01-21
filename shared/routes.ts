@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertAccidentZoneSchema, insertBehaviorLogSchema, insertEmergencyAlertSchema, accidentZones, behaviorLogs, emergencyAlerts } from './schema';
+import { insertAccidentZoneSchema, insertBehaviorLogSchema, insertEmergencyAlertSchema, accidentZones, behaviorLogs, emergencyAlerts } from './schema.js';
 
 export const api = {
   risk: {
