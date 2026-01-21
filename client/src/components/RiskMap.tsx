@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { AccidentZone } from "@shared/schema";
 import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
@@ -9,6 +9,7 @@ interface RiskMapProps {
   center: [number, number];
   zones: AccidentZone[];
   currentLocation?: { lat: number; lng: number };
+  onLocationSelect?: (lat: number, lng: number) => void;
 }
 
 function MapUpdater({ center }: { center: [number, number] }) {
@@ -19,7 +20,18 @@ function MapUpdater({ center }: { center: [number, number] }) {
   return null;
 }
 
-export function RiskMap({ center, zones, currentLocation, zoom = 13 }: RiskMapProps & { zoom?: number }) {
+function MapEvents({ onLocationSelect }: { onLocationSelect?: (lat: number, lng: number) => void }) {
+  useMapEvents({
+    click(e) {
+      if (onLocationSelect) {
+        onLocationSelect(e.latlng.lat, e.latlng.lng);
+      }
+    },
+  });
+  return null;
+}
+
+export function RiskMap({ center, zones, currentLocation, onLocationSelect, zoom = 13 }: RiskMapProps & { zoom?: number }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -48,6 +60,7 @@ export function RiskMap({ center, zones, currentLocation, zoom = 13 }: RiskMapPr
         />
         
         <MapUpdater center={center} />
+        <MapEvents onLocationSelect={onLocationSelect} />
 
         {currentLocation && (
           <CircleMarker 

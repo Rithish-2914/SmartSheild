@@ -115,9 +115,15 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
               <div className="md:col-span-3 h-[400px]">
                 <RiskMap 
-                  center={DEFAULT_CENTER} 
+                  center={mapCenter} 
+                  zoom={zoom}
                   zones={zones ?? []} 
                   currentLocation={currentLocation}
+                  onLocationSelect={(lat, lng) => {
+                    setCurrentLocation({ lat, lng });
+                    setMapCenter([lat, lng]);
+                    setZoom(13);
+                  }}
                 />
               </div>
               <div className="bg-black/40 backdrop-blur border border-border p-4 rounded-xl flex flex-col gap-4">
@@ -128,6 +134,30 @@ export default function Dashboard() {
                   </span>
                 </div>
                 <div className="space-y-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
+                      <MapIcon className="w-3 h-3" /> COORDINATES
+                    </label>
+                    <div className="grid grid-cols-2 gap-2 mb-2">
+                      <input 
+                        type="number" 
+                        step="0.0001"
+                        value={currentLocation.lat} 
+                        onChange={(e) => setCurrentLocation(prev => ({ ...prev, lat: parseFloat(e.target.value) }))}
+                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono"
+                        placeholder="Latitude"
+                      />
+                      <input 
+                        type="number" 
+                        step="0.0001"
+                        value={currentLocation.lng} 
+                        onChange={(e) => setCurrentLocation(prev => ({ ...prev, lng: parseFloat(e.target.value) }))}
+                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono"
+                        placeholder="Longitude"
+                      />
+                    </div>
+                    <p className="text-[10px] text-muted-foreground italic">Tip: Click anywhere on the map to set location</p>
+                  </div>
                   <div>
                     <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
                       <Clock className="w-3 h-3" /> TIME: {timeOfDay}
