@@ -18,28 +18,62 @@ export async function registerRoutes(
     const weather = (req.query.weather as string) || "Clear";
 
     // Dynamic Risk Score Logic for India
-    let riskScore = 15; // Base risk in India
+    let riskScore = 15; // Base risk
     let message = "System monitoring active.";
+
+    // Geofence check for India (approximate bounding box)
+    const isWithinIndia = lat >= 6.0 && lat <= 38.0 && lng >= 68.0 && lng <= 98.0;
+    
+    if (!isWithinIndia) {
+      riskScore = 85;
+      message = "WARNING: Vehicle outside standard safety monitoring zone (Off-road/International).";
+    }
+
+    // Distance-based base risk from major hubs
+    const majorCities = [
+      { name: "Hyderabad", lat: 17.3850, lng: 78.4867 },
+      { name: "Bengaluru", lat: 12.9716, lng: 77.5946 },
+      { name: "Mumbai", lat: 19.0760, lng: 72.8777 },
+      { name: "Delhi", lat: 28.6139, lng: 77.2090 },
+      { name: "Chennai", lat: 13.0827, lng: 80.2707 },
+      { name: "Kolkata", lat: 22.5726, lng: 88.3639 }
+    ];
+
+    let minDistanceToCity = Infinity;
+    let closestCity = "";
+
+    for (const city of majorCities) {
+      const dLat = (lat - city.lat) * 111;
+      const dLng = (lng - city.lng) * 111 * Math.cos(lat * Math.PI / 180);
+      const distance = Math.sqrt(dLat * dLat + dLng * dLng);
+      if (distance < minDistanceToCity) {
+        minDistanceToCity = distance;
+        closestCity = city.name;
+      }
+    }
+
+    // Increase risk as we move away from safe hubs or deep into remote areas
+    // Remote area risk (simple model: risk increases with distance from any major city)
+    if (isWithinIndia) {
+      if (minDistanceToCity > 100) {
+        riskScore += Math.min(30, (minDistanceToCity - 100) / 10);
+        message = "Entering remote region: Reduced emergency response availability.";
+      }
+    }
 
     // Time based risk
     const hour = parseInt(time.split(':')[0]);
     if (hour >= 22 || hour <= 5) {
-      riskScore += 30; // High night risk
-      message = "High risk: Night driving visibility and safety hazards.";
+      riskScore += 25;
+      message = "High risk: Night driving hazards detected.";
     } else if ((hour >= 8 && hour <= 10) || (hour >= 17 && hour <= 20)) {
-      riskScore += 20; // Peak traffic
-      message = "Medium risk: Peak traffic congestion levels.";
+      riskScore += 15;
     }
 
     // Weather based risk
     const weatherLower = weather.toLowerCase();
-    if (weatherLower.includes("rain")) {
-      riskScore += 25;
-      message += " Slippery roads due to monsoon rains.";
-    } else if (weatherLower.includes("fog")) {
-      riskScore += 15;
-      message += " Low visibility due to heavy fog/smog.";
-    }
+    if (weatherLower.includes("rain")) riskScore += 20;
+    else if (weatherLower.includes("fog")) riskScore += 15;
 
     // Location proximity logic
     const zones = await storage.getAccidentZones();
@@ -52,8 +86,17 @@ export async function registerRoutes(
       "Bengaluru": { night: 40, day: 15 },
       "Mumbai": { night: 50, day: 25 },
       "Delhi": { night: 55, day: 30 },
-      "Chennai": { night: 35, day: 15 }
+      "Chennai": { night: 35, day: 15 },
+      "Kolkata": { night: 45, day: 20 }
     };
+
+    if (minDistanceToCity < 50) {
+      const cityData = cityBaseRisks[closestCity];
+      if (cityData) {
+        const isNight = hour >= 21 || hour <= 5;
+        riskScore = Math.max(riskScore, isNight ? cityData.night : cityData.day);
+      }
+    }
 
     for (const zone of zones) {
       const zLat = parseFloat(zone.latitude);
@@ -63,27 +106,22 @@ export async function registerRoutes(
       const dLng = (lng - zLng) * 111 * Math.cos(lat * Math.PI / 180);
       const distance = Math.sqrt(dLat * dLat + dLng * dLng);
 
-      if (distance < 15) { // Increased radius to 15km for city detection
-        // Apply city-specific base risk if within range
-        const cityData = cityBaseRisks[zone.city];
-        if (cityData) {
-          const isNight = hour >= 21 || hour <= 5;
-          riskScore = Math.max(riskScore, isNight ? cityData.night : cityData.day);
-        }
-
-        if (distance < 5) { // Immediate zone proximity
-          const penalty = zone.riskLevel === 'High' ? 40 : (zone.riskLevel === 'Medium' ? 20 : 10);
-          const scaledPenalty = penalty * (1 - (distance / 5));
-          proximityPenalty = Math.max(proximityPenalty, scaledPenalty);
-          if (proximityPenalty === scaledPenalty) nearestZoneName = zone.locationName;
-        }
+      if (distance < 5) { // Immediate zone proximity
+        const penalty = zone.riskLevel === 'High' ? 40 : (zone.riskLevel === 'Medium' ? 20 : 10);
+        const scaledPenalty = penalty * (1 - (distance / 5));
+        proximityPenalty = Math.max(proximityPenalty, scaledPenalty);
+        if (proximityPenalty === scaledPenalty) nearestZoneName = zone.locationName;
       }
     }
 
     riskScore += proximityPenalty;
     if (proximityPenalty > 10) {
-      message = `CAUTION: Proximity to ${nearestZoneName}. Entering high-alert zone.`;
+      message = `CAUTION: Critical accident zone (${nearestZoneName}).`;
     }
+
+    // Add coordinate-based variation (seed for deterministic local jitter)
+    const localVariation = (Math.sin(lat * 10) + Math.cos(lng * 10)) * 5;
+    riskScore += localVariation;
 
     if (riskScore > 100) riskScore = 100;
     if (riskScore < 0) riskScore = 0;
