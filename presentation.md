@@ -60,3 +60,13 @@ India faces a critical road safety crisis with over 150,000 fatalities annually 
 *   **Top Right (Outline)**: `START SIMULATION` (One-click Demo)
 *   **Left Panel**: Risk Analysis & Map (Infrastructure & Prediction)
 *   **Right Panel**: Driver Profile & Safety Gauge (Behavioral Monitoring)
+
+##
+🌟 New "Smart Shield" Features:
+AI Impact Analysis: The SOS trigger now simulates a 6.2G Impact Force detection and an 84% Casualty Probability using predictive AI.
+Smart Traffic Bypass: The system now automatically logs that it is rerouting ambulances via low-traffic corridors for faster arrival.
+High-Speed Pursuit Mode: The "Start Simulation" now includes a high-speed chase scenario under heavy rain at 2 AM, triggering multiple swerving and speeding events to show how the system reacts in extreme conditions.
+Golden Hour 2.0: The emergency screen now has a high-tech "Critical" status indicator and a split-view showing AI-predicted injury levels.
+🚀 How to see them:
+Click "START SIMULATION" to watch the new high-speed rainy pursuit unfold.
+Click "SOS TRIGGER" to see the new AI impact data and smart bypass logs.
