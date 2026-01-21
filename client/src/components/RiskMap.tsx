@@ -19,7 +19,7 @@ function MapUpdater({ center }: { center: [number, number] }) {
   return null;
 }
 
-export function RiskMap({ center, zones, currentLocation }: RiskMapProps) {
+export function RiskMap({ center, zones, currentLocation, zoom = 13 }: RiskMapProps & { zoom?: number }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -33,9 +33,9 @@ export function RiskMap({ center, zones, currentLocation }: RiskMapProps) {
     <div className="h-[400px] w-full rounded-xl overflow-hidden border border-border/50 relative z-0">
       <MapContainer 
         center={center} 
-        zoom={13} 
+        zoom={zoom} 
         style={{ height: "100%", width: "100%", zIndex: 0 }}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

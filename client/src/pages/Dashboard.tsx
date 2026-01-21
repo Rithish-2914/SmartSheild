@@ -11,11 +11,14 @@ import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, 
 import { motion, AnimatePresence } from "framer-motion";
 import { useQueryClient } from "@tanstack/react-query";
 
-// Mock starting location (Bengaluru, India)
-const DEFAULT_CENTER: [number, number] = [12.9716, 77.5946];
+// Mock starting location (India Overview)
+const DEFAULT_CENTER: [number, number] = [20.5937, 78.9629]; // Center of India
+const INITIAL_ZOOM = 5;
 
 export default function Dashboard() {
-  const [currentLocation, setCurrentLocation] = useState({ lat: DEFAULT_CENTER[0], lng: DEFAULT_CENTER[1] });
+  const [currentLocation, setCurrentLocation] = useState({ lat: 12.9716, lng: 77.5946 }); // Start in Bengaluru
+  const [mapCenter, setMapCenter] = useState<[number, number]>(DEFAULT_CENTER);
+  const [zoom, setZoom] = useState(INITIAL_ZOOM);
   const [timeOfDay, setTimeOfDay] = useState("14:00");
   const [weather, setWeather] = useState("Clear");
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);

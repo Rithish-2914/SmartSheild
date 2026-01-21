@@ -17,49 +17,65 @@ export async function registerRoutes(
     const time = (req.query.time as string) || "12:00";
     const weather = (req.query.weather as string) || "Clear";
 
-    // Simple Logic for Risk Score
-    let riskScore = 10; // Base risk
-    let message = "Conditions are safe.";
+    // Dynamic Risk Score Logic for India
+    let riskScore = 25; // Base risk in India
+    let message = "System monitoring active.";
 
     // Time based risk
     const hour = parseInt(time.split(':')[0]);
     if (hour >= 22 || hour <= 5) {
-      riskScore += 30; // Night driving
-      message = "Night driving increases risk.";
-    } else if ((hour >= 8 && hour <= 10) || (hour >= 17 && hour <= 19)) {
-      riskScore += 20; // Rush hour
-      message = "High traffic volume detected.";
+      riskScore += 40; // High night risk
+      message = "High risk: Night driving visibility and safety hazards.";
+    } else if ((hour >= 8 && hour <= 10) || (hour >= 17 && hour <= 20)) {
+      riskScore += 30; // Peak traffic
+      message = "Medium risk: Peak traffic congestion levels.";
     }
 
     // Weather based risk
     const weatherLower = weather.toLowerCase();
     if (weatherLower.includes("rain")) {
-      riskScore += 40;
-      message += " Slippery roads due to rain.";
-    } else if (weatherLower.includes("snow") || weatherLower.includes("ice")) {
-      riskScore += 50;
-      message += " Hazardous road conditions.";
+      riskScore += 35;
+      message += " Slippery roads due to monsoon rains.";
     } else if (weatherLower.includes("fog")) {
-      riskScore += 30;
-      message += " Reduced visibility.";
+      riskScore += 25;
+      message += " Low visibility due to heavy fog/smog.";
     }
 
-    // Location proximity (Mock: check if close to a "known" zone)
+    // Location proximity logic
     const zones = await storage.getAccidentZones();
-    // Simple mock "nearby" check - if we had real lat/lng we'd calc distance
-    // For demo, we'll just say if risk > 80, we are in a Red Zone.
+    let proximityPenalty = 0;
+    let nearestZoneName = "";
+
+    for (const zone of zones) {
+      const zLat = parseFloat(zone.latitude);
+      const zLng = parseFloat(zone.longitude);
+      
+      // Simple distance squared check (threshold approx 0.05 units for "nearby")
+      const distSq = Math.pow(lat - zLat, 2) + Math.pow(lng - zLng, 2);
+      if (distSq < 0.0025) { // Roughly within 5km
+        if (zone.riskLevel === 'High') proximityPenalty = Math.max(proximityPenalty, 30);
+        else if (zone.riskLevel === 'Medium') proximityPenalty = Math.max(proximityPenalty, 15);
+        nearestZoneName = zone.locationName;
+      }
+    }
+
+    riskScore += proximityPenalty;
+    if (proximityPenalty > 0) {
+      message = `CAUTION: Proximity to ${nearestZoneName}. Entering high-alert zone.`;
+    }
 
     if (riskScore > 100) riskScore = 100;
+    if (riskScore < 0) riskScore = 0;
 
     let riskLevel: 'High' | 'Medium' | 'Safe' = 'Safe';
-    if (riskScore >= 70) riskLevel = 'High';
+    if (riskScore >= 75) riskLevel = 'High';
     else if (riskScore >= 40) riskLevel = 'Medium';
 
     res.json({
       riskScore,
       riskLevel,
       message,
-      nearbyZones: zones // Send all zones for map display
+      nearbyZones: zones 
     });
   });
 
