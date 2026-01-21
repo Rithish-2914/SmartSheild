@@ -150,7 +150,9 @@ export default function Dashboard() {
                   center={mapCenter} 
                   zoom={zoom}
                   zones={zones ?? []} 
+                  hazards={hazards || []}
                   currentLocation={currentLocation}
+                  visionMode={visionMode}
                   onLocationSelect={(lat, lng) => {
                     setCurrentLocation({ lat, lng });
                     setMapCenter([lat, lng]);

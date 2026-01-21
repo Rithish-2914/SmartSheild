@@ -112,6 +112,12 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
           <Marker 
             key={`hazard-${hazard.id}`} 
             position={[parseFloat(hazard.latitude), parseFloat(hazard.longitude)]}
+            icon={L.divIcon({
+              className: 'custom-div-icon',
+              html: `<div style="background-color: #f97316; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px #f97316;" class="${visionMode ? 'animate-pulse' : ''}"></div>`,
+              iconSize: [12, 12],
+              iconAnchor: [6, 6]
+            })}
           >
             <Popup className="font-sans">
               <div className="p-2 min-w-[150px] font-mono">
