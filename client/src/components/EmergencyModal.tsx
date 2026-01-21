@@ -2,7 +2,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useTriggerEmergency } from "@/hooks/use-emergency";
 import { useEffect, useState } from "react";
 import { Siren, MapPin, Clock, Navigation } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 interface EmergencyModalProps {
   isOpen: boolean;
