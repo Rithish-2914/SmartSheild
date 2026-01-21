@@ -108,7 +108,7 @@ app.get(api.risk.zones.path, async (req, res) => {
   let zones = await storage.getAccidentZones();
   
   // Auto-seed if empty (crucial for new deployments)
-  if (zones.length === 0) {
+  if (!zones || zones.length === 0) {
     const defaultZones = [
       { name: "Andhra Pradesh", lat: "15.9129", lng: "79.7400", risk: "High", city: "Amaravati", count: 42, desc: "High accident rate on state highways." },
       { name: "Arunachal Pradesh", lat: "28.2180", lng: "94.7278", risk: "Low", city: "Itanagar", count: 8, desc: "Hilly terrain with weather-related risks." },
@@ -141,15 +141,19 @@ app.get(api.risk.zones.path, async (req, res) => {
     ];
 
     for (const z of defaultZones) {
-      await storage.createAccidentZone({
-        locationName: z.name,
-        latitude: z.lat,
-        longitude: z.lng,
-        riskLevel: z.risk,
-        city: z.city,
-        accidentCount: z.count,
-        description: z.desc
-      } as any);
+      try {
+        await storage.createAccidentZone({
+          locationName: z.name,
+          latitude: z.lat,
+          longitude: z.lng,
+          riskLevel: z.risk,
+          city: z.city,
+          accidentCount: z.count,
+          description: z.desc
+        } as any);
+      } catch (e) {
+        console.error("Failed to seed zone:", z.name, e);
+      }
     }
     zones = await storage.getAccidentZones();
   }

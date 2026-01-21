@@ -38,7 +38,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getBehaviorLogs(): Promise<BehaviorLog[]> {
-    return await db.select().from(behaviorLogs).orderBy(desc(behaviorLogs.timestamp));
+    try {
+      return await db.select().from(behaviorLogs).orderBy(desc(behaviorLogs.timestamp));
+    } catch (e) {
+      console.error("Failed to fetch logs:", e);
+      return [];
+    }
   }
 
   async createBehaviorLog(log: InsertBehaviorLog): Promise<BehaviorLog> {
