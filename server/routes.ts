@@ -46,21 +46,37 @@ export async function registerRoutes(
     let proximityPenalty = 0;
     let nearestZoneName = "";
 
+    // City-specific base risks based on time
+    const cityBaseRisks: Record<string, { night: number, day: number }> = {
+      "Hyderabad": { night: 60, day: 20 },
+      "Bengaluru": { night: 40, day: 15 },
+      "Mumbai": { night: 50, day: 25 },
+      "Delhi": { night: 55, day: 30 },
+      "Chennai": { night: 35, day: 15 }
+    };
+
     for (const zone of zones) {
       const zLat = parseFloat(zone.latitude);
       const zLng = parseFloat(zone.longitude);
       
-      // Calculate distance in kilometers roughly (1 degree ~ 111km)
       const dLat = (lat - zLat) * 111;
       const dLng = (lng - zLng) * 111 * Math.cos(lat * Math.PI / 180);
       const distance = Math.sqrt(dLat * dLat + dLng * dLng);
 
-      if (distance < 5) { // Within 5km
-        const penalty = zone.riskLevel === 'High' ? 40 : (zone.riskLevel === 'Medium' ? 20 : 10);
-        // Apply penalty inversely proportional to distance
-        const scaledPenalty = penalty * (1 - (distance / 5));
-        proximityPenalty = Math.max(proximityPenalty, scaledPenalty);
-        if (proximityPenalty === scaledPenalty) nearestZoneName = zone.locationName;
+      if (distance < 15) { // Increased radius to 15km for city detection
+        // Apply city-specific base risk if within range
+        const cityData = cityBaseRisks[zone.city];
+        if (cityData) {
+          const isNight = hour >= 21 || hour <= 5;
+          riskScore = Math.max(riskScore, isNight ? cityData.night : cityData.day);
+        }
+
+        if (distance < 5) { // Immediate zone proximity
+          const penalty = zone.riskLevel === 'High' ? 40 : (zone.riskLevel === 'Medium' ? 20 : 10);
+          const scaledPenalty = penalty * (1 - (distance / 5));
+          proximityPenalty = Math.max(proximityPenalty, scaledPenalty);
+          if (proximityPenalty === scaledPenalty) nearestZoneName = zone.locationName;
+        }
       }
     }
 

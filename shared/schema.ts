@@ -9,6 +9,7 @@ export const accidentZones = pgTable("accident_zones", {
   latitude: text("latitude").notNull(), // text to preserve precision or simple coordinate
   longitude: text("longitude").notNull(),
   riskLevel: text("risk_level").notNull(), // 'High', 'Medium', 'Low'
+  city: text("city").notNull().default('Unknown'),
   accidentCount: integer("accident_count").default(0),
   description: text("description"),
 });
