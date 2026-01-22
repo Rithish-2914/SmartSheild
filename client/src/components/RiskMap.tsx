@@ -88,8 +88,12 @@ function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
     }
 
     return () => {
-      if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
+      if (routingControlRef.current && map) {
+        try {
+          map.removeControl(routingControlRef.current);
+        } catch (e) {
+          console.warn("Routing cleanup failed", e);
+        }
       }
     };
   }, [map, waypoints]);

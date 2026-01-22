@@ -77,7 +77,8 @@ export default function Dashboard() {
         setCyberVision(true);
         const dest = { lat: 12.9176, lng: 77.6233 };
         setDestination(dest);
-        setCurrentLocation({ lat: 12.9616, lng: 77.6046 }); // Close to hazard area
+        // Move location closer to Silk Board for the demo
+        setCurrentLocation({ lat: 12.9216, lng: 77.6133 }); 
       }
       
       if (step === 3) {
@@ -92,6 +93,7 @@ export default function Dashboard() {
       if (step === 5) {
         setIsEmergencyOpen(true);
         setDemoActive(false);
+        // We clear interval at the end of the effect anyway, but doing it here ensures it stops
         clearInterval(interval);
       }
     }, 1000);
