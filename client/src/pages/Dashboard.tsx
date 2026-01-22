@@ -55,13 +55,21 @@ export default function Dashboard() {
       
       // Step 1: Simulate movement to a risky zone (Silk Board)
       if (step === 1) {
-        setCurrentLocation({ lat: 12.9176, lng: 77.6233 }); // Silk Board
+        const dest = { lat: 12.9176, lng: 77.6233 };
+        setDestination(dest);
+        setCurrentLocation({ lat: 12.9716, lng: 77.5946 }); // Start position
       }
       
-      // Step 2: High Speed Pursuit Simulation
-      if (step === 2) {
-        // Keeping weather consistent with user preference or keeping it clear unless requested
-        // setWeather("Rain"); 
+      // Step 2: Smooth movement simulation toward destination
+      if (step >= 2 && step <= 5 && destination) {
+        setCurrentLocation(prev => ({
+          lat: prev.lat + (destination.lat - prev.lat) * 0.2,
+          lng: prev.lng + (destination.lng - prev.lng) * 0.2
+        }));
+      }
+
+      // Step 3: High Speed Pursuit Simulation
+      if (step === 3) {
         setTimeOfDay("02:00");
       }
 
@@ -273,13 +281,52 @@ export default function Dashboard() {
                 </div>
                 
                 {riskData?.message && (
-                  <div className="mt-auto p-2 bg-secondary/10 border-l-2 border-secondary text-xs text-secondary-foreground">
+                  <div className={`mt-auto p-2 border-l-2 text-xs transition-colors duration-500 ${
+                    riskData.riskLevel === 'High' ? 'bg-destructive/10 border-destructive text-destructive' : 
+                    'bg-secondary/10 border-secondary text-secondary-foreground'
+                  }`}>
+                    <div className="flex items-center gap-2 font-bold mb-1">
+                      <ShieldAlert className="w-3 h-3" />
+                      SYSTEM ALERT
+                    </div>
                     {riskData.message}
                   </div>
                 )}
               </div>
             </div>
           </CyberCard>
+
+          {/* New: Route Safety HUD */}
+          {destination && (
+            <CyberCard title="Route Safety Analysis" borderColor="primary" className="animate-in fade-in slide-in-from-left duration-500">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2">
+                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
+                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                    <AlertTriangle className="w-3 h-3 text-destructive" /> Accident Prob.
+                  </div>
+                  <div className="text-xl font-mono font-bold text-destructive">
+                    {riskData?.riskScore ? (riskData.riskScore * 0.8).toFixed(1) : "0"}%
+                  </div>
+                </div>
+                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
+                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                    <Zap className="w-3 h-3 text-orange-400" /> Pothole Density
+                  </div>
+                  <div className="text-xl font-mono font-bold text-orange-400">
+                    High
+                  </div>
+                </div>
+                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
+                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                    <ShieldAlert className="w-3 h-3 text-primary" /> Blind Spots
+                  </div>
+                  <div className="text-xl font-mono font-bold text-primary">
+                    Detected
+                  </div>
+                </div>
+              </div>
+            </CyberCard>
+          )}
 
           {/* Road Ratings (New Section) */}
           <CyberCard title="Road Safety Ratings" borderColor="primary">

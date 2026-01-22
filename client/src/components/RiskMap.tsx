@@ -1,8 +1,9 @@
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap, useMapEvents, Marker } from "react-leaflet";
 import { AccidentZone, HazardReport } from "@shared/schema";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet-routing-machine";
 
 // Fix Leaflet's default icon issue
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -46,6 +47,49 @@ function MapEvents({ onLocationSelect }: { onLocationSelect?: (lat: number, lng:
   return null;
 }
 
+function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
+  const map = useMap();
+  const routingControlRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!map || waypoints.length < 2) {
+      if (routingControlRef.current) {
+        map.removeControl(routingControlRef.current);
+        routingControlRef.current = null;
+      }
+      return;
+    }
+
+    if (routingControlRef.current) {
+      map.removeControl(routingControlRef.current);
+    }
+
+    // @ts-ignore - leaflet-routing-machine adds this to L
+    routingControlRef.current = L.Routing.control({
+      waypoints,
+      lineOptions: {
+        styles: [{ color: "#00ffff", weight: 6, opacity: 0.6 }],
+        extendToWaypoints: true,
+        missingRouteTolerance: 10
+      },
+      // @ts-ignore
+      createMarker: () => null, // We handle our own markers
+      addWaypoints: false,
+      draggableWaypoints: false,
+      fitSelectedRoutes: true,
+      show: false // Hide the instruction panel to keep HUD clean
+    }).addTo(map);
+
+    return () => {
+      if (routingControlRef.current) {
+        map.removeControl(routingControlRef.current);
+      }
+    };
+  }, [map, waypoints]);
+
+  return null;
+}
+
 export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination }: RiskMapProps & { zoom?: number }) {
   const getZoneColor = (level: string) => {
     switch (level) {
@@ -86,6 +130,15 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
         
         <MapUpdater center={center} />
         <MapEvents onLocationSelect={onLocationSelect} />
+        
+        {currentLocation && destination && (
+          <RoutingMachine 
+            waypoints={[
+              L.latLng(currentLocation.lat, currentLocation.lng),
+              L.latLng(destination.lat, destination.lng)
+            ]} 
+          />
+        )}
 
         {currentLocation && (
           <CircleMarker 
