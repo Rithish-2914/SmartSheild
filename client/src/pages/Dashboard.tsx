@@ -285,8 +285,23 @@ export default function Dashboard() {
                       type="time" 
                       value={timeOfDay} 
                       onChange={(e) => setTimeOfDay(e.target.value)}
-                      className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-mono"
+                      className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-mono mb-4"
                     />
+                    
+                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
+                      <CloudRain className="w-3 h-3" /> WEATHER
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {['Clear', 'Rain', 'Fog'].map((w) => (
+                        <button
+                          key={w}
+                          onClick={() => setWeather(w)}
+                          className={`flex-1 min-w-[60px] py-1 text-xs rounded border transition-all ${weather === w ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-border text-muted-foreground'}`}
+                        >
+                          {w}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 
@@ -471,6 +486,16 @@ export default function Dashboard() {
                 >
                   <Zap className="w-6 h-6 text-orange-500 group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-bold uppercase">Over Speeding</span>
+                </Button>
+
+                <Button 
+                  variant="outline"
+                  className="h-auto py-4 flex flex-col gap-2 border-destructive/30 hover:bg-destructive/10 hover:border-destructive hover:text-destructive transition-all group"
+                  onClick={() => logEvent({ eventType: "crash", scoreDeduction: 100 })}
+                  disabled={isScoreLoading}
+                >
+                  <AlertTriangle className="w-6 h-6 text-destructive group-hover:scale-110 transition-transform" />
+                  <span className="text-xs font-bold uppercase">Severe Crash</span>
                 </Button>
                 <Button 
                   variant="outline"
