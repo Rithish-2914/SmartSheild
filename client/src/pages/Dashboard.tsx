@@ -25,6 +25,20 @@ export default function Dashboard() {
   const [visionMode, setCyberVision] = useState(false);
   const [destination, setDestination] = useState<{ lat: number; lng: number } | null>(null);
   const [isSettingDestination, setIsSettingDestination] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Search Results for Demo
+  const SEARCH_RESULTS = [
+    { name: "Silk Board Junction, Bengaluru", lat: 12.9176, lng: 77.6233 },
+    { name: "MG Road, Bengaluru", lat: 12.9756, lng: 77.6067 },
+    { name: "Western Express Highway, Mumbai", lat: 19.0760, lng: 72.8777 },
+    { name: "Connaught Place, Delhi", lat: 28.6315, lng: 77.2167 },
+    { name: "Outer Ring Road, Hyderabad", lat: 17.3850, lng: 78.4867 },
+  ];
+
+  const filteredSearch = SEARCH_RESULTS.filter(item => 
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Queries
   const { data: scoreData, isLoading: isScoreLoading } = useDriverScore();
@@ -205,13 +219,43 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div>
+                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
+                      <MapIcon className="w-3 h-3" /> DESTINATION SEARCH
+                    </label>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs font-mono mb-2"
+                        placeholder="Search area or road..."
+                      />
+                      {searchQuery && filteredSearch.length > 0 && (
+                        <div className="absolute top-full left-0 right-0 z-50 bg-background border border-border rounded shadow-xl max-h-32 overflow-y-auto">
+                          {filteredSearch.map((result) => (
+                            <button
+                              key={result.name}
+                              className="w-full text-left px-2 py-1 text-[10px] hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0"
+                              onClick={() => {
+                                setDestination({ lat: result.lat, lng: result.lng });
+                                setMapCenter([result.lat, result.lng]);
+                                setZoom(14);
+                                setSearchQuery("");
+                              }}
+                            >
+                              {result.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                     <Button 
                       variant="outline" 
                       size="sm" 
                       className={`w-full font-mono text-[10px] ${isSettingDestination ? 'bg-primary/20 border-primary animate-pulse' : ''}`}
                       onClick={() => setIsSettingDestination(!isSettingDestination)}
                     >
-                      {isSettingDestination ? "CLICK MAP TO SET DEST" : "SET DESTINATION"}
+                      {isSettingDestination ? "CLICK MAP TO SET DEST" : "OR PIN ON MAP"}
                     </Button>
                     {destination && (
                       <div className="mt-2 p-2 bg-black/40 border border-border rounded text-[10px] font-mono">
@@ -361,7 +405,15 @@ export default function Dashboard() {
         <div className="lg:col-span-4 space-y-6">
           <CyberCard title="Road Safety Ratings" borderColor="primary">
             <div className="space-y-3 p-2">
-              {(roadRatings || []).map((road) => (
+              {(roadRatings?.filter(road => {
+                if (!destination) return true;
+                // Proximity check for destination specific rating
+                const dLat = (parseFloat(road.roadName.includes("Silk Board") ? "12.9176" : 
+                             road.roadName.includes("Western Express") ? "19.0760" :
+                             road.roadName.includes("Outer Ring Road") ? "17.3850" :
+                             road.roadName.includes("Connaught Place") ? "28.6315" : "0") - destination.lat) * 111;
+                return Math.abs(dLat) < 5 || !destination;
+              }) || []).map((road) => (
                 <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
                   <div>
                     <div className="font-bold text-sm">{road.roadName}</div>
