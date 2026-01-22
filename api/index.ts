@@ -204,22 +204,130 @@ app.post(api.driver.reset.path, async (req, res) => {
   res.json({ success: true });
 });
 
+app.get("/api/roads/ratings", async (req, res) => {
+  const ratings = await storage.getRoadRatings();
+  res.json(ratings);
+});
+
+app.post("/api/roads/ratings", async (req, res) => {
+  const rating = await storage.createRoadRating(req.body);
+  res.json(rating);
+});
+
+app.get("/api/hazards", async (req, res) => {
+  const reports = await storage.getHazardReports();
+  res.json(reports);
+});
+
+app.post("/api/hazards", async (req, res) => {
+  const report = await storage.createHazardReport(req.body);
+  res.json(report);
+});
+
+app.post("/api/hazards/:id/upvote", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const reports = await storage.getHazardReports();
+  const report = reports.find(r => r.id === id);
+  if (report) {
+    const updated = await storage.createHazardReport({
+      ...report,
+      upvotes: (report.upvotes || 0) + 1
+    } as any);
+    res.json(updated);
+  } else {
+    res.status(404).json({ message: "Not found" });
+  }
+});
+
 app.post(api.emergency.trigger.path, async (req, res) => {
   const { lat, lng } = req.body;
+  
+  // Create alert
   const alert = await storage.createEmergencyAlert({
     location: `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
-    hospitalName: "City General Hospital",
+    hospitalName: "Searching...",
     status: "Active"
   });
-  res.json({
-    alert,
-    nearestHospital: {
-      name: "City General Hospital",
-      distance: "2.4 km",
-      eta: "5 mins",
-      coordinates: { lat: lat + 0.01, lng: lng + 0.01 }
+
+  // Searching state for nearest hospital
+  let nearestHospital = {
+    name: "Locating Facility...",
+    distance: "Calculating...",
+    eta: "Estimating...",
+    coordinates: { lat: lat + 0.001, lng: lng + 0.001 }
+  };
+
+  try {
+    // Direct hospital lookup using a more reliable Overpass query
+    const query = `[out:json][timeout:30];
+      (
+        node["amenity"="hospital"](around:20000,${lat},${lng});
+        way["amenity"="hospital"](around:20000,${lat},${lng});
+        node["healthcare"="hospital"](around:20000,${lat},${lng});
+      );
+      out center;`;
+    
+    const mirrors = [
+      `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`,
+      `https://overpass.kumi.systems/api/interpreter?data=${encodeURIComponent(query)}`,
+      `https://lz4.overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`
+    ];
+
+    let data;
+    for (const url of mirrors) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          data = await response.json();
+          if (data.elements && data.elements.length > 0) break;
+        }
+      } catch (e) {
+        console.error(`SOS: Mirror failed: ${url}`);
+      }
     }
-  });
+
+    if (data && data.elements && data.elements.length > 0) {
+      const hospitals = data.elements.map((h: any) => {
+        const hLat = h.lat || (h.center && h.center.lat);
+        const hLng = h.lon || (h.center && h.center.lon);
+        if (!hLat || !hLng) return null;
+        
+        const dLat = (hLat - lat) * 111;
+        const dLng = (hLng - lng) * 111 * Math.cos(lat * Math.PI / 180);
+        const dist = Math.sqrt(dLat * dLat + dLng * dLng);
+
+        return {
+          name: h.tags.name || h.tags["name:en"] || h.tags["name:hi"] || "Local Medical Center",
+          lat: hLat,
+          lng: hLng,
+          dist: dist
+        };
+      }).filter(Boolean).sort((a: any, b: any) => a.dist - b.dist);
+
+      if (hospitals.length > 0) {
+        const best = hospitals[0];
+        const distKm = best.dist.toFixed(1); 
+        nearestHospital = {
+          name: best.name,
+          distance: `${distKm} km`,
+          eta: `${Math.ceil(Number(distKm) * 2.5) + 2} mins`, 
+          coordinates: { lat: best.lat, lng: best.lng }
+        };
+        await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
+      }
+    } else {
+      nearestHospital = {
+        name: "Regional Emergency Center",
+        distance: "Searching...",
+        eta: "Calculating...",
+        coordinates: { lat: lat + 0.005, lng: lng + 0.005 }
+      };
+    }
+  } catch (error) {
+    console.error("SOS: Hospital search failed:", error);
+  }
+
+  res.json({ alert, nearestHospital });
 });
 
 export default app;
