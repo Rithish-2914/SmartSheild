@@ -337,10 +337,20 @@ export default function Dashboard() {
           <CyberCard title="Road Safety Ratings" borderColor="primary">
             <div className="space-y-3 p-2">
               {(roadRatings?.filter(road => {
-                if (!destination) return true;
-                // Simplified filtering: show top 3 most relevant or all for demo
-                return true;
-              }).slice(0, 5) || []).map((road) => (
+                if (!destination) return false;
+                // Match based on destination proximity to seed data cities for demo
+                const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
+                const isMumbaiDest = destination.lat > 19.0 && destination.lat < 19.1 && destination.lng > 72.8 && destination.lng < 72.9;
+                const isHydDest = destination.lat > 17.3 && destination.lat < 17.4 && destination.lng > 78.4 && destination.lng < 78.6;
+                const isDelhiDest = destination.lat > 28.5 && destination.lat < 28.7 && destination.lng > 77.1 && destination.lng < 77.3;
+
+                if (isBengaluruDest) return road.roadName.includes("Silk Board") || road.roadName.includes("MG Road");
+                if (isMumbaiDest) return road.roadName.includes("Western Express");
+                if (isHydDest) return road.roadName.includes("Outer Ring Road");
+                if (isDelhiDest) return road.roadName.includes("Connaught Place");
+                
+                return false;
+              }) || []).map((road) => (
                 <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
                   <div>
                     <div className="font-bold text-sm">{road.roadName}</div>
