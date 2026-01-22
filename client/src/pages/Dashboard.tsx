@@ -76,17 +76,22 @@ export default function Dashboard() {
         setCurrentLocation({ lat: 12.9716, lng: 77.5946 });
       }
       
-      if (step >= 2 && step <= 5 && destination) {
+      if (step >= 2 && step <= 4 && destination) {
         setCurrentLocation(prev => ({
-          lat: prev.lat + (destination.lat - prev.lat) * 0.2,
-          lng: prev.lng + (destination.lng - prev.lng) * 0.2
+          lat: prev.lat + (destination.lat - prev.lat) * 0.25,
+          lng: prev.lng + (destination.lng - prev.lng) * 0.25
         }));
       }
 
       if (step === 3) {
-        setTimeOfDay("02:00");
+        setTimeOfDay("22:00");
+        setWeather("Rain");
         logEvent({ eventType: "speeding", scoreDeduction: 15 });
-        logEvent({ eventType: "swerving", scoreDeduction: 10 });
+      }
+
+      if (step === 5) {
+        // Trigger Crash
+        logEvent({ eventType: "crash", scoreDeduction: 100 });
       }
 
       if (step === 6) {
