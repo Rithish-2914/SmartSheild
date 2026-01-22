@@ -342,21 +342,21 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-2 border-t border-border/30 pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-2 border-t border-border/30 pt-4">
                   <div className="p-2 bg-black/40 border border-destructive/20 rounded-lg">
                     <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
-                      <AlertTriangle className="w-3 h-3 text-destructive" /> Accident Prob.
+                      <AlertTriangle className="w-3 h-3 text-destructive" /> Risk Index
                     </div>
                     <div className="text-lg font-mono font-bold text-destructive">
-                      {riskData?.riskScore ? (riskData.riskScore * 0.8).toFixed(1) : "0"}%
+                      {riskData?.riskScore ?? 0}%
                     </div>
                   </div>
                   <div className="p-2 bg-black/40 border border-orange-400/20 rounded-lg">
                     <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
-                      <Zap className="w-3 h-3 text-orange-400" /> Pothole Density
+                      <Zap className="w-3 h-3 text-orange-400" /> Hazards
                     </div>
                     <div className="text-lg font-mono font-bold text-orange-400">
-                      High
+                      {riskData?.riskScore ? Math.floor(riskData.riskScore / 5) : 0}
                     </div>
                   </div>
                   <div className="p-2 bg-black/40 border border-primary/20 rounded-lg">
@@ -364,7 +364,15 @@ export default function Dashboard() {
                       <ShieldAlert className="w-3 h-3 text-primary" /> Blind Spots
                     </div>
                     <div className="text-lg font-mono font-bold text-primary">
-                      Detected
+                      {riskData?.riskScore && riskData.riskScore > 40 ? "High" : "Low"}
+                    </div>
+                  </div>
+                  <div className="p-2 bg-black/40 border border-blue-400/20 rounded-lg">
+                    <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                      <CloudRain className="w-3 h-3 text-blue-400" /> Visibility
+                    </div>
+                    <div className="text-lg font-mono font-bold text-blue-400">
+                      {weather === 'Fog' ? "Poor" : weather === 'Rain' ? "Moderate" : "Clear"}
                     </div>
                   </div>
                 </div>
@@ -412,15 +420,18 @@ export default function Dashboard() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <div className="text-[10px] text-muted-foreground uppercase">Est. Potholes</div>
-                      <div className="text-lg font-mono font-bold text-primary">
-                        {riskData?.riskScore ? Math.floor(riskData.riskScore / 10) : 0}
+                      <div className="text-[10px] text-muted-foreground uppercase">Hazard Conditions</div>
+                      <div className="text-xs font-mono font-bold text-primary flex flex-wrap gap-2">
+                        {riskData?.riskScore && riskData.riskScore > 30 && <span className="text-orange-400">POTHOLES</span>}
+                        {riskData?.riskScore && riskData.riskScore > 50 && <span className="text-destructive">BLIND SPOTS</span>}
+                        {weather !== 'Clear' && <span className="text-blue-400">{weather.toUpperCase()}</span>}
+                        {riskData?.riskScore && riskData.riskScore < 30 && <span className="text-green-400">OPTIMAL</span>}
                       </div>
                     </div>
                     <div className="space-y-1 text-right">
-                      <div className="text-[10px] text-muted-foreground uppercase">Hazard Score</div>
+                      <div className="text-[10px] text-muted-foreground uppercase">Safety Index</div>
                       <div className="text-lg font-mono font-bold text-secondary">
-                        {riskData?.riskScore ?? 0}
+                        {100 - (riskData?.riskScore ?? 0)}
                       </div>
                     </div>
                   </div>
