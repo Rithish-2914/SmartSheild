@@ -366,36 +366,24 @@ export default function Dashboard() {
 
                 <div className="space-y-2 border-t border-border/30 pt-4">
                   <div className="text-[10px] text-muted-foreground uppercase mb-2">Route Safety Segment</div>
-                  {(roadRatings?.filter(road => {
-                    if (!destination) return false;
-                    const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
-                    const isMumbaiDest = destination.lat > 19.0 && destination.lat < 19.1 && destination.lng > 72.8 && destination.lng < 72.9;
-                    const isHydDest = destination.lat > 17.3 && destination.lat < 17.4 && destination.lng > 78.4 && destination.lng < 78.6;
-                    const isDelhiDest = destination.lat > 28.5 && destination.lat < 28.7 && destination.lng > 77.1 && destination.lng < 77.3;
-
-                    if (isBengaluruDest) return road.roadName.includes("Silk Board") || road.roadName.includes("MG Road");
-                    if (isMumbaiDest) return road.roadName.includes("Western Express");
-                    if (isHydDest) return road.roadName.includes("Outer Ring Road");
-                    if (isDelhiDest) return road.roadName.includes("Connaught Place");
-                    return false;
-                  }) || []).map((road) => (
-                    <div key={road.id} className="flex justify-between items-center p-2 rounded bg-background/50 border border-border/30">
+                  {destination && (
+                    <div className="flex justify-between items-center p-2 rounded bg-background/50 border border-border/30">
                       <div>
-                        <div className="font-bold text-xs">{road.roadName}</div>
+                        <div className="font-bold text-xs">Active Route Rating</div>
                         <div className="text-[9px] text-muted-foreground flex gap-2">
-                          <span>Potholes: {road.potholeCount}</span>
-                          <span>Accidents: {road.accidentHistory}</span>
+                          <span>Potholes: {riskData?.riskScore ? Math.floor(riskData.riskScore / 10) : 0}</span>
+                          <span>Risk Index: {riskData?.riskScore ?? 0}</span>
                         </div>
                       </div>
                       <div className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase ${
-                        road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
-                        road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                        riskData?.riskLevel === 'High' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                        riskData?.riskLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
                         'bg-green-500/20 text-green-500 border border-green-500/50'
                       }`}>
-                        {road.rating}
+                        {riskData?.riskLevel === 'Safe' ? 'Good' : riskData?.riskLevel ?? 'Good'}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </CyberCard>
@@ -403,36 +391,37 @@ export default function Dashboard() {
         </div>
 
         <div className="lg:col-span-4 space-y-6">
-          <CyberCard title="Road Safety Ratings" borderColor="primary">
+          <CyberCard title="Route Safety Analysis" borderColor="primary">
             <div className="space-y-3 p-2">
-              {(roadRatings?.filter(road => {
-                if (!destination) return true;
-                // Proximity check for destination specific rating
-                const dLat = (parseFloat(road.roadName.includes("Silk Board") ? "12.9176" : 
-                             road.roadName.includes("Western Express") ? "19.0760" :
-                             road.roadName.includes("Outer Ring Road") ? "17.3850" :
-                             road.roadName.includes("Connaught Place") ? "28.6315" : "0") - destination.lat) * 111;
-                return Math.abs(dLat) < 5 || !destination;
-              }) || []).map((road) => (
-                <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
-                  <div>
-                    <div className="font-bold text-sm">{road.roadName}</div>
-                    <div className="text-[10px] text-muted-foreground flex gap-3">
-                      <span>Potholes: {road.potholeCount}</span>
-                      <span>Accidents: {road.accidentHistory}</span>
+              {destination ? (
+                <div className="p-3 rounded bg-background/50 border border-border/50">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="font-bold text-sm">Active Journey Rating</div>
+                    <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
+                      riskData?.riskLevel === 'High' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                      riskData?.riskLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                      'bg-green-500/20 text-green-500 border border-green-500/50'
+                    }`}>
+                      {riskData?.riskLevel === 'Safe' ? 'Good' : riskData?.riskLevel ?? 'Good'}
                     </div>
                   </div>
-                  <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                    road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
-                    road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
-                    'bg-green-500/20 text-green-500 border border-green-500/50'
-                  }`}>
-                    {road.rating}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <div className="text-[10px] text-muted-foreground uppercase">Est. Potholes</div>
+                      <div className="text-lg font-mono font-bold text-primary">
+                        {riskData?.riskScore ? Math.floor(riskData.riskScore / 10) : 0}
+                      </div>
+                    </div>
+                    <div className="space-y-1 text-right">
+                      <div className="text-[10px] text-muted-foreground uppercase">Hazard Score</div>
+                      <div className="text-lg font-mono font-bold text-secondary">
+                        {riskData?.riskScore ?? 0}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
-              {(!roadRatings || roadRatings.length === 0) && (
-                <div className="text-center text-muted-foreground py-4 italic text-sm">No road rating data available.</div>
+              ) : (
+                <div className="text-center text-muted-foreground py-8 italic text-sm">Set a destination to see route safety rating.</div>
               )}
             </div>
           </CyberCard>
