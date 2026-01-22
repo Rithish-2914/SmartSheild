@@ -163,7 +163,12 @@ export default function Dashboard() {
                   center={mapCenter} 
                   zoom={zoom}
                   zones={zones ?? []} 
-                  hazards={hazards || []}
+                  hazards={hazards?.filter(h => {
+                    if (!destination) return false;
+                    const dLat = (parseFloat(h.latitude) - destination.lat) * 111;
+                    const dLng = (parseFloat(h.longitude) - destination.lng) * 111;
+                    return Math.sqrt(dLat * dLat + dLng * dLng) < 5; // Only show hazards within 5km of destination
+                  }) || []}
                   currentLocation={currentLocation}
                   visionMode={visionMode}
                   destination={destination || undefined}
@@ -331,7 +336,11 @@ export default function Dashboard() {
           {/* Road Ratings (New Section) */}
           <CyberCard title="Road Safety Ratings" borderColor="primary">
             <div className="space-y-3 p-2">
-              {roadRatings?.map((road) => (
+              {(roadRatings?.filter(road => {
+                if (!destination) return true;
+                // Simplified filtering: show top 3 most relevant or all for demo
+                return true;
+              }).slice(0, 5) || []).map((road) => (
                 <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
                   <div>
                     <div className="font-bold text-sm">{road.roadName}</div>

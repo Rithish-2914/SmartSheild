@@ -400,5 +400,17 @@ async function seedDatabase() {
       accidentHistory: 15,
       rating: "Average"
     });
+    await storage.createRoadRating({
+      roadName: "Connaught Place, Delhi",
+      potholeCount: 3,
+      accidentHistory: 12,
+      rating: "Average"
+    });
+    await storage.createRoadRating({
+      roadName: "MG Road, Bengaluru",
+      potholeCount: 1,
+      accidentHistory: 8,
+      rating: "Good"
+    });
   }
 }
