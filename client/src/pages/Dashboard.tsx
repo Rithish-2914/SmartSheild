@@ -172,6 +172,7 @@ export default function Dashboard() {
                   currentLocation={currentLocation}
                   visionMode={visionMode}
                   destination={destination || undefined}
+                  roadRatings={roadRatings || []}
                   onLocationSelect={(lat, lng) => {
                     if (isSettingDestination) {
                       setDestination({ lat, lng });
@@ -301,78 +302,6 @@ export default function Dashboard() {
             </div>
           </CyberCard>
 
-          {/* New: Route Safety HUD */}
-          {destination && (
-            <CyberCard title="Route Safety Analysis" borderColor="primary" className="animate-in fade-in slide-in-from-left duration-500">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2">
-                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
-                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
-                    <AlertTriangle className="w-3 h-3 text-destructive" /> Accident Prob.
-                  </div>
-                  <div className="text-xl font-mono font-bold text-destructive">
-                    {riskData?.riskScore ? (riskData.riskScore * 0.8).toFixed(1) : "0"}%
-                  </div>
-                </div>
-                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
-                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
-                    <Zap className="w-3 h-3 text-orange-400" /> Pothole Density
-                  </div>
-                  <div className="text-xl font-mono font-bold text-orange-400">
-                    High
-                  </div>
-                </div>
-                <div className="p-3 bg-black/40 border border-primary/20 rounded-lg">
-                  <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
-                    <ShieldAlert className="w-3 h-3 text-primary" /> Blind Spots
-                  </div>
-                  <div className="text-xl font-mono font-bold text-primary">
-                    Detected
-                  </div>
-                </div>
-              </div>
-            </CyberCard>
-          )}
-
-          {/* Road Ratings (New Section) */}
-          <CyberCard title="Road Safety Ratings" borderColor="primary">
-            <div className="space-y-3 p-2">
-              {(roadRatings?.filter(road => {
-                if (!destination) return false;
-                // Match based on destination proximity to seed data cities for demo
-                const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
-                const isMumbaiDest = destination.lat > 19.0 && destination.lat < 19.1 && destination.lng > 72.8 && destination.lng < 72.9;
-                const isHydDest = destination.lat > 17.3 && destination.lat < 17.4 && destination.lng > 78.4 && destination.lng < 78.6;
-                const isDelhiDest = destination.lat > 28.5 && destination.lat < 28.7 && destination.lng > 77.1 && destination.lng < 77.3;
-
-                if (isBengaluruDest) return road.roadName.includes("Silk Board") || road.roadName.includes("MG Road");
-                if (isMumbaiDest) return road.roadName.includes("Western Express");
-                if (isHydDest) return road.roadName.includes("Outer Ring Road");
-                if (isDelhiDest) return road.roadName.includes("Connaught Place");
-                
-                return false;
-              }) || []).map((road) => (
-                <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
-                  <div>
-                    <div className="font-bold text-sm">{road.roadName}</div>
-                    <div className="text-[10px] text-muted-foreground flex gap-3">
-                      <span>Potholes: {road.potholeCount}</span>
-                      <span>Accidents: {road.accidentHistory}</span>
-                    </div>
-                  </div>
-                  <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                    road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
-                    road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
-                    'bg-green-500/20 text-green-500 border border-green-500/50'
-                  }`}>
-                    {road.rating}
-                  </div>
-                </div>
-              ))}
-              {(!roadRatings || roadRatings.length === 0) && (
-                <div className="text-center text-muted-foreground py-4 italic text-sm">No road rating data available.</div>
-              )}
-            </div>
-          </CyberCard>
 
           {/* Recent Logs (Bottom left) */}
           <CyberCard title="System Logs" borderColor="accent" className="min-h-[200px]">
@@ -395,18 +324,83 @@ export default function Dashboard() {
           {/* New: Navigation HUD Instructions */}
           {destination && (
             <CyberCard title="Navigation HUD" borderColor="secondary" className="animate-in zoom-in duration-300">
-              <div className="p-4 grid grid-cols-2 gap-4">
-                <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-secondary/30 rounded-lg group hover:border-secondary transition-colors">
-                  <Zap className="w-8 h-8 text-secondary mb-2 group-hover:scale-110 transition-transform" />
-                  <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Next Action</span>
-                  <span className="text-lg font-display font-bold text-secondary">TURN LEFT</span>
-                  <span className="text-[10px] text-muted-foreground mt-1">IN 200m</span>
+              <div className="p-4 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-secondary/30 rounded-lg group hover:border-secondary transition-colors">
+                    <Zap className="w-8 h-8 text-secondary mb-2 group-hover:scale-110 transition-transform" />
+                    <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Next Action</span>
+                    <span className="text-lg font-display font-bold text-secondary">TURN LEFT</span>
+                    <span className="text-[10px] text-muted-foreground mt-1 text-center">ON TO {roadRatings?.find(r => r.rating === 'Poor')?.roadName || "MAIN ROAD"}</span>
+                    <span className="text-[10px] text-muted-foreground mt-1">IN 200m</span>
+                  </div>
+                  <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-border rounded-lg opacity-50">
+                    <RotateCcw className="w-8 h-8 text-muted-foreground mb-2" />
+                    <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Followed By</span>
+                    <span className="text-lg font-display font-bold text-muted-foreground uppercase">Turn Right</span>
+                    <span className="text-[10px] text-muted-foreground mt-1">IN 1.2km</span>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-border rounded-lg opacity-50">
-                  <RotateCcw className="w-8 h-8 text-muted-foreground mb-2" />
-                  <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Followed By</span>
-                  <span className="text-lg font-display font-bold text-muted-foreground uppercase">Turn Right</span>
-                  <span className="text-[10px] text-muted-foreground mt-1">IN 1.2km</span>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-2 border-t border-border/30 pt-4">
+                  <div className="p-2 bg-black/40 border border-destructive/20 rounded-lg">
+                    <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                      <AlertTriangle className="w-3 h-3 text-destructive" /> Accident Prob.
+                    </div>
+                    <div className="text-lg font-mono font-bold text-destructive">
+                      {riskData?.riskScore ? (riskData.riskScore * 0.8).toFixed(1) : "0"}%
+                    </div>
+                  </div>
+                  <div className="p-2 bg-black/40 border border-orange-400/20 rounded-lg">
+                    <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                      <Zap className="w-3 h-3 text-orange-400" /> Pothole Density
+                    </div>
+                    <div className="text-lg font-mono font-bold text-orange-400">
+                      High
+                    </div>
+                  </div>
+                  <div className="p-2 bg-black/40 border border-primary/20 rounded-lg">
+                    <div className="text-[10px] text-muted-foreground uppercase mb-1 flex items-center gap-1">
+                      <ShieldAlert className="w-3 h-3 text-primary" /> Blind Spots
+                    </div>
+                    <div className="text-lg font-mono font-bold text-primary">
+                      Detected
+                    </div>
+                  </div>
+                </div>
+
+                {/* Road Safety Ratings integrated into HUD */}
+                <div className="space-y-2 border-t border-border/30 pt-4">
+                  <div className="text-[10px] text-muted-foreground uppercase mb-2">Route Safety Segment</div>
+                  {(roadRatings?.filter(road => {
+                    if (!destination) return false;
+                    const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
+                    const isMumbaiDest = destination.lat > 19.0 && destination.lat < 19.1 && destination.lng > 72.8 && destination.lng < 72.9;
+                    const isHydDest = destination.lat > 17.3 && destination.lat < 17.4 && destination.lng > 78.4 && destination.lng < 78.6;
+                    const isDelhiDest = destination.lat > 28.5 && destination.lat < 28.7 && destination.lng > 77.1 && destination.lng < 77.3;
+
+                    if (isBengaluruDest) return road.roadName.includes("Silk Board") || road.roadName.includes("MG Road");
+                    if (isMumbaiDest) return road.roadName.includes("Western Express");
+                    if (isHydDest) return road.roadName.includes("Outer Ring Road");
+                    if (isDelhiDest) return road.roadName.includes("Connaught Place");
+                    return false;
+                  }) || []).map((road) => (
+                    <div key={road.id} className="flex justify-between items-center p-2 rounded bg-background/50 border border-border/30">
+                      <div>
+                        <div className="font-bold text-xs">{road.roadName}</div>
+                        <div className="text-[9px] text-muted-foreground flex gap-2">
+                          <span>Potholes: {road.potholeCount}</span>
+                          <span>Accidents: {road.accidentHistory}</span>
+                        </div>
+                      </div>
+                      <div className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase ${
+                        road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                        road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                        'bg-green-500/20 text-green-500 border border-green-500/50'
+                      }`}>
+                        {road.rating}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </CyberCard>

@@ -26,6 +26,7 @@ interface RiskMapProps {
   onLocationSelect?: (lat: number, lng: number) => void;
   visionMode?: boolean;
   destination?: { lat: number; lng: number };
+  roadRatings?: RoadRating[];
 }
 
 function MapUpdater({ center }: { center: [number, number] }) {
@@ -90,7 +91,7 @@ function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
   return null;
 }
 
-export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination }: RiskMapProps & { zoom?: number }) {
+export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination, roadRatings = [] }: RiskMapProps & { zoom?: number }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -179,6 +180,32 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
             </Popup>
           </Marker>
         )}
+
+        {/* Route Hazard Indicators on Map */}
+        {destination && (roadRatings?.filter(road => {
+            const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
+            if (isBengaluruDest) return road.roadName.includes("Silk Board");
+            return false;
+          }) || []).map((road) => (
+          <Marker 
+            key={`route-hazard-${road.id}`} 
+            position={[destination.lat - 0.005, destination.lng - 0.005]} // Place slightly before destination
+            icon={L.divIcon({
+              className: 'custom-div-icon',
+              html: `<div style="background-color: #ef4444; width: 10px; height: 10px; border-radius: 50%; border: 1px solid white; box-shadow: 0 0 8px #ef4444;" class="animate-pulse"></div>`,
+              iconSize: [10, 10],
+              iconAnchor: [5, 5]
+            })}
+          >
+            <Popup className="font-sans">
+              <div className="p-1 text-[10px] font-mono">
+                <strong className="text-destructive block border-b border-destructive/30 mb-1 uppercase">ROUTE HAZARD</strong>
+                <div>{road.roadName}</div>
+                <div className="text-muted-foreground italic">Caution: High Pothole Density</div>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
 
         {/* Hazard Reports */}
         {hazards?.map((hazard) => (
