@@ -1,4 +1,4 @@
-# Smart Shield - Features Summary
+# Safe Path - Features Summary
 
 ## Core Platform Features
 
@@ -13,3 +13,4 @@
 - **Emergency Response System**: Immediate incident logging and severe crash event tracking for emergency coordination.
 - **Smart Search**: Destination-based route planning with integrated safety ratings for major Indian cities.
 - **Comprehensive Safety Metrics**: Real-time monitoring of blind spots, visibility conditions, and composite risk indexes.
+- **Safe Path Active Alert**: AI-driven impact analysis and automatic medical facility coordination.

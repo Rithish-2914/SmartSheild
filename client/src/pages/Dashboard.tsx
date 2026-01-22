@@ -10,6 +10,8 @@ import { EmergencyModal } from "@/components/EmergencyModal";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, CloudRain, Sun, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
 
+import logoImg from "@assets/WhatsApp_Image_2026-01-23_at_00.36.06_1769108780312.jpeg";
+
 // Mock starting location (India Overview)
 const DEFAULT_CENTER: [number, number] = [20.5937, 78.9629]; // Center of India
 const INITIAL_ZOOM = 5;
@@ -107,12 +109,12 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-foreground p-4 md:p-6 lg:p-8 font-body overflow-x-hidden">
       <header className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-primary/10 rounded-lg border border-primary/30">
-            <ShieldAlert className="w-8 h-8 text-primary" />
+          <div className="p-1 bg-primary/10 rounded-lg border border-primary/30 overflow-hidden w-14 h-14 flex items-center justify-center">
+            <img src={logoImg} alt="Safe Path Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-3xl font-display font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              SMART SHIELD
+              SAFE PATH
             </h1>
             <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">Predict. Prevent. Protect.</p>
           </div>

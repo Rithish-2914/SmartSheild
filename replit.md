@@ -1,8 +1,8 @@
-# Smart Shield - Road Safety Platform
+# Safe Path - Road Safety Platform
 
 ## Overview
 
-Smart Shield is an AI-powered road safety platform built for a hackathon focused on accident prevention, road safety awareness, and safer mobility practices. The application provides three core features:
+Safe Path is an AI-powered road safety platform built for a hackathon focused on accident prevention, road safety awareness, and safer mobility practices. The application provides three core features:
 
 1. **Accident Risk Prediction** - Predicts accident risk based on location, time, and weather conditions, displaying risk zones on an interactive map
 2. **Driver Behavior Monitoring** - Tracks driving events (braking, speeding, swerving) and maintains a driver safety score

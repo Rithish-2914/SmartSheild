@@ -137,10 +137,10 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
                   <div className="p-3 bg-primary/5 border border-primary/20 rounded-lg">
                     <div className="flex items-center gap-2 text-primary font-bold text-[10px] uppercase mb-1">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
-                      Smart Shield Active
+                      Safe Path Active
                     </div>
                     <p className="text-[10px] text-muted-foreground leading-relaxed">
-                      AI Impact Analysis: {data.nearestHospital.distance} calculated. Smart Traffic Bypass enabled: Automatically rerouting via low-traffic corridors.
+                      AI Impact Analysis: {data.nearestHospital.distance} calculated. Safe Path Bypass enabled: Automatically rerouting via low-traffic corridors.
                     </p>
                   </div>
                 </div>
