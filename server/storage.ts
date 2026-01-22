@@ -1,8 +1,8 @@
 import { db } from "./db.js";
 import { 
-  accidentZones, behaviorLogs, emergencyAlerts, hazardReports,
+  accidentZones, behaviorLogs, emergencyAlerts, hazardReports, roadRatings,
   type AccidentZone, type BehaviorLog, type EmergencyAlert, type HazardReport,
-  type InsertAccidentZone, type InsertBehaviorLog, type InsertEmergencyAlert, type InsertHazardReport 
+  type InsertAccidentZone, type InsertBehaviorLog, type InsertEmergencyAlert, type InsertHazardReport, type RoadRating, type InsertRoadRating 
 } from "../shared/schema.js";
 import { eq, desc } from "drizzle-orm";
 
@@ -23,6 +23,10 @@ export interface IStorage {
   // Hazard Reports
   getHazardReports(): Promise<HazardReport[]>;
   createHazardReport(report: InsertHazardReport): Promise<HazardReport>;
+
+  // Road Ratings
+  getRoadRatings(): Promise<RoadRating[]>;
+  createRoadRating(rating: InsertRoadRating): Promise<RoadRating>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -78,6 +82,15 @@ export class DatabaseStorage implements IStorage {
   async createHazardReport(report: InsertHazardReport): Promise<HazardReport> {
     const [newReport] = await db.insert(hazardReports).values(report).returning();
     return newReport;
+  }
+
+  async getRoadRatings(): Promise<RoadRating[]> {
+    return await db.select().from(roadRatings).orderBy(desc(roadRatings.lastUpdated));
+  }
+
+  async createRoadRating(rating: InsertRoadRating): Promise<RoadRating> {
+    const [newRating] = await db.insert(roadRatings).values(rating).returning();
+    return newRating;
   }
 }
 

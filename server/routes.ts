@@ -261,13 +261,12 @@ export async function registerRoutes(
           const hLng = h.lon || (h.center && h.center.lon);
           if (!hLat || !hLng) return null;
           
-          // Basic distance calculation
           const dLat = (hLat - lat) * 111;
           const dLng = (hLng - lng) * 111 * Math.cos(lat * Math.PI / 180);
           const dist = Math.sqrt(dLat * dLat + dLng * dLng);
 
           return {
-            name: h.tags.name || h.tags["name:en"] || "Local Medical Center",
+            name: h.tags.name || h.tags["name:en"] || h.tags["name:hi"] || "Local Medical Center",
             lat: hLat,
             lng: hLng,
             dist: dist
@@ -284,6 +283,7 @@ export async function registerRoutes(
             coordinates: { lat: best.lat, lng: best.lng }
           };
           await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
+          console.log(`SOS: Successfully found hospital: ${best.name}`);
         }
       } else {
         // Honest fallback with more realistic name if no data found
@@ -327,6 +327,17 @@ export async function registerRoutes(
     }
   });
 
+  // --- Road Ratings ---
+  app.get("/api/roads/ratings", async (req, res) => {
+    const ratings = await storage.getRoadRatings();
+    res.json(ratings);
+  });
+
+  app.post("/api/roads/ratings", async (req, res) => {
+    const rating = await storage.createRoadRating(req.body);
+    res.json(rating);
+  });
+
   // --- Seed Data Helper ---
   seedDatabase();
 
@@ -368,6 +379,26 @@ async function seedDatabase() {
       riskLevel: "Medium",
       accidentCount: 15,
       description: "Speeding violations common during night hours."
+    });
+
+    // Seed Road Ratings
+    await storage.createRoadRating({
+      roadName: "Silk Board Main Road",
+      potholeCount: 12,
+      accidentHistory: 45,
+      rating: "Poor"
+    });
+    await storage.createRoadRating({
+      roadName: "Western Express Highway",
+      potholeCount: 5,
+      accidentHistory: 38,
+      rating: "Poor"
+    });
+    await storage.createRoadRating({
+      roadName: "Outer Ring Road, Hyd",
+      potholeCount: 2,
+      accidentHistory: 15,
+      rating: "Average"
     });
   }
 }

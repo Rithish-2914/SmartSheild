@@ -41,22 +41,35 @@ export const hazardReports = pgTable("hazard_reports", {
   upvotes: integer("upvotes").default(0),
 });
 
+// === Road Ratings ===
+export const roadRatings = pgTable("road_ratings", {
+  id: serial("id").primaryKey(),
+  roadName: text("road_name").notNull(),
+  potholeCount: integer("pothole_count").default(0),
+  accidentHistory: integer("accident_history").default(0),
+  rating: text("rating").notNull(), // 'Good', 'Average', 'Poor'
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
 // === Schemas ===
 export const insertAccidentZoneSchema = createInsertSchema(accidentZones).omit({ id: true });
 export const insertBehaviorLogSchema = createInsertSchema(behaviorLogs).omit({ id: true, timestamp: true });
 export const insertEmergencyAlertSchema = createInsertSchema(emergencyAlerts).omit({ id: true, triggeredAt: true });
 export const insertHazardReportSchema = createInsertSchema(hazardReports).omit({ id: true, reportedAt: true });
+export const insertRoadRatingSchema = createInsertSchema(roadRatings).omit({ id: true, lastUpdated: true });
 
 // === Types ===
 export type AccidentZone = typeof accidentZones.$inferSelect;
 export type BehaviorLog = typeof behaviorLogs.$inferSelect;
 export type EmergencyAlert = typeof emergencyAlerts.$inferSelect;
 export type HazardReport = typeof hazardReports.$inferSelect;
+export type RoadRating = typeof roadRatings.$inferSelect;
 
 export type InsertAccidentZone = z.infer<typeof insertAccidentZoneSchema>;
 export type InsertBehaviorLog = z.infer<typeof insertBehaviorLogSchema>;
 export type InsertEmergencyAlert = z.infer<typeof insertEmergencyAlertSchema>;
 export type InsertHazardReport = z.infer<typeof insertHazardReportSchema>;
+export type InsertRoadRating = z.infer<typeof insertRoadRatingSchema>;
 
 // === API Types ===
 export type RiskPredictionRequest = {

@@ -24,6 +24,7 @@ interface RiskMapProps {
   currentLocation?: { lat: number; lng: number };
   onLocationSelect?: (lat: number, lng: number) => void;
   visionMode?: boolean;
+  destination?: { lat: number; lng: number };
 }
 
 function MapUpdater({ center }: { center: [number, number] }) {
@@ -45,7 +46,7 @@ function MapEvents({ onLocationSelect }: { onLocationSelect?: (lat: number, lng:
   return null;
 }
 
-export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false }: RiskMapProps & { zoom?: number }) {
+export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination }: RiskMapProps & { zoom?: number }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -105,6 +106,25 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
               </div>
             </Popup>
           </CircleMarker>
+        )}
+
+        {destination && (
+          <Marker 
+            position={[destination.lat, destination.lng]}
+            icon={L.divIcon({
+              className: 'custom-div-icon',
+              html: `<div style="background-color: #ef4444; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px #ef4444;"></div>`,
+              iconSize: [14, 14],
+              iconAnchor: [7, 7]
+            })}
+          >
+            <Popup className="font-sans">
+              <div className="p-1">
+                <strong className="text-destructive font-display block mb-1">DESTINATION</strong>
+                <span className="text-xs text-muted-foreground">End of route...</span>
+              </div>
+            </Popup>
+          </Marker>
         )}
 
         {/* Hazard Reports */}

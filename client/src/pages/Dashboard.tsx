@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDriverScore, useLogDriverEvent, useResetDriverScore } from "@/hooks/use-driver";
 import { useRiskPrediction, useAccidentZones } from "@/hooks/use-risk";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { HazardReport } from "@shared/schema";
+import { HazardReport, RoadRating } from "@shared/schema";
 import { CyberCard } from "@/components/CyberCard";
 import { RiskMap } from "@/components/RiskMap";
 import { DriverGauge } from "@/components/DriverGauge";
@@ -25,11 +25,14 @@ export default function Dashboard() {
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
   const [demoActive, setDemoActive] = useState(false);
   const [visionMode, setCyberVision] = useState(false);
+  const [destination, setDestination] = useState<{ lat: number; lng: number } | null>(null);
+  const [isSettingDestination, setIsSettingDestination] = useState(false);
 
   // Queries
   const { data: scoreData, isLoading: isScoreLoading } = useDriverScore();
   const queryClient = useQueryClient();
   const { data: hazards } = useQuery<HazardReport[]>({ queryKey: ["/api/hazards"] });
+  const { data: roadRatings } = useQuery<RoadRating[]>({ queryKey: ["/api/roads/ratings"] });
   const { data: riskData } = useRiskPrediction({ 
     lat: currentLocation.lat, 
     lng: currentLocation.lng,
@@ -155,7 +158,13 @@ export default function Dashboard() {
                   hazards={hazards || []}
                   currentLocation={currentLocation}
                   visionMode={visionMode}
+                  destination={destination || undefined}
                   onLocationSelect={(lat, lng) => {
+                    if (isSettingDestination) {
+                      setDestination({ lat, lng });
+                      setIsSettingDestination(false);
+                      return;
+                    }
                     // Create hazard report on click for community-driven feature
                     const hazardTypes = ['Pothole', 'Blind Spot', 'Stray Animal', 'Black Ice'];
                     const type = hazardTypes[Math.floor(Math.random() * hazardTypes.length)];
@@ -211,6 +220,30 @@ export default function Dashboard() {
                     <p className="text-[10px] text-muted-foreground italic">Tip: Click anywhere on the map to set location</p>
                   </div>
                   <div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className={`w-full font-mono text-[10px] ${isSettingDestination ? 'bg-primary/20 border-primary animate-pulse' : ''}`}
+                      onClick={() => setIsSettingDestination(!isSettingDestination)}
+                    >
+                      {isSettingDestination ? "CLICK MAP TO SET DEST" : "SET DESTINATION"}
+                    </Button>
+                    {destination && (
+                      <div className="mt-2 p-2 bg-black/40 border border-border rounded text-[10px] font-mono">
+                        <div className="text-muted-foreground uppercase mb-1">Route Info</div>
+                        <div className="text-primary truncate">DEST: {destination.lat.toFixed(4)}, {destination.lng.toFixed(4)}</div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="w-full h-6 mt-1 text-[10px] text-destructive hover:text-destructive/80"
+                          onClick={() => setDestination(null)}
+                        >
+                          CLEAR ROUTE
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                  <div>
                     <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
                       <Clock className="w-3 h-3" /> TIME: {timeOfDay}
                     </label>
@@ -245,6 +278,33 @@ export default function Dashboard() {
                   </div>
                 )}
               </div>
+            </div>
+          </CyberCard>
+
+          {/* Road Ratings (New Section) */}
+          <CyberCard title="Road Safety Ratings" borderColor="primary">
+            <div className="space-y-3 p-2">
+              {roadRatings?.map((road) => (
+                <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
+                  <div>
+                    <div className="font-bold text-sm">{road.roadName}</div>
+                    <div className="text-[10px] text-muted-foreground flex gap-3">
+                      <span>Potholes: {road.potholeCount}</span>
+                      <span>Accidents: {road.accidentHistory}</span>
+                    </div>
+                  </div>
+                  <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
+                    road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                    road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                    'bg-green-500/20 text-green-500 border border-green-500/50'
+                  }`}>
+                    {road.rating}
+                  </div>
+                </div>
+              ))}
+              {(!roadRatings || roadRatings.length === 0) && (
+                <div className="text-center text-muted-foreground py-4 italic text-sm">No road rating data available.</div>
+              )}
             </div>
           </CyberCard>
 
