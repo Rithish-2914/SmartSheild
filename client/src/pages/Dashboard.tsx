@@ -71,35 +71,30 @@ export default function Dashboard() {
       step++;
       
       if (step === 1) {
+        // Instant setup for demo
+        setTimeOfDay("22:30");
+        setWeather("Rain");
+        setCyberVision(true);
         const dest = { lat: 12.9176, lng: 77.6233 };
         setDestination(dest);
-        setCurrentLocation({ lat: 12.9716, lng: 77.5946 });
+        setCurrentLocation({ lat: 12.9616, lng: 77.6046 }); // Close to hazard area
       }
       
-      if (step >= 2 && step <= 4 && destination) {
-        setCurrentLocation(prev => ({
-          lat: prev.lat + (destination.lat - prev.lat) * 0.25,
-          lng: prev.lng + (destination.lng - prev.lng) * 0.25
-        }));
-      }
-
       if (step === 3) {
-        setTimeOfDay("22:00");
-        setWeather("Rain");
         logEvent({ eventType: "speeding", scoreDeduction: 15 });
       }
 
-      if (step === 5) {
-        // Trigger Crash
+      if (step === 4) {
+        // Trigger Crash immediately after speeding
         logEvent({ eventType: "crash", scoreDeduction: 100 });
       }
 
-      if (step === 6) {
+      if (step === 5) {
         setIsEmergencyOpen(true);
         setDemoActive(false);
         clearInterval(interval);
       }
-    }, 1500);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [demoActive, logEvent, destination]);
