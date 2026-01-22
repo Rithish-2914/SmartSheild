@@ -8,9 +8,7 @@ import { RiskMap } from "@/components/RiskMap";
 import { DriverGauge } from "@/components/DriverGauge";
 import { EmergencyModal } from "@/components/EmergencyModal";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { AlertTriangle, CloudRain, Sun, Moon, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AlertTriangle, CloudRain, Sun, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
 
 // Mock starting location (India Overview)
 const DEFAULT_CENTER: [number, number] = [20.5937, 78.9629]; // Center of India
@@ -53,14 +51,12 @@ export default function Dashboard() {
     const interval = setInterval(() => {
       step++;
       
-      // Step 1: Simulate movement to a risky zone (Silk Board)
       if (step === 1) {
         const dest = { lat: 12.9176, lng: 77.6233 };
         setDestination(dest);
-        setCurrentLocation({ lat: 12.9716, lng: 77.5946 }); // Start position
+        setCurrentLocation({ lat: 12.9716, lng: 77.5946 });
       }
       
-      // Step 2: Smooth movement simulation toward destination
       if (step >= 2 && step <= 5 && destination) {
         setCurrentLocation(prev => ({
           lat: prev.lat + (destination.lat - prev.lat) * 0.2,
@@ -68,39 +64,26 @@ export default function Dashboard() {
         }));
       }
 
-      // Step 3: High Speed Pursuit Simulation
       if (step === 3) {
         setTimeOfDay("02:00");
-      }
-
-      // Step 3: Simulate multiple bad driving events
-      if (step === 3) {
         logEvent({ eventType: "speeding", scoreDeduction: 15 });
         logEvent({ eventType: "swerving", scoreDeduction: 10 });
       }
 
-      // Step 4: AI Traffic Bypass Prediction
-      if (step === 4) {
-        // Just visual cue for simulation
-      }
-
-      // Step 5: Trigger Accident/Emergency
       if (step === 6) {
         setIsEmergencyOpen(true);
-        setDemoActive(false); // End demo
+        setDemoActive(false);
         clearInterval(interval);
       }
     }, 1500);
 
     return () => clearInterval(interval);
-  }, [demoActive, logEvent]);
+  }, [demoActive, logEvent, destination]);
 
-  // Weather Icons
   const WeatherIcon = weather === "Clear" ? Sun : CloudRain;
 
   return (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-6 lg:p-8 font-body overflow-x-hidden">
-      {/* Header */}
       <header className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-lg border border-primary/30">
@@ -126,35 +109,25 @@ export default function Dashboard() {
 
           <Button 
             variant="outline" 
-            className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono relative group"
+            className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono"
             onClick={() => setDemoActive(!demoActive)}
             disabled={demoActive}
           >
             {demoActive ? <span className="animate-pulse">RUNNING DEMO...</span> : "START SIMULATION"}
-            <div className="absolute top-full mt-2 hidden group-hover:block z-50 w-64 p-3 bg-black/90 border border-primary/50 rounded-lg text-[10px] normal-case font-body text-muted-foreground shadow-2xl">
-              <p className="font-bold text-primary mb-1">AUTOMATED SCENARIO</p>
-              Runs a pre-programmed high-speed chase simulation under night conditions to demonstrate system response and driver scoring.
-            </div>
           </Button>
           
           <Button 
             variant="destructive"
-            className="font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse relative group"
+            className="font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse"
             onClick={() => setIsEmergencyOpen(true)}
           >
             <AlertTriangle className="mr-2 h-5 w-5" />
             SOS TRIGGER
-            <div className="absolute top-full mt-2 hidden group-hover:block z-50 w-64 p-3 bg-black/90 border border-destructive/50 rounded-lg text-[10px] normal-case font-body text-muted-foreground shadow-2xl">
-              <p className="font-bold text-destructive mb-1">MANUAL EMERGENCY</p>
-              Instantly triggers an emergency protocol at your current location, finds real nearby hospitals, and provides navigation routes.
-            </div>
           </Button>
         </div>
       </header>
 
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* Left Column: Risk & Map (8 cols) */}
         <div className="lg:col-span-8 space-y-6">
           <CyberCard title="Live Risk Analysis" className="flex flex-col" borderColor={riskData?.riskLevel === 'High' ? 'destructive' : 'primary'}>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
@@ -167,7 +140,7 @@ export default function Dashboard() {
                     if (!destination) return false;
                     const dLat = (parseFloat(h.latitude) - destination.lat) * 111;
                     const dLng = (parseFloat(h.longitude) - destination.lng) * 111;
-                    return Math.sqrt(dLat * dLat + dLng * dLng) < 5; // Only show hazards within 5km of destination
+                    return Math.sqrt(dLat * dLat + dLng * dLng) < 5;
                   }) || []}
                   currentLocation={currentLocation}
                   visionMode={visionMode}
@@ -179,7 +152,6 @@ export default function Dashboard() {
                       setIsSettingDestination(false);
                       return;
                     }
-                    // Create hazard report on click for community-driven feature
                     const hazardTypes = ['Pothole', 'Blind Spot', 'Stray Animal', 'Black Ice'];
                     const type = hazardTypes[Math.floor(Math.random() * hazardTypes.length)];
                     
@@ -219,7 +191,7 @@ export default function Dashboard() {
                         step="0.0001"
                         value={currentLocation.lat} 
                         onChange={(e) => setCurrentLocation(prev => ({ ...prev, lat: parseFloat(e.target.value) }))}
-                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono"
+                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono w-full"
                         placeholder="Latitude"
                       />
                       <input 
@@ -227,11 +199,10 @@ export default function Dashboard() {
                         step="0.0001"
                         value={currentLocation.lng} 
                         onChange={(e) => setCurrentLocation(prev => ({ ...prev, lng: parseFloat(e.target.value) }))}
-                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono"
+                        className="bg-background border border-border rounded px-2 py-1 text-xs font-mono w-full"
                         placeholder="Longitude"
                       />
                     </div>
-                    <p className="text-[10px] text-muted-foreground italic">Tip: Click anywhere on the map to set location</p>
                   </div>
                   <div>
                     <Button 
@@ -268,22 +239,6 @@ export default function Dashboard() {
                       className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-mono"
                     />
                   </div>
-                  <div>
-                    <label className="text-xs text-muted-foreground mb-2 block flex items-center gap-2">
-                      <WeatherIcon className="w-3 h-3" /> WEATHER
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {['Clear', 'Rain', 'Fog'].map((w) => (
-                        <button
-                          key={w}
-                          onClick={() => setWeather(w)}
-                          className={`flex-1 min-w-[60px] py-1 text-xs rounded border transition-all ${weather === w ? 'bg-primary/20 border-primary text-primary' : 'bg-transparent border-border text-muted-foreground'}`}
-                        >
-                          {w}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
                 </div>
                 
                 {riskData?.message && (
@@ -302,8 +257,6 @@ export default function Dashboard() {
             </div>
           </CyberCard>
 
-
-          {/* Recent Logs (Bottom left) */}
           <CyberCard title="System Logs" borderColor="accent" className="min-h-[200px]">
             <div className="space-y-2 max-h-[150px] overflow-y-auto pr-2 custom-scrollbar">
               {scoreData?.logs.slice().reverse().map((log, i) => (
@@ -321,7 +274,6 @@ export default function Dashboard() {
             </div>
           </CyberCard>
 
-          {/* New: Navigation HUD Instructions */}
           {destination && (
             <CyberCard title="Navigation HUD" borderColor="secondary" className="animate-in zoom-in duration-300">
               <div className="p-4 space-y-4">
@@ -368,7 +320,6 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                {/* Road Safety Ratings integrated into HUD */}
                 <div className="space-y-2 border-t border-border/30 pt-4">
                   <div className="text-[10px] text-muted-foreground uppercase mb-2">Route Safety Segment</div>
                   {(roadRatings?.filter(road => {
@@ -407,12 +358,36 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Right Column: Driver Stats (4 cols) */}
         <div className="lg:col-span-4 space-y-6">
+          <CyberCard title="Road Safety Ratings" borderColor="primary">
+            <div className="space-y-3 p-2">
+              {(roadRatings || []).map((road) => (
+                <div key={road.id} className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/50">
+                  <div>
+                    <div className="font-bold text-sm">{road.roadName}</div>
+                    <div className="text-[10px] text-muted-foreground flex gap-3">
+                      <span>Potholes: {road.potholeCount}</span>
+                      <span>Accidents: {road.accidentHistory}</span>
+                    </div>
+                  </div>
+                  <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
+                    road.rating === 'Poor' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                    road.rating === 'Average' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                    'bg-green-500/20 text-green-500 border border-green-500/50'
+                  }`}>
+                    {road.rating}
+                  </div>
+                </div>
+              ))}
+              {(!roadRatings || roadRatings.length === 0) && (
+                <div className="text-center text-muted-foreground py-4 italic text-sm">No road rating data available.</div>
+              )}
+            </div>
+          </CyberCard>
+
           <CyberCard title="Driver Profile" borderColor="secondary">
             <div className="flex flex-col items-center">
               <DriverGauge score={scoreData?.currentScore ?? 100} />
-              
               <div className="w-full mt-6 space-y-3">
                 <div className="flex justify-between items-center p-3 bg-secondary/10 rounded-lg border border-secondary/20">
                   <span className="text-sm text-secondary font-bold uppercase">Badge Status</span>
@@ -421,7 +396,6 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-
               <div className="w-full grid grid-cols-2 gap-3 mt-6">
                 <Button 
                   variant="outline"
@@ -432,7 +406,6 @@ export default function Dashboard() {
                   <AlertTriangle className="w-6 h-6 text-destructive group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-bold uppercase">Sudden Brake</span>
                 </Button>
-                
                 <Button 
                   variant="outline"
                   className="h-auto py-4 flex flex-col gap-2 border-orange-500/30 hover:bg-orange-500/10 hover:border-orange-500 hover:text-orange-500 transition-all group"
@@ -442,7 +415,6 @@ export default function Dashboard() {
                   <Zap className="w-6 h-6 text-orange-500 group-hover:scale-110 transition-transform" />
                   <span className="text-xs font-bold uppercase">Over Speeding</span>
                 </Button>
-                
                 <Button 
                   variant="outline"
                   className="h-auto py-4 flex flex-col gap-2 col-span-2 border-border hover:bg-primary/5 hover:border-primary transition-all group"

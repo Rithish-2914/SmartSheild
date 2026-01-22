@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap, useMapEvents, Marker } from "react-leaflet";
-import { AccidentZone, HazardReport } from "@shared/schema";
+import { AccidentZone, HazardReport, RoadRating } from "@shared/schema";
 import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
