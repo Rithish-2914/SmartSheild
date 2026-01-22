@@ -393,22 +393,33 @@ export default function Dashboard() {
                 </div>
 
                 <div className="space-y-2 border-t border-border/30 pt-4">
-                  <div className="text-[10px] text-muted-foreground uppercase mb-2">Route Safety Segment</div>
+                  <div className="text-[10px] text-muted-foreground uppercase mb-2">Detailed Route Directives</div>
                   {destination && (
-                    <div className="flex justify-between items-center p-2 rounded bg-background/50 border border-border/30">
-                      <div>
-                        <div className="font-bold text-xs">Active Route Rating</div>
-                        <div className="text-[9px] text-muted-foreground flex gap-2">
-                          <span>Potholes: {riskData?.riskScore ? Math.floor(riskData.riskScore / 10) : 0}</span>
-                          <span>Risk Index: {riskData?.riskScore ?? 0}</span>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center p-3 rounded bg-primary/5 border border-primary/20 animate-pulse">
+                        <div className="flex items-center gap-3">
+                          <Zap className="w-4 h-4 text-primary" />
+                          <div>
+                            <div className="font-bold text-xs text-primary uppercase">Current Segment</div>
+                            <div className="text-[10px] text-muted-foreground">Proceed Straight on {roadRatings?.find(r => r.rating === 'Poor')?.roadName || "Main Access Road"}</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs font-mono font-bold text-primary">800m</div>
+                          <div className="text-[8px] text-muted-foreground uppercase">Remaining</div>
                         </div>
                       </div>
-                      <div className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase ${
-                        riskData?.riskLevel === 'High' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
-                        riskData?.riskLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
-                        'bg-green-500/20 text-green-500 border border-green-500/50'
-                      }`}>
-                        {riskData?.riskLevel === 'Safe' ? 'Good' : riskData?.riskLevel ?? 'Good'}
+                      <div className="flex justify-between items-center p-3 rounded bg-background/50 border border-border/30 opacity-70">
+                        <div className="flex items-center gap-3">
+                          <RotateCcw className="w-4 h-4 text-muted-foreground" />
+                          <div>
+                            <div className="font-bold text-xs uppercase">Next Segment</div>
+                            <div className="text-[10px] text-muted-foreground">Prepare for Sharp Left Turn</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xs font-mono font-bold">1.4km</div>
+                        </div>
                       </div>
                     </div>
                   )}

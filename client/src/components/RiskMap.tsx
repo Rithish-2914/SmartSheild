@@ -188,32 +188,24 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
         )}
 
         {/* Route Hazard Indicators on Map */}
-        {destination && (roadRatings?.filter(road => {
-            const isBengaluruDest = destination.lat > 12.9 && destination.lat < 13.0 && destination.lng > 77.5 && destination.lng < 77.7;
-            const isMumbaiDest = destination.lat > 19.0 && destination.lat < 19.1 && destination.lng > 72.8 && destination.lng < 72.9;
-            const isHydDest = destination.lat > 17.3 && destination.lat < 17.4 && destination.lng > 78.4 && destination.lng < 78.6;
-            const isDelhiDest = destination.lat > 28.5 && destination.lat < 28.7 && destination.lng > 77.1 && destination.lng < 77.3;
-
-            if (isBengaluruDest) return road.roadName.includes("Silk Board") || road.roadName.includes("MG Road");
-            if (isMumbaiDest) return road.roadName.includes("Western Express");
-            if (isHydDest) return road.roadName.includes("Outer Ring Road");
-            if (isDelhiDest) return road.roadName.includes("Connaught Place");
-            return false;
-          }) || []).map((road, index) => {
+        {destination && (roadRatings || []).filter(road => {
+            // Match any road that has Poor or Average rating for demo markers
+            return road.rating !== 'Good';
+          }).slice(0, 3).map((road, index) => {
             // Distribute markers along the route for visualization
-            const offset = (index + 1) * 0.002;
-            const hazardLat = currentLocation ? currentLocation.lat + (destination.lat - currentLocation.lat) * (0.2 * (index + 1)) : destination.lat - offset;
-            const hazardLng = currentLocation ? currentLocation.lng + (destination.lng - currentLocation.lng) * (0.2 * (index + 1)) : destination.lng - offset;
+            const progress = (index + 1) * 0.25; // 25%, 50%, 75% along the route
+            const hazardLat = currentLocation ? currentLocation.lat + (destination.lat - currentLocation.lat) * progress : destination.lat - (index * 0.005);
+            const hazardLng = currentLocation ? currentLocation.lng + (destination.lng - currentLocation.lng) * progress : destination.lng - (index * 0.005);
             
             return (
               <Marker 
-                key={`route-hazard-${road.id}`} 
+                key={`route-hazard-${road.id}-${index}`} 
                 position={[hazardLat, hazardLng]}
                 icon={L.divIcon({
                   className: 'custom-div-icon',
-                  html: `<div style="background-color: #ef4444; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 12px #ef4444;" class="animate-pulse"></div>`,
-                  iconSize: [12, 12],
-                  iconAnchor: [6, 6]
+                  html: `<div style="background-color: #ef4444; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 15px #ef4444;" class="animate-pulse"></div>`,
+                  iconSize: [14, 14],
+                  iconAnchor: [7, 7]
                 })}
               >
                 <Popup className="font-sans">
@@ -222,9 +214,9 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
                     <div className="text-xs font-bold mb-1">{road.roadName}</div>
                     <div className="grid grid-cols-2 gap-1 text-[10px]">
                       <span className="text-muted-foreground">Type:</span>
-                      <span className="text-orange-400">Potholes/Risk</span>
-                      <span className="text-muted-foreground">Density:</span>
-                      <span className="text-destructive">High</span>
+                      <span className="text-orange-400">Surface Risk</span>
+                      <span className="text-muted-foreground">Alert:</span>
+                      <span className="text-destructive">{road.rating === 'Poor' ? 'Critical' : 'Caution'}</span>
                     </div>
                   </div>
                 </Popup>
