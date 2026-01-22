@@ -34,6 +34,11 @@ export default function Dashboard() {
     { name: "Western Express Highway, Mumbai", lat: 19.0760, lng: 72.8777 },
     { name: "Connaught Place, Delhi", lat: 28.6315, lng: 77.2167 },
     { name: "Outer Ring Road, Hyderabad", lat: 17.3850, lng: 78.4867 },
+    { name: "Electronic City, Bengaluru", lat: 12.8399, lng: 77.6770 },
+    { name: "Whitefield, Bengaluru", lat: 12.9698, lng: 77.7500 },
+    { name: "Banjara Hills, Hyderabad", lat: 17.4156, lng: 78.4411 },
+    { name: "Marine Drive, Mumbai", lat: 18.9431, lng: 72.8230 },
+    { name: "Chandni Chowk, Delhi", lat: 28.6506, lng: 77.2303 },
   ];
 
   const filteredSearch = SEARCH_RESULTS.filter(item => 

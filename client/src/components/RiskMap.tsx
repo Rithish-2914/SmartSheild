@@ -78,8 +78,14 @@ function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
       addWaypoints: false,
       draggableWaypoints: false,
       fitSelectedRoutes: true,
-      show: false // Hide the instruction panel to keep HUD clean
+      show: false // Hide the instruction panel completely
     }).addTo(map);
+
+    // Completely hide the routing container that might show on map
+    const routingContainer = document.querySelector('.leaflet-routing-container');
+    if (routingContainer) {
+      (routingContainer as HTMLElement).style.display = 'none';
+    }
 
     return () => {
       if (routingControlRef.current) {
