@@ -28,6 +28,7 @@ export default function Dashboard() {
 
   // Queries
   const { data: scoreData, isLoading: isScoreLoading } = useDriverScore();
+  const queryClient = useQueryClient();
   const { data: hazards } = useQuery<HazardReport[]>({ queryKey: ["/api/hazards"] });
   const { data: riskData } = useRiskPrediction({ 
     lat: currentLocation.lat, 

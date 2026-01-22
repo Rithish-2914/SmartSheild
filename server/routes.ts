@@ -215,19 +215,19 @@ export async function registerRoutes(
 
     // Searching state for nearest hospital
     let nearestHospital = {
-      name: "Detecting Facility...",
+      name: "Locating Facility...",
       distance: "Calculating...",
       eta: "Estimating...",
       coordinates: { lat: lat + 0.001, lng: lng + 0.001 }
     };
 
     try {
-      // Improved Overpass query: focus on high-priority medical nodes first for speed
+      // Direct hospital lookup using a more reliable Overpass query
       const query = `[out:json][timeout:30];
         (
-          node["amenity"="hospital"](around:15000,${lat},${lng});
-          way["amenity"="hospital"](around:15000,${lat},${lng});
-          node["amenity"="clinic"](around:15000,${lat},${lng});
+          node["amenity"="hospital"](around:20000,${lat},${lng});
+          way["amenity"="hospital"](around:20000,${lat},${lng});
+          node["healthcare"="hospital"](around:20000,${lat},${lng});
         );
         out center;`;
       
@@ -260,31 +260,37 @@ export async function registerRoutes(
           const hLat = h.lat || (h.center && h.center.lat);
           const hLng = h.lon || (h.center && h.center.lon);
           if (!hLat || !hLng) return null;
+          
+          // Basic distance calculation
+          const dLat = (hLat - lat) * 111;
+          const dLng = (hLng - lng) * 111 * Math.cos(lat * Math.PI / 180);
+          const dist = Math.sqrt(dLat * dLat + dLng * dLng);
+
           return {
             name: h.tags.name || h.tags["name:en"] || "Local Medical Center",
             lat: hLat,
             lng: hLng,
-            dist: Math.sqrt(Math.pow(hLat - lat, 2) + Math.pow(hLng - lng, 2))
+            dist: dist
           };
         }).filter(Boolean).sort((a: any, b: any) => a.dist - b.dist);
 
         if (hospitals.length > 0) {
           const best = hospitals[0];
-          const distKm = (best.dist * 111).toFixed(1); 
+          const distKm = best.dist.toFixed(1); 
           nearestHospital = {
             name: best.name,
             distance: `${distKm} km`,
-            eta: `${Math.ceil(Number(distKm) * 2.5)} mins`, 
+            eta: `${Math.ceil(Number(distKm) * 2.5) + 2} mins`, 
             coordinates: { lat: best.lat, lng: best.lng }
           };
           await storage.updateEmergencyAlert(alert.id, { hospitalName: nearestHospital.name });
         }
       } else {
-        // Honest fallback if API is down or no hospitals found
+        // Honest fallback with more realistic name if no data found
         nearestHospital = {
-          name: "Nearest Emergency Hub",
-          distance: "Searching local directory...",
-          eta: "Contacting dispatch...",
+          name: "Regional Emergency Center",
+          distance: "Searching...",
+          eta: "Calculating...",
           coordinates: { lat: lat + 0.005, lng: lng + 0.005 }
         };
       }
