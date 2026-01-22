@@ -97,7 +97,7 @@ function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
   return null;
 }
 
-export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination, roadRatings = [] }: RiskMapProps & { zoom?: number }) {
+export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination, roadRatings = [], timeOfDay }: RiskMapProps & { zoom?: number, timeOfDay: string }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -197,6 +197,27 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
             const hazardLat = currentLocation ? currentLocation.lat + (destination.lat - currentLocation.lat) * progress : destination.lat - (index * 0.005);
             const hazardLng = currentLocation ? currentLocation.lng + (destination.lng - currentLocation.lng) * progress : destination.lng - (index * 0.005);
             
+            const isGoldenHour = () => {
+              const [hours] = timeOfDay.split(':').map(Number);
+              return (hours >= 5 && hours <= 7) || (hours >= 17 && hours <= 19);
+            };
+
+            const getHazardType = (roadName: string) => {
+              if (roadName.includes("Silk Board")) return "Heavy Congestion & Potholes";
+              if (roadName.includes("Western Express")) return "High Speed & Water Logging";
+              if (roadName.includes("Outer Ring Road")) return "Illegal Parking & Blind Spots";
+              if (roadName.includes("Connaught Place")) return "Pedestrian Crossings & Sharp Turns";
+              return "Surface Risk & Visibility";
+            };
+
+            const getDriverReview = (roadName: string) => {
+              if (roadName.includes("Silk Board")) return "Driver Review: 'Avoid peak hours, massive potholes near junction.'";
+              if (roadName.includes("Western Express")) return "Driver Review: 'Dangerous lane merges, watch out for sudden stops.'";
+              if (roadName.includes("Outer Ring Road")) return "Driver Review: 'High-speed trucks and poor lighting at night.'";
+              if (roadName.includes("Connaught Place")) return "Driver Review: 'Busy market area, lots of jaywalking.'";
+              return "System Alert: Monitor surface traction and visibility.";
+            };
+
             return (
               <Marker 
                 key={`route-hazard-${road.id}-${index}`} 
@@ -209,14 +230,23 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
                 })}
               >
                 <Popup className="font-sans">
-                  <div className="p-2 min-w-[150px] font-mono">
+                  <div className="p-2 min-w-[200px] font-mono">
                     <strong className="text-destructive block border-b border-destructive/30 mb-2 uppercase text-xs">⚠ ROUTE HAZARD</strong>
                     <div className="text-xs font-bold mb-1">{road.roadName}</div>
-                    <div className="grid grid-cols-2 gap-1 text-[10px]">
+                    <div className="grid grid-cols-2 gap-1 text-[10px] mb-2">
                       <span className="text-muted-foreground">Type:</span>
-                      <span className="text-orange-400">Surface Risk</span>
+                      <span className="text-orange-400">{getHazardType(road.roadName)}</span>
                       <span className="text-muted-foreground">Alert:</span>
                       <span className="text-destructive">{road.rating === 'Poor' ? 'Critical' : 'Caution'}</span>
+                      {isGoldenHour() && (
+                        <>
+                          <span className="text-muted-foreground">Lighting:</span>
+                          <span className="text-yellow-400 font-bold">Golden Hour (Low Sun)</span>
+                        </>
+                      )}
+                    </div>
+                    <div className="text-[9px] text-muted-foreground border-t border-border/30 pt-1 italic">
+                      {getDriverReview(road.roadName)}
                     </div>
                   </div>
                 </Popup>

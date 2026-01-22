@@ -165,6 +165,7 @@ export default function Dashboard() {
                   visionMode={visionMode}
                   destination={destination || undefined}
                   roadRatings={roadRatings || []}
+                  timeOfDay={timeOfDay}
                   onLocationSelect={(lat, lng) => {
                     if (isSettingDestination) {
                       setDestination({ lat, lng });
