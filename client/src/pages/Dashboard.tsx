@@ -391,6 +391,26 @@ export default function Dashboard() {
               )}
             </div>
           </CyberCard>
+
+          {/* New: Navigation HUD Instructions */}
+          {destination && (
+            <CyberCard title="Navigation HUD" borderColor="secondary" className="animate-in zoom-in duration-300">
+              <div className="p-4 grid grid-cols-2 gap-4">
+                <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-secondary/30 rounded-lg group hover:border-secondary transition-colors">
+                  <Zap className="w-8 h-8 text-secondary mb-2 group-hover:scale-110 transition-transform" />
+                  <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Next Action</span>
+                  <span className="text-lg font-display font-bold text-secondary">TURN LEFT</span>
+                  <span className="text-[10px] text-muted-foreground mt-1">IN 200m</span>
+                </div>
+                <div className="flex flex-col items-center justify-center p-4 bg-background/50 border border-border rounded-lg opacity-50">
+                  <RotateCcw className="w-8 h-8 text-muted-foreground mb-2" />
+                  <span className="text-xs font-mono text-muted-foreground uppercase mb-1">Followed By</span>
+                  <span className="text-lg font-display font-bold text-muted-foreground uppercase">Turn Right</span>
+                  <span className="text-[10px] text-muted-foreground mt-1">IN 1.2km</span>
+                </div>
+              </div>
+            </CyberCard>
+          )}
         </div>
 
         {/* Right Column: Driver Stats (4 cols) */}
