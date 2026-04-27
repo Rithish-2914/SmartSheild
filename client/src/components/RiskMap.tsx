@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap, useMapEvents, Marker } from "react-leaflet";
 import { AccidentZone, HazardReport, RoadRating } from "@shared/schema";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "leaflet-routing-machine";
@@ -27,7 +27,11 @@ interface RiskMapProps {
   visionMode?: boolean;
   destination?: { lat: number; lng: number };
   roadRatings?: RoadRating[];
+  onRoutesFound?: (routes: RouteSummary[]) => void;
+  selectedRouteIndex?: number;
 }
+
+export type { RouteSummary };
 
 function MapUpdater({ center }: { center: [number, number] }) {
   const map = useMap();
@@ -48,40 +52,134 @@ function MapEvents({ onLocationSelect }: { onLocationSelect?: (lat: number, lng:
   return null;
 }
 
-function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
+type RouteSummary = {
+  index: number;
+  name: string;
+  distanceKm: number;
+  durationMin: number;
+  riskScore: number;
+  riskLevel: 'Safe' | 'Medium' | 'High';
+  color: string;
+};
+
+function RoutingMachine({
+  fromLat,
+  fromLng,
+  toLat,
+  toLng,
+  onRoutesFound,
+  selectedRouteIndex,
+  onSelectRoute,
+}: {
+  fromLat: number;
+  fromLng: number;
+  toLat: number;
+  toLng: number;
+  onRoutesFound?: (routes: RouteSummary[]) => void;
+  selectedRouteIndex?: number;
+  onSelectRoute?: (index: number) => void;
+}) {
   const map = useMap();
   const routingControlRef = useRef<any>(null);
+  const routesRef = useRef<any[]>([]);
+  const onRoutesFoundRef = useRef(onRoutesFound);
+  onRoutesFoundRef.current = onRoutesFound;
 
+  // Build / rebuild the routing control only when the actual coordinates change
   useEffect(() => {
-    if (!map || waypoints.length < 2) {
-      if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
-        routingControlRef.current = null;
-      }
-      return;
-    }
+    if (!map) return;
+    const waypoints = [L.latLng(fromLat, fromLng), L.latLng(toLat, toLng)];
 
     if (routingControlRef.current) {
-      map.removeControl(routingControlRef.current);
+      try { map.removeControl(routingControlRef.current); } catch {}
+      routingControlRef.current = null;
     }
 
     // @ts-ignore - leaflet-routing-machine adds this to L
+    const router = L.Routing.osrmv1({
+      serviceUrl: 'https://router.project-osrm.org/route/v1',
+      profile: 'driving',
+    });
+
+    // @ts-ignore
     routingControlRef.current = L.Routing.control({
       waypoints,
+      router,
+      // @ts-ignore - request 3 alternative routes from OSRM
+      routeWhileDragging: false,
+      showAlternatives: true,
+      // Selected route style
       lineOptions: {
-        styles: [{ color: "#00ffff", weight: 6, opacity: 0.6 }],
+        styles: [
+          { color: '#000000', opacity: 0.4, weight: 9 },
+          { color: '#00ffff', opacity: 0.95, weight: 6 },
+        ],
         extendToWaypoints: true,
-        missingRouteTolerance: 10
+        missingRouteTolerance: 10,
+      },
+      // Alternative route style (dim purple/orange-ish)
+      altLineOptions: {
+        styles: [
+          { color: '#000000', opacity: 0.3, weight: 8 },
+          { color: '#a855f7', opacity: 0.7, weight: 4 },
+        ],
+        extendToWaypoints: true,
+        missingRouteTolerance: 10,
       },
       // @ts-ignore
-      createMarker: () => null, // We handle our own markers
+      createMarker: () => null,
       addWaypoints: false,
       draggableWaypoints: false,
       fitSelectedRoutes: true,
-      show: false // Hide the instruction panel completely
-    }).addTo(map);
+      show: false,
+    });
 
-    // Completely hide the routing container that might show on map
+    // Patch routing options to request 3 alternatives from OSRM
+    // @ts-ignore
+    routingControlRef.current.options.routingOptions = {
+      ...(routingControlRef.current.options.routingOptions || {}),
+      alternatives: 3,
+    };
+    // @ts-ignore
+    if (routingControlRef.current._router && routingControlRef.current._router.options) {
+      // @ts-ignore
+      routingControlRef.current._router.options.alternatives = 3;
+    }
+
+    // @ts-ignore
+    routingControlRef.current.on('routesfound', (e: any) => {
+      const routes = e.routes || [];
+      routesRef.current = routes;
+      const cb = onRoutesFoundRef.current;
+
+      // Score each route based on distance + estimated duration as a proxy for risk
+      const summaries: RouteSummary[] = routes.slice(0, 3).map((r: any, i: number) => {
+        const distanceKm = (r.summary?.totalDistance || 0) / 1000;
+        const durationMin = (r.summary?.totalTime || 0) / 60;
+        // Heuristic risk: longer + slower (lower avg speed) => higher risk
+        const avgSpeed = distanceKm / Math.max(durationMin / 60, 0.01);
+        const speedPenalty = Math.max(0, 60 - avgSpeed); // slower than 60kmph adds risk
+        const riskScore = Math.min(100, Math.round(20 + speedPenalty * 1.2 + i * 8));
+        const riskLevel: RouteSummary['riskLevel'] =
+          riskScore >= 65 ? 'High' : riskScore >= 40 ? 'Medium' : 'Safe';
+        const palette = ['#00ffff', '#a855f7', '#f59e0b'];
+        const labels = ['Fastest Route', 'Alternate Route', 'Scenic Route'];
+        return {
+          index: i,
+          name: labels[i] || `Route ${i + 1}`,
+          distanceKm,
+          durationMin,
+          riskScore,
+          riskLevel,
+          color: palette[i] || '#94a3b8',
+        };
+      });
+
+      cb?.(summaries);
+    });
+
+    routingControlRef.current.addTo(map);
+
     const routingContainer = document.querySelector('.leaflet-routing-container');
     if (routingContainer) {
       (routingContainer as HTMLElement).style.display = 'none';
@@ -90,18 +188,41 @@ function RoutingMachine({ waypoints }: { waypoints: L.LatLng[] }) {
     return () => {
       if (routingControlRef.current && map) {
         try {
+          // Detach routesfound listener to prevent late XHR callbacks
+          // @ts-ignore
+          routingControlRef.current.off?.('routesfound');
           map.removeControl(routingControlRef.current);
         } catch (e) {
-          console.warn("Routing cleanup failed", e);
+          console.warn('Routing cleanup failed', e);
         }
+        routingControlRef.current = null;
       }
     };
-  }, [map, waypoints]);
+  }, [map, fromLat, fromLng, toLat, toLng]);
+
+  // When the user picks a route in the side panel, try to swap it via LRM's
+  // internal line layer if available; otherwise the map keeps showing all
+  // alternatives via `showAlternatives: true` and the side panel just acts
+  // as an informational highlight.
+  useEffect(() => {
+    if (!routingControlRef.current) return;
+    if (selectedRouteIndex == null) return;
+    const route = routesRef.current[selectedRouteIndex];
+    if (!route) return;
+    try {
+      // @ts-ignore - undocumented internals; safe to attempt
+      const line = routingControlRef.current._line;
+      if (line && typeof line._selectRoute === 'function') {
+        line._selectRoute(route);
+      }
+    } catch {}
+    onSelectRoute?.(selectedRouteIndex);
+  }, [selectedRouteIndex]);
 
   return null;
 }
 
-export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination, roadRatings = [], timeOfDay }: RiskMapProps & { zoom?: number, timeOfDay: string }) {
+export function RiskMap({ center, zones, hazards = [], currentLocation, onLocationSelect, zoom = 13, visionMode = false, destination, roadRatings = [], timeOfDay, onRoutesFound, selectedRouteIndex }: RiskMapProps & { zoom?: number, timeOfDay: string }) {
   const getZoneColor = (level: string) => {
     switch (level) {
       case 'High': return '#ef4444'; // red-500
@@ -143,11 +264,13 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
         <MapEvents onLocationSelect={onLocationSelect} />
         
         {currentLocation && destination && (
-          <RoutingMachine 
-            waypoints={[
-              L.latLng(currentLocation.lat, currentLocation.lng),
-              L.latLng(destination.lat, destination.lng)
-            ]} 
+          <RoutingMachine
+            fromLat={currentLocation.lat}
+            fromLng={currentLocation.lng}
+            toLat={destination.lat}
+            toLng={destination.lng}
+            onRoutesFound={onRoutesFound}
+            selectedRouteIndex={selectedRouteIndex}
           />
         )}
 
