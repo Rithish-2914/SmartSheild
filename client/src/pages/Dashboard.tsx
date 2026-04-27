@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useDriverScore, useLogDriverEvent, useResetDriverScore } from "@/hooks/use-driver";
 import { useRiskPrediction, useAccidentZones } from "@/hooks/use-risk";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { HazardReport, RoadRating } from "@shared/schema";
 import { CyberCard } from "@/components/CyberCard";
-import { RiskMap } from "@/components/RiskMap";
+import { RiskMap, type RouteSummary } from "@/components/RiskMap";
 import { DriverGauge } from "@/components/DriverGauge";
 import { EmergencyModal } from "@/components/EmergencyModal";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, CloudRain, Sun, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock } from "lucide-react";
+import { AlertTriangle, CloudRain, Sun, Gauge, Map as MapIcon, RotateCcw, ShieldAlert, Zap, Clock, Volume2, VolumeX, Sparkles } from "lucide-react";
 
 import logoImg from "@assets/WhatsApp_Image_2026-01-23_at_00.36.06_1769108780312.jpeg";
 
@@ -28,6 +28,14 @@ export default function Dashboard() {
   const [destination, setDestination] = useState<{ lat: number; lng: number } | null>(null);
   const [isSettingDestination, setIsSettingDestination] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [altRoutes, setAltRoutes] = useState<RouteSummary[]>([]);
+  const [selectedRouteIndex, setSelectedRouteIndex] = useState<number>(0);
+  const [voiceAlertsOn, setVoiceAlertsOn] = useState(false);
+  const [sosHoldProgress, setSosHoldProgress] = useState(0);
+  const sosHoldTimerRef = useRef<number | null>(null);
+  const sosHoldStartRef = useRef<number | null>(null);
+  const SOS_HOLD_MS = 1500;
+  const lastSpokenRef = useRef<string>("");
 
   // Search Results for Demo
   const SEARCH_RESULTS = [
@@ -63,6 +71,26 @@ export default function Dashboard() {
   // Mutations
   const { mutate: logEvent } = useLogDriverEvent();
   const { mutate: resetScore } = useResetDriverScore();
+
+  // Effective risk: when a destination + alternative routes exist, use the
+  // selected route's score; otherwise fall back to the location-based prediction.
+  const effectiveRisk = useMemo(() => {
+    const selected = altRoutes[selectedRouteIndex];
+    if (destination && selected) {
+      return {
+        riskScore: selected.riskScore,
+        riskLevel: selected.riskLevel as 'Safe' | 'Medium' | 'High',
+        message: `${selected.name}: ${selected.distanceKm.toFixed(1)} km, ~${Math.round(selected.durationMin)} min. Risk index ${selected.riskScore}% (${selected.riskLevel}).`,
+        source: 'route' as const,
+      };
+    }
+    return {
+      riskScore: riskData?.riskScore ?? 0,
+      riskLevel: (riskData?.riskLevel as 'Safe' | 'Medium' | 'High') ?? 'Safe',
+      message: riskData?.message,
+      source: 'location' as const,
+    };
+  }, [altRoutes, selectedRouteIndex, destination, riskData]);
 
   // Demo Logic
   useEffect(() => {
@@ -105,6 +133,68 @@ export default function Dashboard() {
 
   const WeatherIcon = weather === "Clear" ? Sun : CloudRain;
 
+  // ---- SOS hold-to-trigger ----
+  const stopSosHold = () => {
+    if (sosHoldTimerRef.current != null) {
+      cancelAnimationFrame(sosHoldTimerRef.current);
+      sosHoldTimerRef.current = null;
+    }
+    sosHoldStartRef.current = null;
+    setSosHoldProgress(0);
+  };
+
+  const startSosHold = () => {
+    if (sosHoldStartRef.current != null) return;
+    sosHoldStartRef.current = performance.now();
+    const tick = () => {
+      if (sosHoldStartRef.current == null) return;
+      const elapsed = performance.now() - sosHoldStartRef.current;
+      const pct = Math.min(1, elapsed / SOS_HOLD_MS);
+      setSosHoldProgress(pct);
+      if (pct >= 1) {
+        stopSosHold();
+        setIsEmergencyOpen(true);
+        return;
+      }
+      sosHoldTimerRef.current = requestAnimationFrame(tick);
+    };
+    sosHoldTimerRef.current = requestAnimationFrame(tick);
+  };
+
+  useEffect(() => () => stopSosHold(), []);
+
+  // ---- Voice alerts: speak the active risk message when it changes ----
+  useEffect(() => {
+    if (!voiceAlertsOn) return;
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    const msg = effectiveRisk.message;
+    if (!msg || msg === lastSpokenRef.current) return;
+    lastSpokenRef.current = msg;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(msg);
+      u.rate = 1.05;
+      u.pitch = 1;
+      u.volume = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch {
+      // ignore TTS failures (browser support / autoplay policies)
+    }
+  }, [effectiveRisk.message, voiceAlertsOn]);
+
+  // ---- Auto-pick the safest alternative route ----
+  const pickSafestRoute = () => {
+    if (altRoutes.length === 0) return;
+    const safest = altRoutes.reduce((best, r) => (r.riskScore < best.riskScore ? r : best), altRoutes[0]);
+    setSelectedRouteIndex(safest.index);
+  };
+
+  // Fastest = shortest duration; used for delta comparisons in alt cards
+  const fastestRoute = useMemo(
+    () => (altRoutes.length ? altRoutes.reduce((a, b) => (a.durationMin <= b.durationMin ? a : b)) : null),
+    [altRoutes]
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-6 lg:p-8 font-body overflow-x-hidden">
       <header className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
@@ -131,6 +221,24 @@ export default function Dashboard() {
           </Button>
 
           <Button 
+            variant="ghost"
+            className={`border-primary/30 font-mono transition-all ${voiceAlertsOn ? 'bg-primary/20 text-primary shadow-[0_0_15px_rgba(0,255,255,0.4)]' : 'text-muted-foreground'}`}
+            onClick={() => {
+              setVoiceAlertsOn((v) => {
+                const next = !v;
+                if (!next && typeof window !== 'undefined' && 'speechSynthesis' in window) {
+                  window.speechSynthesis.cancel();
+                }
+                return next;
+              });
+            }}
+            data-testid="button-voice-toggle"
+          >
+            {voiceAlertsOn ? <Volume2 className="mr-2 h-4 w-4" /> : <VolumeX className="mr-2 h-4 w-4" />}
+            VOICE {voiceAlertsOn ? "ON" : "OFF"}
+          </Button>
+
+          <Button 
             variant="outline" 
             className="border-primary/50 text-primary hover:bg-primary/10 hover:text-primary font-mono"
             onClick={() => setDemoActive(!demoActive)}
@@ -139,20 +247,43 @@ export default function Dashboard() {
             {demoActive ? <span className="animate-pulse">RUNNING DEMO...</span> : "START SIMULATION"}
           </Button>
           
-          <Button 
-            variant="destructive"
-            className="font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse"
-            onClick={() => setIsEmergencyOpen(true)}
+          {/* Hold-to-trigger SOS — prevents accidental taps. Hold for 1.5s. */}
+          <button
+            type="button"
+            data-testid="button-sos-hold"
+            onPointerDown={(e) => { e.preventDefault(); startSosHold(); }}
+            onPointerUp={stopSosHold}
+            onPointerLeave={stopSosHold}
+            onPointerCancel={stopSosHold}
+            onContextMenu={(e) => e.preventDefault()}
+            onKeyDown={(e) => {
+              if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) {
+                e.preventDefault();
+                startSosHold();
+              }
+            }}
+            onKeyUp={(e) => {
+              if (e.key === ' ' || e.key === 'Enter') stopSosHold();
+            }}
+            aria-label="Hold to trigger emergency SOS"
+            className="relative inline-flex items-center justify-center rounded-md font-bold uppercase select-none touch-manipulation transition-all px-4 py-2 text-sm bg-destructive text-destructive-foreground border border-destructive/60 shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-destructive/60"
           >
-            <AlertTriangle className="mr-2 h-5 w-5" />
-            SOS TRIGGER
-          </Button>
+            <span
+              aria-hidden
+              className="absolute inset-0 rounded-md bg-white/20 origin-left pointer-events-none"
+              style={{ transform: `scaleX(${sosHoldProgress})`, transition: sosHoldProgress === 0 ? 'transform 200ms ease-out' : 'none' }}
+            />
+            <span className="relative flex items-center">
+              <AlertTriangle className="mr-2 h-5 w-5" />
+              {sosHoldProgress > 0 ? `HOLD… ${Math.round(sosHoldProgress * 100)}%` : 'HOLD FOR SOS'}
+            </span>
+          </button>
         </div>
       </header>
 
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8 space-y-6">
-          <CyberCard title="Live Risk Analysis" className="flex flex-col" borderColor={riskData?.riskLevel === 'High' ? 'destructive' : 'primary'}>
+          <CyberCard title="Live Risk Analysis" className="flex flex-col" borderColor={effectiveRisk.riskLevel === 'High' ? 'destructive' : 'primary'}>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
               <div className="md:col-span-3 h-[400px]">
                 <RiskMap 
@@ -170,6 +301,11 @@ export default function Dashboard() {
                   destination={destination || undefined}
                   roadRatings={roadRatings || []}
                   timeOfDay={timeOfDay}
+                  onRoutesFound={(routes) => {
+                    setAltRoutes(routes);
+                    setSelectedRouteIndex(0);
+                  }}
+                  selectedRouteIndex={selectedRouteIndex}
                   onLocationSelect={(lat, lng) => {
                     if (isSettingDestination) {
                       setDestination({ lat, lng });
@@ -200,8 +336,8 @@ export default function Dashboard() {
               <div className="bg-black/40 backdrop-blur border border-border p-4 rounded-xl flex flex-col gap-4">
                 <div className="flex justify-between items-center">
                   <span className="text-xs uppercase text-muted-foreground font-mono">Risk Score</span>
-                  <span className={`text-2xl font-bold font-display ${riskData?.riskLevel === 'High' ? 'text-destructive' : 'text-primary'}`}>
-                    {riskData?.riskScore ?? 0}%
+                  <span className={`text-2xl font-bold font-display ${effectiveRisk.riskLevel === 'High' ? 'text-destructive' : effectiveRisk.riskLevel === 'Medium' ? 'text-yellow-500' : 'text-primary'}`} data-testid="text-risk-score">
+                    {effectiveRisk.riskScore}%
                   </span>
                 </div>
                 <div className="space-y-4">
@@ -275,10 +411,94 @@ export default function Dashboard() {
                           variant="ghost" 
                           size="sm" 
                           className="w-full h-6 mt-1 text-[10px] text-destructive hover:text-destructive/80"
-                          onClick={() => setDestination(null)}
+                          onClick={() => {
+                            setDestination(null);
+                            setAltRoutes([]);
+                            setSelectedRouteIndex(0);
+                          }}
                         >
                           CLEAR ROUTE
                         </Button>
+                      </div>
+                    )}
+
+                    {destination && altRoutes.length > 0 && (
+                      <div className="mt-2 space-y-1.5" data-testid="alt-routes-list">
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="text-muted-foreground uppercase text-[10px] font-mono">
+                            Alternative Paths ({altRoutes.length})
+                          </div>
+                          <button
+                            type="button"
+                            onClick={pickSafestRoute}
+                            data-testid="button-auto-safest"
+                            className="text-[9px] uppercase font-mono px-2 py-0.5 rounded border border-green-500/50 text-green-400 hover:bg-green-500/10 transition-colors flex items-center gap-1"
+                            title="Automatically select the route with the lowest risk score"
+                          >
+                            <Sparkles className="w-3 h-3" /> AUTO-SAFEST
+                          </button>
+                        </div>
+
+                        {altRoutes.map((r) => {
+                          const selected = r.index === selectedRouteIndex;
+                          const isFastest = fastestRoute && r.index === fastestRoute.index;
+                          const dMin = fastestRoute ? Math.round(r.durationMin - fastestRoute.durationMin) : 0;
+                          const dKm = fastestRoute ? r.distanceKm - fastestRoute.distanceKm : 0;
+                          const riskColor =
+                            r.riskLevel === 'High'
+                              ? 'text-destructive border-destructive/60'
+                              : r.riskLevel === 'Medium'
+                              ? 'text-yellow-500 border-yellow-500/60'
+                              : 'text-green-500 border-green-500/60';
+                          return (
+                            <button
+                              key={r.index}
+                              data-testid={`alt-route-${r.index}`}
+                              onClick={() => setSelectedRouteIndex(r.index)}
+                              className={`w-full text-left p-2 rounded border transition-all font-mono text-[10px] ${
+                                selected
+                                  ? 'bg-primary/10 border-primary shadow-[0_0_10px_rgba(0,255,255,0.3)]'
+                                  : 'bg-background/40 border-border hover:border-primary/40'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex items-center gap-1.5">
+                                  <span
+                                    className="inline-block w-2 h-2 rounded-full"
+                                    style={{ background: r.color }}
+                                  />
+                                  <span className={selected ? 'text-primary font-bold' : 'text-foreground'}>
+                                    {r.name}
+                                  </span>
+                                  {isFastest && (
+                                    <span className="px-1 py-0.5 rounded bg-primary/20 text-primary text-[8px] tracking-widest">
+                                      FASTEST
+                                    </span>
+                                  )}
+                                </div>
+                                <span className={`px-1.5 py-0.5 rounded border ${riskColor}`}>
+                                  {r.riskLevel.toUpperCase()}
+                                </span>
+                              </div>
+                              <div className="flex justify-between text-muted-foreground mb-1">
+                                <span>{r.distanceKm.toFixed(1)} km</span>
+                                <span>{Math.round(r.durationMin)} min</span>
+                                <span>Risk {r.riskScore}%</span>
+                              </div>
+                              {!isFastest && fastestRoute && (
+                                <div className="flex justify-between text-[9px] text-muted-foreground/80 border-t border-border/30 pt-1">
+                                  <span>vs Fastest</span>
+                                  <span className={dMin > 0 ? 'text-orange-400' : 'text-green-400'}>
+                                    {dMin > 0 ? `+${dMin}` : dMin} min
+                                  </span>
+                                  <span className={dKm > 0 ? 'text-orange-400' : 'text-green-400'}>
+                                    {dKm > 0 ? `+${dKm.toFixed(1)}` : dKm.toFixed(1)} km
+                                  </span>
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -310,16 +530,17 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                {riskData?.message && (
+                {effectiveRisk.message && (
                   <div className={`mt-auto p-2 border-l-2 text-xs transition-colors duration-500 ${
-                    riskData.riskLevel === 'High' ? 'bg-destructive/10 border-destructive text-destructive' : 
+                    effectiveRisk.riskLevel === 'High' ? 'bg-destructive/10 border-destructive text-destructive' :
+                    effectiveRisk.riskLevel === 'Medium' ? 'bg-yellow-500/10 border-yellow-500 text-yellow-500' :
                     'bg-secondary/10 border-secondary text-secondary-foreground'
                   }`}>
                     <div className="flex items-center gap-2 font-bold mb-1">
                       <ShieldAlert className="w-3 h-3" />
-                      SYSTEM ALERT
+                      {effectiveRisk.source === 'route' ? 'ROUTE RISK ALERT' : 'SYSTEM ALERT'}
                     </div>
-                    {riskData.message}
+                    {effectiveRisk.message}
                   </div>
                 )}
               </div>
@@ -368,7 +589,7 @@ export default function Dashboard() {
                       <AlertTriangle className="w-3 h-3 text-destructive" /> Risk Index
                     </div>
                     <div className="text-lg font-mono font-bold text-destructive">
-                      {riskData?.riskScore ?? 0}%
+                      {effectiveRisk.riskScore}%
                     </div>
                   </div>
                   <div className="p-2 bg-black/40 border border-orange-400/20 rounded-lg">
@@ -376,7 +597,7 @@ export default function Dashboard() {
                       <Zap className="w-3 h-3 text-orange-400" /> Hazards
                     </div>
                     <div className="text-lg font-mono font-bold text-orange-400">
-                      {riskData?.riskScore ? Math.floor(riskData.riskScore / 5) : 0}
+                      {Math.floor(effectiveRisk.riskScore / 5)}
                     </div>
                   </div>
                   <div className="p-2 bg-black/40 border border-primary/20 rounded-lg">
@@ -384,7 +605,7 @@ export default function Dashboard() {
                       <ShieldAlert className="w-3 h-3 text-primary" /> Blind Spots
                     </div>
                     <div className="text-lg font-mono font-bold text-primary">
-                      {riskData?.riskScore && riskData.riskScore > 40 ? "High" : "Low"}
+                      {effectiveRisk.riskScore > 40 ? "High" : "Low"}
                     </div>
                   </div>
                   <div className="p-2 bg-black/40 border border-blue-400/20 rounded-lg">
@@ -442,27 +663,27 @@ export default function Dashboard() {
                   <div className="flex justify-between items-center mb-2">
                     <div className="font-bold text-sm">Active Journey Rating</div>
                     <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${
-                      riskData?.riskLevel === 'High' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
-                      riskData?.riskLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
+                      effectiveRisk.riskLevel === 'High' ? 'bg-destructive/20 text-destructive border border-destructive/50' :
+                      effectiveRisk.riskLevel === 'Medium' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50' :
                       'bg-green-500/20 text-green-500 border border-green-500/50'
-                    }`}>
-                      {riskData?.riskLevel === 'Safe' ? 'Good' : riskData?.riskLevel ?? 'Good'}
+                    }`} data-testid="badge-journey-rating">
+                      {effectiveRisk.riskLevel === 'Safe' ? 'Good' : effectiveRisk.riskLevel}
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <div className="text-[10px] text-muted-foreground uppercase">Hazard Conditions</div>
                       <div className="text-xs font-mono font-bold text-primary flex flex-wrap gap-2">
-                        {riskData?.riskScore && riskData.riskScore > 30 && <span className="text-orange-400">POTHOLES</span>}
-                        {riskData?.riskScore && riskData.riskScore > 50 && <span className="text-destructive">BLIND SPOTS</span>}
+                        {effectiveRisk.riskScore > 30 && <span className="text-orange-400">POTHOLES</span>}
+                        {effectiveRisk.riskScore > 50 && <span className="text-destructive">BLIND SPOTS</span>}
                         {weather !== 'Clear' && <span className="text-blue-400">{weather.toUpperCase()}</span>}
-                        {riskData?.riskScore && riskData.riskScore < 30 && <span className="text-green-400">OPTIMAL</span>}
+                        {effectiveRisk.riskScore < 30 && <span className="text-green-400">OPTIMAL</span>}
                       </div>
                     </div>
                     <div className="space-y-1 text-right">
                       <div className="text-[10px] text-muted-foreground uppercase">Safety Index</div>
-                      <div className="text-lg font-mono font-bold text-secondary">
-                        {100 - (riskData?.riskScore ?? 0)}
+                      <div className="text-lg font-mono font-bold text-secondary" data-testid="text-safety-index">
+                        {Math.max(0, 100 - effectiveRisk.riskScore)}
                       </div>
                     </div>
                   </div>
