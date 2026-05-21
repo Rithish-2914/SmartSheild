@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm --filter @workspace/road-safety run build",
+  "outputDirectory": "artifacts/road-safety/dist",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "framework": null
+}
