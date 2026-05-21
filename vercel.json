@@ -2,5 +2,9 @@
   "buildCommand": "pnpm --filter @workspace/road-safety run build",
   "outputDirectory": "artifacts/road-safety/dist/public",
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }
