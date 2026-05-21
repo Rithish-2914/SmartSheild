@@ -9,7 +9,13 @@
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
   "private": true,
+  "dependencies": {
+    "@google/genai": "^1.52.0",
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.20.0"
+  },
   "devDependencies": {
+    "@types/pg": "^8.20.0",
     "@vercel/node": "^5.8.3",
     "prettier": "^3.8.3",
     "typescript": "~5.9.3"
