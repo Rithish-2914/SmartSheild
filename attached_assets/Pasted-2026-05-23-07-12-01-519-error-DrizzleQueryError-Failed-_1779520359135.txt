@@ -1,0 +1,38 @@
+2026-05-23 07:12:01.519 [error] DrizzleQueryError: Failed query: select "id", "location_name", "latitude", "longitude", "risk_level", "city", "accident_count", "description" from "accident_zones"
+params: 
+    at NodePgPreparedQuery.queryWithCache (/var/task/node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_pg@8.20.0/node_modules/drizzle-orm/pg-core/session.cjs:66:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /var/task/node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_pg@8.20.0/node_modules/drizzle-orm/node-postgres/session.cjs:152:22
+    ... 3 lines matching cause stack trace ...
+    at async Server.<anonymous> (/opt/rust/nodejs.js:17:11390) {
+  query: 'select "id", "location_name", "latitude", "longitude", "risk_level", "city", "accident_count", "description" from "accident_zones"',
+  params: [],
+  cause: error: (ENOTFOUND) tenant/user postgres.wvozrdkewmbgqwucsurt not found
+      at /var/task/node_modules/.pnpm/pg-pool@3.13.0_pg@8.20.0/node_modules/pg-pool/index.js:45:11
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async /var/task/node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_pg@8.20.0/node_modules/drizzle-orm/node-postgres/session.cjs:159:18
+      at async NodePgPreparedQuery.queryWithCache (/var/task/node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_pg@8.20.0/node_modules/drizzle-orm/pg-core/session.cjs:64:16)
+      at async /var/task/node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.20.0_pg@8.20.0/node_modules/drizzle-orm/node-postgres/session.cjs:152:22
+      at async handler (/vercel/path0/api/risk/predict.ts:47:21)
+      at async r (/opt/rust/nodejs.js:2:15575)
+      at async Server.<anonymous> (/opt/rust/nodejs.js:2:11597)
+      at async Server.<anonymous> (/opt/rust/nodejs.js:17:11390) {
+    length: 84,
+    severity: 'FATAL',
+    code: 'XX000',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: undefined,
+    line: undefined,
+    routine: undefined
+  }
+}
