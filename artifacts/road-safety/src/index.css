@@ -84,3 +84,11 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-primary/20 rounded hover:bg-primary/40 transition-colors;
 }
+
+/* ── Hide all Leaflet branding ──────────────────── */
+.leaflet-control-attribution,
+.leaflet-control-logo,
+.leaflet-routing-container,
+.leaflet-routing-alt-minimize-btn {
+  display: none !important;
+}

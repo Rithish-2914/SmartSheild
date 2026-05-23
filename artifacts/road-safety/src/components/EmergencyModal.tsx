@@ -256,6 +256,7 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
               zoomControl={true}
               dragging={true}
               scrollWheelZoom={true}
+              attributionControl={false}
             >
               <TileLayer
                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
@@ -439,6 +440,7 @@ export function EmergencyModal({ isOpen, onClose, location }: EmergencyModalProp
                       scrollWheelZoom={false}
                       doubleClickZoom={false}
                       touchZoom={false}
+                      attributionControl={false}
                     >
                       <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" attribution="" />
                       <MapFit bounds={previewBounds} />

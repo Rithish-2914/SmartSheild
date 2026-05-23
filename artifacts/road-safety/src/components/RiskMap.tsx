@@ -254,9 +254,10 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
           filter: visionMode ? 'hue-rotate(180deg) brightness(1.2) contrast(1.4) saturate(1.5)' : 'none'
         }}
         scrollWheelZoom={true}
+        attributionControl={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution=""
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
         
@@ -447,6 +448,11 @@ export function RiskMap({ center, zones, hazards = [], currentLocation, onLocati
         ))}
       </MapContainer>
       
+      {/* Safe Path watermark — bottom right, replaces Leaflet attribution */}
+      <div className="absolute bottom-2 right-2 z-[400] text-[9px] font-mono text-primary/40 bg-black/60 px-2 py-0.5 rounded select-none pointer-events-none tracking-widest uppercase">
+        SAFE PATH NAV SYSTEM
+      </div>
+
       {/* HUD Overlay Elements */}
       <div className="absolute top-4 right-4 z-[400] bg-black/80 backdrop-blur-md p-3 rounded-lg border border-primary/20 text-xs font-mono text-primary">
         <div className="flex items-center gap-2 mb-1">
