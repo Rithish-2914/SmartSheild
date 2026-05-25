@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .shield-outline { fill: none; stroke: white; stroke-width: 2.5; }
+      .shield-fill { fill: none; }
+      .plus { fill: white; }
+    </style>
+  </defs>
+  <!-- Shield shape -->
+  <path class="shield-outline" d="M 50 15 L 70 25 L 70 50 Q 50 75 50 75 Q 30 75 30 50 L 30 25 Z"/>
+  <!-- Plus sign inside shield -->
+  <g class="plus">
+    <rect x="46" y="35" width="8" height="30" rx="2"/>
+    <rect x="35" y="46" width="30" height="8" rx="2"/>
+  </g>
+</svg>
