@@ -244,7 +244,7 @@ roadSafetyRouter.post("/hazards", async (req: Request, res: Response) => {
 });
 
 roadSafetyRouter.post("/hazards/:id/upvote", async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(String(req.params.id));
   if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
   const [updated] = await db.update(hazardReports)
     .set({ upvotes: (await db.select().from(hazardReports).where(eq(hazardReports.id, id)))[0]?.upvotes ?? 0 + 1 })
